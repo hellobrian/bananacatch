@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-export default class Button extends Component {
+class Button extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired
   };
@@ -20,5 +20,8 @@ const StyledButton = styled.button`
   width: 100px;
   height: 50px;
   color: white;
+  font-size: 1rem;
   background-color: blue;
 `;
+
+export default Button;

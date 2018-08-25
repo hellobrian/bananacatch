@@ -37,7 +37,7 @@ const BottomSection = styled.div`
 
 class Header extends Component {
   render() {
-    const { speed, onChange } = this.props;
+    const { speedPercent, onChange } = this.props;
     return (
       <Root>
         <TopSection>
@@ -46,16 +46,16 @@ class Header extends Component {
         </TopSection>
         <BottomSection>
           <input
-            defaultValue={speed}
-            id="speed"
+            defaultValue={speedPercent}
+            id="speedPercent"
             max="100"
             min="10"
-            name="speed"
+            name="speedPercent"
             onChange={onChange}
             step="1"
             type="range"
           />
-          <label htmlFor="speed">Speed: {speed}%</label>
+          <label htmlFor="speedPercent">Speed: {speedPercent}%</label>
         </BottomSection>
       </Root>
     );

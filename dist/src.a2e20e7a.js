@@ -23990,7 +23990,7 @@ var Header = function (_Component) {
     key: "render",
     value: function render() {
       var _props = this.props,
-          speed = _props.speed,
+          speedPercent = _props.speedPercent,
           onChange = _props.onChange;
 
       return _react2.default.createElement(
@@ -24044,11 +24044,11 @@ var Header = function (_Component) {
             __self: this
           },
           _react2.default.createElement("input", {
-            defaultValue: speed,
-            id: "speed",
+            defaultValue: speedPercent,
+            id: "speedPercent",
             max: "100",
             min: "10",
-            name: "speed",
+            name: "speedPercent",
             onChange: onChange,
             step: "1",
             type: "range",
@@ -24060,14 +24060,14 @@ var Header = function (_Component) {
           }),
           _react2.default.createElement(
             "label",
-            { htmlFor: "speed", __source: {
+            { htmlFor: "speedPercent", __source: {
                 fileName: _jsxFileName,
                 lineNumber: 58
               },
               __self: this
             },
             "Speed: ",
-            speed,
+            speedPercent,
             "%"
           )
         )
@@ -24154,7 +24154,136 @@ CircleSvg.defaultProps = {
   fill: "red"
 };
 exports.default = CircleSvg;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js"}],"components/CircleButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = "/Users/brianhan/dev/dot-game/src/components/CircleButton.js";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(["\n  100% { transform: translateY(100vh); }\n"], ["\n  100% { transform: translateY(100vh); }\n"]),
+    _templateObject2 = _taggedTemplateLiteral(["\n  transform: ", ";\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-name: ", ";\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  padding: 0;\n  position: relative;\n  top: ", ";\n  margin: 1rem;\n"], ["\n  transform: ", ";\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-name: ", ";\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  padding: 0;\n  position: relative;\n  top: ", ";\n  margin: 1rem;\n"]);
+
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require("styled-components");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _CircleSvg = require("./CircleSvg");
+
+var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var slideDown = (0, _styledComponents.keyframes)(_templateObject);
+
+var Root = _styledComponents2.default.button(_templateObject2, function (props) {
+  return "translateY(" + props.size + ")";
+}, function (props) {
+  return props.animationDuration + "ms";
+}, slideDown, function (props) {
+  return "-" + props.size + "px";
+});
+
+var CircleButton = function (_Component) {
+  _inherits(CircleButton, _Component);
+
+  function CircleButton() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, CircleButton);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      size: Math.floor(Math.random() * 100) + 10,
+      animationDuration: _this.props.animationDuration
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(CircleButton, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.id = setInterval(function () {
+        return _this2.tick();
+      }, this.state.animationDuration - 100);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.animationDuration !== prevProps.animationDuration) {
+        this.setState({ animationDuration: this.props.animationDuration });
+        console.log(this.state);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.id);
+    }
+  }, {
+    key: "tick",
+    value: function tick() {
+      this.setState({
+        size: Math.floor(Math.random() * 100) + 10
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          animationDuration = _props.animationDuration,
+          size = _props.size,
+          fill = _props.fill,
+          isHidden = _props.isHidden;
+
+      return _react2.default.createElement(
+        Root,
+        { animationDuration: animationDuration, isHidden: isHidden, size: this.state.size, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 55
+          },
+          __self: this
+        },
+        _react2.default.createElement(_CircleSvg2.default, { size: this.state.size, fill: fill, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 56
+          },
+          __self: this
+        })
+      );
+    }
+  }]);
+
+  return CircleButton;
+}(_react.Component);
+
+exports.default = CircleButton;
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleSvg":"components/CircleSvg.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -24227,10 +24356,8 @@ var _jsxFileName = "/Users/brianhan/dev/dot-game/src/index.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  from {\n    transform: translateY(0)\n  }\n\n  to {\n    transform: translateY(100vh);\n  }\n"], ["\n  from {\n    transform: translateY(0)\n  }\n\n  to {\n    transform: translateY(100vh);\n  }\n"]),
-    _templateObject2 = _taggedTemplateLiteral(["\n  display: block;\n  height: 100vh;\n"], ["\n  display: block;\n  height: 100vh;\n"]),
-    _templateObject3 = _taggedTemplateLiteral(["\n  display: block;\n  margin: 0 auto;\n"], ["\n  display: block;\n  margin: 0 auto;\n"]),
-    _templateObject4 = _taggedTemplateLiteral(["\n  animation-name: ", ";\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-timing-function: linear;\n  position: relative;\n  top: -100px;\n  appearance: none;\n  padding: 0;\n  border: 0;\n  background: 0;\n"], ["\n  animation-name: ", ";\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-timing-function: linear;\n  position: relative;\n  top: -100px;\n  appearance: none;\n  padding: 0;\n  border: 0;\n  background: 0;\n"]);
+var _templateObject = _taggedTemplateLiteral(["\n  display: block;\n  height: 100vh;\n"], ["\n  display: block;\n  height: 100vh;\n"]),
+    _templateObject2 = _taggedTemplateLiteral(["\n  display: block;\n  margin: 0 auto;\n"], ["\n  display: block;\n  margin: 0 auto;\n"]);
 
 var _propTypes = require("prop-types");
 
@@ -24250,9 +24377,9 @@ var _Header = require("./components/Header");
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _CircleSvg = require("./components/CircleSvg");
+var _CircleButton = require("./components/CircleButton");
 
-var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
+var _CircleButton2 = _interopRequireDefault(_CircleButton);
 
 require("./index.css");
 
@@ -24266,15 +24393,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var slideDown = (0, _styledComponents.keyframes)(_templateObject);
+var MainSection = _styledComponents2.default.section(_templateObject);
 
-var MainSection = _styledComponents2.default.section(_templateObject2);
-
-var CircleSection = _styledComponents2.default.div(_templateObject3);
-
-var CircleButtonWrapper = _styledComponents2.default.button(_templateObject4, slideDown, function (props) {
-  return props.animationDuration;
-});
+var CircleSection = _styledComponents2.default.div(_templateObject2);
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -24290,28 +24411,32 @@ var App = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = { speed: 75, duration: 1, circleCount: 3 }, _this.handleChange = function (event) {
-      var speed = parseInt(event.target.value, 10);
-      _this.setState({ speed: speed });
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      speedPercent: 15,
+      fastestAnimationDuration: 3000
+    }, _this.handleChange = function (event) {
+      var speedPercent = parseInt(event.target.value, 10);
+      _this.setState({ speedPercent: speedPercent });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
-      var animationDuration = this.state.duration / this.state.speed * 100 + "s";
+      var animationDuration = this.state.fastestAnimationDuration / (this.state.speedPercent / 100);
+
       return _react2.default.createElement(
         MainSection,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 53
+            lineNumber: 34
           },
           __self: this
         },
-        _react2.default.createElement(_Header2.default, { speed: this.state.speed, onChange: this.handleChange, __source: {
+        _react2.default.createElement(_Header2.default, { speedPercent: this.state.speedPercent, onChange: this.handleChange, __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 35
           },
           __self: this
         }),
@@ -24320,55 +24445,28 @@ var App = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 55
+              lineNumber: 36
             },
             __self: this
           },
-          _react2.default.createElement(
-            CircleButtonWrapper,
-            { animationDuration: animationDuration, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 57
-              },
-              __self: this
+          _react2.default.createElement(_CircleButton2.default, { animationDuration: animationDuration, size: 170, fill: "green", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 38
             },
-            _react2.default.createElement(_CircleSvg2.default, { size: 170, fill: "green", __source: {
-                fileName: _jsxFileName,
-                lineNumber: 58
-              },
-              __self: this
-            })
-          ),
-          _react2.default.createElement(
-            CircleButtonWrapper,
-            { animationDuration: animationDuration, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 60
-              },
-              __self: this
+            __self: this
+          }),
+          _react2.default.createElement(_CircleButton2.default, { animationDuration: animationDuration, size: 70, fill: "blue", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39
             },
-            _react2.default.createElement(_CircleSvg2.default, { size: 70, fill: "blue", __source: {
-                fileName: _jsxFileName,
-                lineNumber: 61
-              },
-              __self: this
-            })
-          ),
-          _react2.default.createElement(
-            CircleButtonWrapper,
-            { animationDuration: animationDuration, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 63
-              },
-              __self: this
+            __self: this
+          }),
+          _react2.default.createElement(_CircleButton2.default, { animationDuration: animationDuration, size: 100, fill: "red", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 40
             },
-            _react2.default.createElement(_CircleSvg2.default, { size: 100, fill: "red", __source: {
-                fileName: _jsxFileName,
-                lineNumber: 64
-              },
-              __self: this
-            })
-          )
+            __self: this
+          })
         )
       );
     }
@@ -24381,11 +24479,11 @@ var wrapper = document.getElementById("app");
 wrapper ? (0, _reactDom.render)(_react2.default.createElement(App, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 73
+    lineNumber: 48
   },
   __self: undefined
 }), wrapper) : false;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react-dom":"../node_modules/react-dom/index.js","./components/Header":"components/Header.js","./components/CircleSvg":"components/CircleSvg.js","./index.css":"index.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react-dom":"../node_modules/react-dom/index.js","./components/Header":"components/Header.js","./components/CircleButton":"components/CircleButton.js","./index.css":"index.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -24414,7 +24512,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61803' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50581' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

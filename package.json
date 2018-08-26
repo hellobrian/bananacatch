@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.6.2",
+    "react-on-screen": "^2.0.4",
+    "react-visibility-sensor": "^3.11.1",
     "styled-components": "^2.4.0"
   }
 }

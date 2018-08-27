@@ -1,6 +1,33 @@
 import React, { Component } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Button from "./Button";
+
+class Header extends Component {
+  render() {
+    const { speedPercent, onChange } = this.props;
+    return (
+      <Root>
+        <TopSection>
+          <Score>0</Score>
+          <Button>Start</Button>
+        </TopSection>
+        <BottomSection>
+          <input
+            defaultValue={speedPercent}
+            id="speedPercent"
+            max="100"
+            min="10"
+            name="speedPercent"
+            onChange={onChange}
+            step="1"
+            type="range"
+          />
+          <label htmlFor="speedPercent">Speed: {speedPercent}%</label>
+        </BottomSection>
+      </Root>
+    );
+  }
+}
 
 const Root = styled.header`
   display: flex;
@@ -34,32 +61,5 @@ const BottomSection = styled.div`
   width: 50%;
   padding: 1rem;
 `;
-
-class Header extends Component {
-  render() {
-    const { speedPercent, onChange } = this.props;
-    return (
-      <Root>
-        <TopSection>
-          <Score>0</Score>
-          <Button>Start</Button>
-        </TopSection>
-        <BottomSection>
-          <input
-            defaultValue={speedPercent}
-            id="speedPercent"
-            max="100"
-            min="10"
-            name="speedPercent"
-            onChange={onChange}
-            step="1"
-            type="range"
-          />
-          <label htmlFor="speedPercent">Speed: {speedPercent}%</label>
-        </BottomSection>
-      </Root>
-    );
-  }
-}
 
 export default Header;

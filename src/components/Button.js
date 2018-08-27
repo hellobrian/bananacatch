@@ -9,11 +9,11 @@ class Button extends Component {
 
   render() {
     const { children, ...other } = this.props;
-    return <StyledButton {...other}>{children}</StyledButton>;
+    return <RootButton {...other}>{children}</RootButton>;
   }
 }
 
-const StyledButton = styled.button`
+const RootButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;

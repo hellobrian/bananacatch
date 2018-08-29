@@ -19,7 +19,7 @@ class Header extends Component {
             min="10"
             name="speedPercent"
             onChange={onChange}
-            step="1"
+            step="10"
             type="range"
           />
           <label htmlFor="speedPercent">Speed: {speedPercent}%</label>

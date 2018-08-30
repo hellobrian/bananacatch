@@ -16,8 +16,8 @@ const randomSize = () => Math.floor(Math.random() * 100) + 10;
 
 class CircleButton extends Component {
   static propTypes = {
-    animationDuration: PropTypes.string.isRequired,
-    isVisible: PropTypes.bool.isRequired,
+    animationDuration: PropTypes.number.isRequired,
+    isVisible: PropTypes.bool,
     isPlaying: PropTypes.bool.isRequired,
   };
 

@@ -44174,38 +44174,22 @@ module.exports = createReactClass({
   }
 });
 
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/Button.js":[function(require,module,exports) {
-"use strict";
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/Context.js":[function(require,module,exports) {
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsxFileName = "/Users/brian.han/dev/dot-game/src/components/Button.js";
+exports.MyContext = undefined;
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Context.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100px;\n  height: 50px;\n  color: white;\n  font-size: 1rem;\n  background-color: blue;\n"], ["\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100px;\n  height: 50px;\n  color: white;\n  font-size: 1rem;\n  background-color: blue;\n"]);
-
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require("prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styledComponents = require("styled-components");
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44213,48 +44197,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = function (_Component) {
-  _inherits(Button, _Component);
+var MyContext = exports.MyContext = _react2.default.createContext();
 
-  function Button() {
-    _classCallCheck(this, Button);
+var MyProvider = function (_Component) {
+  _inherits(MyProvider, _Component);
 
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+  function MyProvider() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, MyProvider);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      speedPercent: 100,
+      fastestAnimationDuration: 2000,
+      columnCount: 4,
+      isPlaying: false,
+      score: 0
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Button, [{
-    key: "render",
+  _createClass(MyProvider, [{
+    key: 'render',
     value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          other = _objectWithoutProperties(_props, ["children"]);
+      var _this2 = this;
 
       return _react2.default.createElement(
-        RootButton,
-        _extends({}, other, {
+        MyContext.Provider,
+        {
+          value: {
+            state: this.state,
+            animationDuration: this.state.fastestAnimationDuration / (this.state.speedPercent / 100),
+            handleSpeedChange: function handleSpeedChange(event) {
+              return _this2.setState({ speedPercent: parseInt(event.target.value, 10) });
+            },
+            togglePlay: function togglePlay() {
+              return _this2.setState({ isPlaying: !_this2.state.isPlaying });
+            }
+          },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 12
+            lineNumber: 16
           },
           __self: this
-        }),
-        children
+        },
+        this.props.children
       );
     }
   }]);
 
-  return Button;
+  return MyProvider;
 }(_react.Component);
 
-Button.propTypes = {
-  children: _propTypes2.default.node.isRequired
-};
-
-
-var RootButton = _styledComponents2.default.button(_templateObject);
-
-exports.default = Button;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/Header.js":[function(require,module,exports) {
+exports.default = MyProvider;
+},{"react":"../node_modules/react/index.js"}],"components/Header.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44277,9 +44278,7 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Button = require('./Button');
-
-var _Button2 = _interopRequireDefault(_Button);
+var _Context = require('./Context');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44303,78 +44302,106 @@ var Header = function (_Component) {
   _createClass(Header, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          speedPercent = _props.speedPercent,
-          onChange = _props.onChange,
-          children = _props.children;
+      var _this2 = this;
 
       return _react2.default.createElement(
         Root,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 9
+            lineNumber: 8
           },
           __self: this
         },
         _react2.default.createElement(
-          TopSection,
+          _Context.MyContext.Consumer,
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 10
+              lineNumber: 9
             },
             __self: this
           },
-          _react2.default.createElement(
-            Score,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 11
+          function (context) {
+            return _react2.default.createElement(
+              _react.Fragment,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 11
+                },
+                __self: _this2
               },
-              __self: this
-            },
-            '0'
-          ),
-          children
-        ),
-        _react2.default.createElement(
-          BottomSection,
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 14
-            },
-            __self: this
-          },
-          _react2.default.createElement('input', {
-            defaultValue: speedPercent,
-            id: 'speedPercent',
-            max: '100',
-            min: '10',
-            name: 'speedPercent',
-            onChange: onChange,
-            step: '10',
-            type: 'range',
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 15
-            },
-            __self: this
-          }),
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'speedPercent', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 25
-              },
-              __self: this
-            },
-            'Speed: ',
-            speedPercent,
-            '%'
-          )
+              _react2.default.createElement(
+                TopSection,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 12
+                  },
+                  __self: _this2
+                },
+                _react2.default.createElement(
+                  Score,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 13
+                    },
+                    __self: _this2
+                  },
+                  context.state.score
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: context.togglePlay, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 14
+                    },
+                    __self: _this2
+                  },
+                  context.state.isPlaying ? 'running' : 'paused'
+                )
+              ),
+              _react2.default.createElement(
+                BottomSection,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 18
+                  },
+                  __self: _this2
+                },
+                _react2.default.createElement('input', {
+                  defaultValue: context.state.speedPercent,
+                  id: 'speedPercent',
+                  max: '100',
+                  min: '10',
+                  name: 'speedPercent',
+                  onChange: context.handleSpeedChange,
+                  step: '10',
+                  type: 'range',
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 19
+                  },
+                  __self: _this2
+                }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'speedPercent', __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 29
+                    },
+                    __self: _this2
+                  },
+                  'Speed: ',
+                  context.state.speedPercent,
+                  '%'
+                )
+              )
+            );
+          }
         )
       );
     }
@@ -44392,7 +44419,7 @@ var Score = _styledComponents2.default.p(_templateObject3);
 var BottomSection = _styledComponents2.default.div(_templateObject4);
 
 exports.default = Header;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Button":"components/Button.js"}],"components/CircleSvg.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"components/CircleSvg.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44628,8 +44655,8 @@ var CircleButton = function (_Component) {
 }(_react.Component);
 
 CircleButton.propTypes = {
-  animationDuration: _propTypes2.default.string.isRequired,
-  isVisible: _propTypes2.default.bool.isRequired,
+  animationDuration: _propTypes2.default.number.isRequired,
+  isVisible: _propTypes2.default.bool,
   isPlaying: _propTypes2.default.bool.isRequired
 };
 
@@ -44650,37 +44677,32 @@ var RootButton = _styledComponents2.default.button(_templateObject2, function (p
 
 exports.default = CircleButton;
 },{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleSvg":"components/CircleSvg.js"}],"components/CircleSection.js":[function(require,module,exports) {
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsxFileName = "/Users/brian.han/dev/dot-game/src/components/CircleSection.js";
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSection.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-columns: ", ";\n"], ["\n  display: grid;\n  grid-template-columns: ", ";\n"]);
+var _templateObject = _taggedTemplateLiteral(['\n  display: grid;\n  grid-template-columns: ', ';\n'], ['\n  display: grid;\n  grid-template-columns: ', ';\n']);
 
-var _propTypes = require("prop-types");
+var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = require("styled-components");
+var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44698,21 +44720,20 @@ var CircleSection = function (_Component) {
   }
 
   _createClass(CircleSection, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          props = _objectWithoutProperties(_props, ["children"]);
+          columnCount = _props.columnCount;
 
       return _react2.default.createElement(
         Root,
-        _extends({}, props, {
-          __source: {
+        { columnCount: columnCount, __source: {
             fileName: _jsxFileName,
-            lineNumber: 13
+            lineNumber: 14
           },
           __self: this
-        }),
+        },
         children
       );
     }
@@ -44722,13 +44743,14 @@ var CircleSection = function (_Component) {
 }(_react.Component);
 
 CircleSection.propTypes = {
+  children: _propTypes2.default.node.isRequired,
   columnCount: _propTypes2.default.number
 };
 CircleSection.defaultProps = {};
 
 
 var Root = _styledComponents2.default.div(_templateObject, function (props) {
-  return "repeat(" + props.columnCount + ", minmax(150px, 1fr))";
+  return 'repeat(' + props.columnCount + ', minmax(150px, 1fr))';
 });
 
 exports.default = CircleSection;
@@ -44758,6 +44780,10 @@ var _reactVisibilitySensor = require('react-visibility-sensor');
 
 var _reactVisibilitySensor2 = _interopRequireDefault(_reactVisibilitySensor);
 
+var _Context = require('./Context');
+
+var _Context2 = _interopRequireDefault(_Context);
+
 var _Header = require('./Header');
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -44784,27 +44810,9 @@ var App = function (_Component) {
   _inherits(App, _Component);
 
   function App() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, App);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      speedPercent: 100,
-      fastestAnimationDuration: 2000,
-      count: 3,
-      isPlaying: false
-    }, _this.handleChange = function (event) {
-      var speedPercent = parseInt(event.target.value, 10);
-      _this.setState({ speedPercent: speedPercent });
-    }, _this.handlePlayClick = function () {
-      return _this.setState({ isPlaying: !_this.state.isPlaying });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
   }
 
   _createClass(App, [{
@@ -44812,72 +44820,87 @@ var App = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var animationDuration = this.state.fastestAnimationDuration / (this.state.speedPercent / 100);
-
       return _react2.default.createElement(
-        MainSection,
+        _Context2.default,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 14
           },
           __self: this
         },
         _react2.default.createElement(
-          _Header2.default,
+          MainSection,
           {
-            speedPercent: this.state.speedPercent,
-            onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 31
+              lineNumber: 15
             },
             __self: this
           },
           _react2.default.createElement(
-            'button',
-            { onClick: this.handlePlayClick, __source: {
+            _Context.MyContext.Consumer,
+            {
+              __source: {
                 fileName: _jsxFileName,
-                lineNumber: 35
+                lineNumber: 16
               },
               __self: this
             },
-            this.state.isPlaying ? 'Pause' : 'Start'
-          )
-        ),
-        _react2.default.createElement(
-          _CircleSection2.default,
-          { columnCount: this.state.count, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 39
-            },
-            __self: this
-          },
-          (0, _lodash.times)(this.state.count).map(function (index) {
-            return _react2.default.createElement(
-              _reactVisibilitySensor2.default,
-              { key: index, partialVisibility: true, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 41
-                },
-                __self: _this2
-              },
-              function (_ref2) {
-                var isVisible = _ref2.isVisible;
-                return _react2.default.createElement(_CircleButton2.default, {
-                  isPlaying: _this2.state.isPlaying,
-                  isVisible: isVisible,
-                  animationDuration: animationDuration,
-                  style: { animationDelay: index * 1000 + 'ms' },
+            function (context) {
+              return _react2.default.createElement(
+                _react.Fragment,
+                {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 43
+                    lineNumber: 18
                   },
                   __self: _this2
-                });
-              }
-            );
-          })
+                },
+                _react2.default.createElement(_Header2.default, {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 19
+                  },
+                  __self: _this2
+                }),
+                _react2.default.createElement(
+                  _CircleSection2.default,
+                  { columnCount: context.state.columnCount, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 20
+                    },
+                    __self: _this2
+                  },
+                  (0, _lodash.times)(context.state.columnCount).map(function (index) {
+                    return _react2.default.createElement(
+                      _reactVisibilitySensor2.default,
+                      { key: index, partialVisibility: true, __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 22
+                        },
+                        __self: _this2
+                      },
+                      function (_ref) {
+                        var isVisible = _ref.isVisible;
+                        return _react2.default.createElement(_CircleButton2.default, {
+                          isPlaying: context.state.isPlaying,
+                          isVisible: isVisible,
+                          animationDuration: context.animationDuration,
+                          style: { animationDelay: index * 1000 + 'ms' },
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 24
+                          },
+                          __self: _this2
+                        });
+                      }
+                    );
+                  })
+                )
+              );
+            }
+          )
         )
       );
     }
@@ -44889,7 +44912,7 @@ var App = function (_Component) {
 var MainSection = _styledComponents2.default.section(_templateObject);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js","./Header":"components/Header.js","./CircleButton":"components/CircleButton.js","./CircleSection":"components/CircleSection.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js","./Context":"components/Context.js","./Header":"components/Header.js","./CircleButton":"components/CircleButton.js","./CircleSection":"components/CircleSection.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -45010,7 +45033,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55044' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51408' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

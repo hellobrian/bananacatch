@@ -1,29 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import { MyContext } from './Context';
 
 class Header extends Component {
   render() {
-    const { speedPercent, onChange, children } = this.props;
     return (
       <Root>
-        <TopSection>
-          <Score>0</Score>
-          {children}
-        </TopSection>
-        <BottomSection>
-          <input
-            defaultValue={speedPercent}
-            id="speedPercent"
-            max="100"
-            min="10"
-            name="speedPercent"
-            onChange={onChange}
-            step="10"
-            type="range"
-          />
-          <label htmlFor="speedPercent">Speed: {speedPercent}%</label>
-        </BottomSection>
+        <MyContext.Consumer>
+          {context => (
+            <Fragment>
+              <TopSection>
+                <Score>{context.state.score}</Score>
+                <button onClick={context.togglePlay}>
+                  {context.state.isPlaying ? 'running' : 'paused'}
+                </button>
+              </TopSection>
+              <BottomSection>
+                <input
+                  defaultValue={context.state.speedPercent}
+                  id="speedPercent"
+                  max="100"
+                  min="10"
+                  name="speedPercent"
+                  onChange={context.handleSpeedChange}
+                  step="10"
+                  type="range"
+                />
+                <label htmlFor="speedPercent">
+                  Speed: {context.state.speedPercent}%
+                </label>
+              </BottomSection>
+            </Fragment>
+          )}
+        </MyContext.Consumer>
       </Root>
     );
   }

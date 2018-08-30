@@ -44255,29 +44255,29 @@ var RootButton = _styledComponents2.default.button(_templateObject);
 
 exports.default = Button;
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/Header.js":[function(require,module,exports) {
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = "/Users/brian.han/dev/dot-game/src/components/Header.js";
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  background-color: salmon;\n  position: relative;\n  z-index: 1;\n"], ["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  background-color: salmon;\n  position: relative;\n  z-index: 1;\n"]),
-    _templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 50%;\n  padding: 1rem;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 50%;\n  padding: 1rem;\n"]),
-    _templateObject3 = _taggedTemplateLiteral(["\n  font-size: 2rem;\n  width: 50%;\n  text-align: right;\n  padding: 0.5rem;\n"], ["\n  font-size: 2rem;\n  width: 50%;\n  text-align: right;\n  padding: 0.5rem;\n"]),
-    _templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  padding: 1rem;\n"], ["\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  padding: 1rem;\n"]);
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  background-color: salmon;\n  position: relative;\n  z-index: 1;\n'], ['\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  background-color: salmon;\n  position: relative;\n  z-index: 1;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 50%;\n  padding: 1rem;\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 50%;\n  padding: 1rem;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  width: 50%;\n  text-align: right;\n  padding: 0.5rem;\n'], ['\n  font-size: 2rem;\n  width: 50%;\n  text-align: right;\n  padding: 0.5rem;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  padding: 1rem;\n'], ['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  padding: 1rem;\n']);
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = require("styled-components");
+var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Button = require("./Button");
+var _Button = require('./Button');
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -44301,11 +44301,12 @@ var Header = function (_Component) {
   }
 
   _createClass(Header, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props = this.props,
           speedPercent = _props.speedPercent,
-          onChange = _props.onChange;
+          onChange = _props.onChange,
+          children = _props.children;
 
       return _react2.default.createElement(
         Root,
@@ -44334,19 +44335,9 @@ var Header = function (_Component) {
               },
               __self: this
             },
-            "0"
+            '0'
           ),
-          _react2.default.createElement(
-            _Button2.default,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 12
-              },
-              __self: this
-            },
-            "Start"
-          )
+          children
         ),
         _react2.default.createElement(
           BottomSection,
@@ -44357,15 +44348,15 @@ var Header = function (_Component) {
             },
             __self: this
           },
-          _react2.default.createElement("input", {
+          _react2.default.createElement('input', {
             defaultValue: speedPercent,
-            id: "speedPercent",
-            max: "100",
-            min: "10",
-            name: "speedPercent",
+            id: 'speedPercent',
+            max: '100',
+            min: '10',
+            name: 'speedPercent',
             onChange: onChange,
-            step: "10",
-            type: "range",
+            step: '10',
+            type: 'range',
             __source: {
               fileName: _jsxFileName,
               lineNumber: 15
@@ -44373,16 +44364,16 @@ var Header = function (_Component) {
             __self: this
           }),
           _react2.default.createElement(
-            "label",
-            { htmlFor: "speedPercent", __source: {
+            'label',
+            { htmlFor: 'speedPercent', __source: {
                 fileName: _jsxFileName,
                 lineNumber: 25
               },
               __self: this
             },
-            "Speed: ",
+            'Speed: ',
             speedPercent,
-            "%"
+            '%'
           )
         )
       );
@@ -44505,7 +44496,7 @@ var Svg = _styledComponents2.default.svg(_templateObject3);
 
 exports.default = CircleSvg;
 },{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/CircleButton.js":[function(require,module,exports) {
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -44513,26 +44504,26 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsxFileName = "/Users/brian.han/dev/dot-game/src/components/CircleButton.js";
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  100% { transform: translateY(120vh); }\n"], ["\n  100% { transform: translateY(120vh); }\n"]),
-    _templateObject2 = _taggedTemplateLiteral(["\n  justify-self: center;\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-name: ", ";\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  display: inline-flex;\n  height: ", ";\n  padding: 0;\n  position: relative;\n  top: -300px;\n  transform: ", ";\n  width: ", ";\n"], ["\n  justify-self: center;\n  animation-duration: ", ";\n  animation-iteration-count: infinite;\n  animation-name: ", ";\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  display: inline-flex;\n  height: ", ";\n  padding: 0;\n  position: relative;\n  top: -300px;\n  transform: ", ";\n  width: ", ";\n"]);
+var _templateObject = _taggedTemplateLiteral(['\n  100% { transform: translateY(120vh); }\n'], ['\n  100% { transform: translateY(120vh); }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  animation-duration: ', ';\n  animation-iteration-count: infinite;\n  animation-name: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  display: inline-flex;\n  height: ', ';\n  justify-self: center;\n  padding: 0;\n  position: relative;\n  top: -300px;\n  transform: ', ';\n  width: ', ';\n'], ['\n  animation-duration: ', ';\n  animation-iteration-count: infinite;\n  animation-name: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: 0;\n  border: 0;\n  display: inline-flex;\n  height: ', ';\n  justify-self: center;\n  padding: 0;\n  position: relative;\n  top: -300px;\n  transform: ', ';\n  width: ', ';\n']);
 
-var _propTypes = require("prop-types");
+var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = require("styled-components");
+var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _CircleSvg = require("./CircleSvg");
+var _CircleSvg = require('./CircleSvg');
 
 var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
 
@@ -44549,8 +44540,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var getRandomColor = function getRandomColor() {
-  var letters = "0123456789ABCDEF";
-  var color = "#";
+  var letters = '0123456789ABCDEF';
+  var color = '#';
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -44583,7 +44574,7 @@ var CircleButton = function (_Component) {
   }
 
   _createClass(CircleButton, [{
-    key: "componentDidUpdate",
+    key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       if (this.props.animationDuration !== prevProps.animationDuration) {
         this.setState({ animationDuration: this.props.animationDuration });
@@ -44594,12 +44585,13 @@ var CircleButton = function (_Component) {
       }
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props = this.props,
           animationDuration = _props.animationDuration,
           isVisible = _props.isVisible,
-          props = _objectWithoutProperties(_props, ["animationDuration", "isVisible"]);
+          isPlaying = _props.isPlaying,
+          props = _objectWithoutProperties(_props, ['animationDuration', 'isVisible', 'isPlaying']);
 
       return _react2.default.createElement(
         RootButton,
@@ -44607,19 +44599,24 @@ var CircleButton = function (_Component) {
           animationDuration: animationDuration,
           size: this.state.size,
           isVisible: isVisible,
+          isPlaying: isPlaying,
           onClick: function onClick() {
-            return console.log("TODO: disable button, add to score, re-enable button when isVisible");
+            return console.log('TODO: disable button, add to score, re-enable button when isVisible');
           }
         }, props, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 43
           },
           __self: this
         }),
-        _react2.default.createElement(_CircleSvg2.default, { size: this.state.size, fill: this.state.color, isVisible: isVisible, __source: {
+        _react2.default.createElement(_CircleSvg2.default, {
+          size: this.state.size,
+          fill: this.state.color,
+          isVisible: isVisible,
+          __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 55
           },
           __self: this
         })
@@ -44632,20 +44629,23 @@ var CircleButton = function (_Component) {
 
 CircleButton.propTypes = {
   animationDuration: _propTypes2.default.string.isRequired,
-  isVisible: _propTypes2.default.bool.isRequired
+  isVisible: _propTypes2.default.bool.isRequired,
+  isPlaying: _propTypes2.default.bool.isRequired
 };
 
 
 var slideDown = (0, _styledComponents.keyframes)(_templateObject);
 
 var RootButton = _styledComponents2.default.button(_templateObject2, function (props) {
-  return props.animationDuration + "ms";
+  return props.animationDuration + 'ms';
 }, slideDown, function (props) {
-  return props.size + "px";
+  return props.isPlaying ? 'running' : 'paused';
 }, function (props) {
-  return "translateY(" + props.size + "px)";
+  return props.size + 'px';
 }, function (props) {
-  return props.size + "px";
+  return 'translateY(' + props.size + 'px)';
+}, function (props) {
+  return props.size + 'px';
 });
 
 exports.default = CircleButton;
@@ -44797,10 +44797,13 @@ var App = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       speedPercent: 100,
       fastestAnimationDuration: 2000,
-      count: 4
+      count: 3,
+      isPlaying: false
     }, _this.handleChange = function (event) {
       var speedPercent = parseInt(event.target.value, 10);
       _this.setState({ speedPercent: speedPercent });
+    }, _this.handlePlayClick = function () {
+      return _this.setState({ isPlaying: !_this.state.isPlaying });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -44816,45 +44819,59 @@ var App = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 27
+            lineNumber: 30
           },
           __self: this
         },
-        _react2.default.createElement(_Header2.default, {
-          speedPercent: this.state.speedPercent,
-          onChange: this.handleChange,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 28
+        _react2.default.createElement(
+          _Header2.default,
+          {
+            speedPercent: this.state.speedPercent,
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 31
+            },
+            __self: this
           },
-          __self: this
-        }),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handlePlayClick, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 35
+              },
+              __self: this
+            },
+            this.state.isPlaying ? 'Pause' : 'Start'
+          )
+        ),
         _react2.default.createElement(
           _CircleSection2.default,
           { columnCount: this.state.count, __source: {
               fileName: _jsxFileName,
-              lineNumber: 32
+              lineNumber: 39
             },
             __self: this
           },
           (0, _lodash.times)(this.state.count).map(function (index) {
             return _react2.default.createElement(
               _reactVisibilitySensor2.default,
-              { partialVisibility: true, __source: {
+              { key: index, partialVisibility: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 34
+                  lineNumber: 41
                 },
                 __self: _this2
               },
               function (_ref2) {
                 var isVisible = _ref2.isVisible;
                 return _react2.default.createElement(_CircleButton2.default, {
+                  isPlaying: _this2.state.isPlaying,
                   isVisible: isVisible,
                   animationDuration: animationDuration,
                   style: { animationDelay: index * 1000 + 'ms' },
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 36
+                    lineNumber: 43
                   },
                   __self: _this2
                 });
@@ -44993,7 +45010,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63918' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55044' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

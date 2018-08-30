@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Button from "./Button";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Button from './Button';
 
 class Header extends Component {
   render() {
-    const { speedPercent, onChange } = this.props;
+    const { speedPercent, onChange, children } = this.props;
     return (
       <Root>
         <TopSection>
           <Score>0</Score>
-          <Button>Start</Button>
+          {children}
         </TopSection>
         <BottomSection>
           <input

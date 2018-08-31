@@ -46,7 +46,8 @@ const Root = styled.header`
   width: 100%;
   background-color: salmon;
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
 `;
 
 const TopSection = styled.div`

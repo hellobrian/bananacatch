@@ -2,17 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import CircleSvg from './CircleSvg';
-
-const getRandomColor = () => {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-const randomSize = () => Math.floor(Math.random() * 100) + 10;
+import { randomSize, randomNumber } from '../utils';
 
 class CircleButton extends Component {
   static propTypes = {
@@ -22,29 +12,44 @@ class CircleButton extends Component {
   };
 
   state = {
-    color: getRandomColor(),
     size: randomSize(),
     animationDuration: this.props.animationDuration,
+    randomHiddenDot: 1,
   };
 
   componentDidUpdate(prevProps) {
+    // animationDuration needs to update based on onChange event handled by context.handleSpeedChange
     if (this.props.animationDuration !== prevProps.animationDuration) {
       this.setState({ animationDuration: this.props.animationDuration });
     }
 
+    // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize
     if (prevProps.isVisible !== this.props.isVisible) {
-      this.setState({ size: randomSize(), color: getRandomColor() });
+      this.setState({
+        size: randomSize(),
+        randomHiddenDot: randomNumber(0, this.props.columnCount),
+      });
     }
   }
 
   render() {
-    const { animationDuration, isVisible, isPlaying, ...props } = this.props;
+    const {
+      animationDuration,
+      isVisible,
+      isPlaying,
+      index,
+      columnCount,
+      ...props
+    } = this.props;
     return (
       <RootButton
+        animationDelay={this.state.animationDelay}
         animationDuration={animationDuration}
-        size={this.state.size}
-        isVisible={isVisible}
+        index={index}
         isPlaying={isPlaying}
+        isVisible={isVisible}
+        randomHiddenDot={this.state.randomHiddenDot}
+        size={this.state.size}
         onClick={() =>
           console.log(
             'TODO: disable button, add to score, re-enable button when isVisible',
@@ -52,37 +57,46 @@ class CircleButton extends Component {
         }
         {...props}
       >
-        <CircleSvg
-          size={this.state.size}
-          fill={this.state.color}
-          isVisible={isVisible}
-        />
+        <CircleSvg size={this.state.size} isVisible={isVisible} />
       </RootButton>
     );
   }
 }
 
 const slideDown = keyframes`
-  100% { transform: translateY(120vh); }
+  0% {
+    transform: translateY(0);
+  }
+
+  98% {
+    transform: translateY(150vh);
+  }
+
+  100% {
+    transform: translateY(150vh);
+  }
 `;
 
+// TODO: All these animations need to be controlled by a className that can be toggled on/off
 const RootButton = styled.button`
+  visibility: ${props =>
+    props.randomHiddenDot === props.index ? 'hidden' : 'visible'};
+  animation-delay: ${props => `${props.index * 500}ms`};
   animation-duration: ${props => props.animationDuration + 'ms'};
   animation-iteration-count: infinite;
   animation-name: ${slideDown};
   animation-play-state: ${props => (props.isPlaying ? 'running' : 'paused')};
-  animation-timing-function: linear;
+  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
   appearance: none;
-  background: 0;
-  border: 0;
-  display: inline-flex;
+  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+  border-radius: 100%;
+  border: 5px solid white;
   height: ${props => `${props.size}px`};
   justify-self: center;
   padding: 0;
-  position: relative;
-  top: -300px;
-  transform: ${props => `translateY(${props.size}px)`};
   width: ${props => `${props.size}px`};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 `;
 
 export default CircleButton;

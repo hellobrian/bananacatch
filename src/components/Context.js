@@ -5,9 +5,9 @@ export const MyContext = React.createContext();
 class MyProvider extends Component {
   state = {
     speedPercent: 50,
-    fastestAnimationDuration: 2000,
-    columnCount: 4,
-    isPlaying: true,
+    fastestAnimationDuration: 4000,
+    columnCount: 6,
+    isPlaying: false,
     score: 0,
   };
 
@@ -20,10 +20,12 @@ class MyProvider extends Component {
     return (
       <MyContext.Provider
         value={{
-          state: this.state,
-          animationDuration:
-            this.state.fastestAnimationDuration /
-            (this.state.speedPercent / 100),
+          state: {
+            ...this.state,
+            animationDuration:
+              this.state.fastestAnimationDuration /
+              (this.state.speedPercent / 100),
+          },
           handleSpeedChange: this.handleSpeedChange,
           togglePlay: this.togglePlay,
         }}

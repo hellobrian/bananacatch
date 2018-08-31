@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { randomNumber } from '../utils';
 
 class CircleSection extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ class CircleSection extends Component {
   };
 
   static defaultProps = {};
+
   render() {
     const { children, columnCount } = this.props;
     return <Root columnCount={columnCount}>{children}</Root>;
@@ -17,8 +19,11 @@ class CircleSection extends Component {
 
 const Root = styled.div`
   display: grid;
-  grid-template-columns: ${props =>
-    `repeat(${props.columnCount}, minmax(150px, 1fr))`};
+  grid-template-columns: ${props => `repeat(${props.columnCount}, 1fr)`};
+  height: 300px;
+  padding: 0 2%;
+  position: relative;
+  top: -300px;
 `;
 
 export default CircleSection;

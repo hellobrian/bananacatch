@@ -12,7 +12,7 @@ class Header extends Component {
               <TopSection>
                 <Score>{context.state.score}</Score>
                 <button onClick={context.togglePlay}>
-                  {context.state.isPlaying ? 'running' : 'paused'}
+                  {context.state.isPlaying ? 'Pause' : 'Start'}
                 </button>
               </TopSection>
               <BottomSection>

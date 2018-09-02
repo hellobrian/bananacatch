@@ -39,37 +39,38 @@ class Header extends Component {
 }
 
 const Root = styled.header`
+  align-items: center;
+  background-color: salmon;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 150px;
   justify-content: center;
-  width: 100%;
-  background-color: salmon;
   position: relative;
+  width: 100%;
   z-index: 3;
-  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
 `;
 
 const TopSection = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
-  width: 50%;
   padding: 1rem;
+  width: 50%;
 `;
 
 const Score = styled.p`
   font-size: 2rem;
-  width: 50%;
-  text-align: right;
   padding: 0.5rem;
+  text-align: right;
+  width: 50%;
 `;
 
 const BottomSection = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
   padding: 1rem;
+  width: 50%;
 `;
 
 export default Header;

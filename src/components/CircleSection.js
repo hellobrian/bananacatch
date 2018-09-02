@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { randomNumber } from '../utils';
+import { MyContext } from './Context';
 
 class CircleSection extends Component {
   static propTypes = {
@@ -13,17 +14,20 @@ class CircleSection extends Component {
 
   render() {
     const { children, columnCount } = this.props;
-    return <Root columnCount={columnCount}>{children}</Root>;
+    return (
+      <MyContext.Consumer>
+        {context => (
+          <Root columnCount={context.state.columnCount}>{children}</Root>
+        )}
+      </MyContext.Consumer>
+    );
   }
 }
 
 const Root = styled.div`
   display: grid;
   grid-template-columns: ${props => `repeat(${props.columnCount}, 1fr)`};
-  height: 300px;
   padding: 0 2%;
-  position: relative;
-  top: -300px;
 `;
 
 export default CircleSection;

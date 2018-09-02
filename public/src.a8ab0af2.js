@@ -43001,7 +43001,643 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
+},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"components/Context.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MyContext = undefined;
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Context.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MyContext = exports.MyContext = _react2.default.createContext();
+
+var MyProvider = function (_Component) {
+  _inherits(MyProvider, _Component);
+
+  function MyProvider() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, MyProvider);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      speedPercent: 50,
+      fastestAnimationDuration: 4500,
+      columnCount: 6,
+      isPlaying: false,
+      score: 0
+    }, _this.handleSpeedChange = function (event) {
+      return _this.setState({ speedPercent: parseInt(event.target.value, 10) });
+    }, _this.togglePlay = function () {
+      return _this.setState({ isPlaying: !_this.state.isPlaying });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(MyProvider, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        MyContext.Provider,
+        {
+          value: {
+            state: Object.assign({}, this.state, {
+              animationDuration: this.state.fastestAnimationDuration / (this.state.speedPercent / 100)
+            }),
+            handleSpeedChange: this.handleSpeedChange,
+            togglePlay: this.togglePlay
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 21
+          },
+          __self: this
+        },
+        this.props.children
+      );
+    }
+  }]);
+
+  return MyProvider;
+}(_react.Component);
+
+exports.default = MyProvider;
+},{"react":"../node_modules/react/index.js"}],"components/Header.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  align-items: center;\n  background-color: salmon;\n  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n'], ['\n  align-items: center;\n  background-color: salmon;\n  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n'], ['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _Context = require('./Context');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        Root,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 8
+          },
+          __self: this
+        },
+        _react2.default.createElement(
+          _Context.MyContext.Consumer,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 9
+            },
+            __self: this
+          },
+          function (context) {
+            return _react2.default.createElement(
+              _react.Fragment,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 11
+                },
+                __self: _this2
+              },
+              _react2.default.createElement(
+                TopSection,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 12
+                  },
+                  __self: _this2
+                },
+                _react2.default.createElement(
+                  Score,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 13
+                    },
+                    __self: _this2
+                  },
+                  context.state.score
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: context.togglePlay, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 14
+                    },
+                    __self: _this2
+                  },
+                  context.state.isPlaying ? 'Pause' : 'Start'
+                )
+              ),
+              _react2.default.createElement(
+                BottomSection,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 18
+                  },
+                  __self: _this2
+                },
+                _react2.default.createElement('input', {
+                  defaultValue: context.state.speedPercent,
+                  id: 'speedPercent',
+                  max: '100',
+                  min: '10',
+                  name: 'speedPercent',
+                  onChange: context.handleSpeedChange,
+                  step: '10',
+                  type: 'range',
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 19
+                  },
+                  __self: _this2
+                }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'speedPercent', __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 29
+                    },
+                    __self: _this2
+                  },
+                  'Speed: ',
+                  context.state.speedPercent,
+                  '%'
+                )
+              )
+            );
+          }
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(_react.Component);
+
+var Root = _styledComponents2.default.header(_templateObject);
+
+var TopSection = _styledComponents2.default.div(_templateObject2);
+
+var Score = _styledComponents2.default.p(_templateObject3);
+
+var BottomSection = _styledComponents2.default.div(_templateObject4);
+
+exports.default = Header;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+var define;
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+		// register as 'classnames', consistent with npm package name
+		define('classnames', [], function () {
+			return classNames;
+		});
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+},{}],"components/CircleSvg.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSvg.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CircleSvg = function (_Component) {
+  _inherits(CircleSvg, _Component);
+
+  function CircleSvg() {
+    _classCallCheck(this, CircleSvg);
+
+    return _possibleConstructorReturn(this, (CircleSvg.__proto__ || Object.getPrototypeOf(CircleSvg)).apply(this, arguments));
+  }
+
+  _createClass(CircleSvg, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          size = _props.size,
+          fill = _props.fill;
+
+      var radius = size / 2;
+      var viewBox = '0 0 ' + size + ' ' + size;
+
+      return _react2.default.createElement(
+        'svg',
+        { width: size, height: size, viewBox: viewBox, fill: fill, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 22
+          },
+          __self: this
+        },
+        _react2.default.createElement('circle', { cx: radius, cy: radius, r: radius, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 23
+          },
+          __self: this
+        })
+      );
+    }
+  }]);
+
+  return CircleSvg;
+}(_react.Component);
+
+CircleSvg.propTypes = {
+  size: _propTypes2.default.number,
+  fill: _propTypes2.default.string
+};
+CircleSvg.defaultProps = {
+  size: 100,
+  fill: 'transparent'
+};
+exports.default = CircleSvg;
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"utils.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Return random hex string
+var getRandomColor = exports.getRandomColor = function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+// Return random number between min and max
+var randomNumber = exports.randomNumber = function randomNumber(min, max) {
+  return Math.floor(Math.random() * max) + min;
+};
+
+// Return random number between 40 - 100
+var randomSize = exports.randomSize = function randomSize() {
+  return Math.floor(Math.random() * 100) + 40;
+};
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/CircleButton.css":[function(require,module,exports) {
+
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+module.exports = {
+        "noAnimation": "_noAnimation_1eama_15",
+        "slideDown": "_slideDown_1eama_19",
+        "visibilityVisible": "_visibilityVisible_1eama_23",
+        "visibilityHidden": "_visibilityHidden_1eama_27"
+};
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CircleButton.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n']);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Context = require('./Context');
+
+var _CircleSvg = require('./CircleSvg');
+
+var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
+
+var _utils = require('../utils');
+
+var _CircleButton = require('./CircleButton.css');
+
+var _CircleButton2 = _interopRequireDefault(_CircleButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CircleButton = function (_Component) {
+  _inherits(CircleButton, _Component);
+
+  function CircleButton() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, CircleButton);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      size: (0, _utils.randomSize)(),
+      animationDelay: 0,
+      isClicked: false,
+      isVisible: _this.props.isVisible
+    }, _this.handleClick = function () {
+      console.log('isClicked');
+      _this.setState({ isClicked: true });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(CircleButton, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize and random animationDelay
+      if (prevProps.isVisible !== this.props.isVisible) {
+        this.setState({
+          size: (0, _utils.randomSize)(),
+          animationDelay: (0, _utils.randomNumber)(1, 10) * 500,
+          isClicked: false
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _classNames,
+          _this2 = this;
+
+      var _props = this.props,
+          index = _props.index,
+          isVisible = _props.isVisible;
+
+      var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.slideDown, isVisible), _defineProperty(_classNames, _CircleButton2.default.noAnimation, !isVisible), _defineProperty(_classNames, _CircleButton2.default.visibilityHidden, this.state.isClicked), _defineProperty(_classNames, _CircleButton2.default.visibilityVisible, !this.state.isClicked), _classNames));
+      return _react2.default.createElement(
+        _Context.MyContext.Consumer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 49
+          },
+          __self: this
+        },
+        function (context) {
+          return _react2.default.createElement(
+            RootButton,
+            {
+              animationDelay: _this2.state.animationDelay,
+              animationDuration: context.state.animationDuration,
+              className: classList,
+              index: index,
+              isPlaying: context.state.isPlaying,
+              isVisible: isVisible,
+              size: _this2.state.size,
+              onClick: _this2.handleClick,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 51
+              },
+              __self: _this2
+            },
+            _react2.default.createElement(_CircleSvg2.default, { size: _this2.state.size, isVisible: isVisible, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 61
+              },
+              __self: _this2
+            })
+          );
+        }
+      );
+    }
+  }]);
+
+  return CircleButton;
+}(_react.Component);
+
+CircleButton.propTypes = {
+  index: _propTypes2.default.number.isRequired,
+  isVisible: _propTypes2.default.bool
+};
+
+
+var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
+  return props.animationDelay + 'ms';
+}, function (props) {
+  return props.animationDuration + 'ms';
+}, function (props) {
+  return props.isPlaying ? 'running' : 'paused';
+}, function (props) {
+  return props.size + 'px';
+}, function (props) {
+  return props.size + 'px';
+});
+
+exports.default = CircleButton;
+},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.js","./CircleSvg":"components/CircleSvg.js","../utils":"utils.js","./CircleButton.css":"components/CircleButton.css"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -44174,644 +44810,7 @@ module.exports = createReactClass({
   }
 });
 
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/Context.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MyContext = undefined;
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Context.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MyContext = exports.MyContext = _react2.default.createContext();
-
-var MyProvider = function (_Component) {
-  _inherits(MyProvider, _Component);
-
-  function MyProvider() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, MyProvider);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      speedPercent: 50,
-      fastestAnimationDuration: 4500,
-      columnCount: 6,
-      isPlaying: false,
-      score: 0
-    }, _this.handleSpeedChange = function (event) {
-      return _this.setState({ speedPercent: parseInt(event.target.value, 10) });
-    }, _this.togglePlay = function () {
-      return _this.setState({ isPlaying: !_this.state.isPlaying });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(MyProvider, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        MyContext.Provider,
-        {
-          value: {
-            state: Object.assign({}, this.state, {
-              animationDuration: this.state.fastestAnimationDuration / (this.state.speedPercent / 100)
-            }),
-            handleSpeedChange: this.handleSpeedChange,
-            togglePlay: this.togglePlay
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 21
-          },
-          __self: this
-        },
-        this.props.children
-      );
-    }
-  }]);
-
-  return MyProvider;
-}(_react.Component);
-
-exports.default = MyProvider;
-},{"react":"../node_modules/react/index.js"}],"components/Header.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _templateObject = _taggedTemplateLiteral(['\n  align-items: center;\n  background-color: salmon;\n  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n'], ['\n  align-items: center;\n  background-color: salmon;\n  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n'], ['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n']);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _styledComponents = require('styled-components');
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-var _Context = require('./Context');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_Component) {
-  _inherits(Header, _Component);
-
-  function Header() {
-    _classCallCheck(this, Header);
-
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-  }
-
-  _createClass(Header, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        Root,
-        {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 8
-          },
-          __self: this
-        },
-        _react2.default.createElement(
-          _Context.MyContext.Consumer,
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 9
-            },
-            __self: this
-          },
-          function (context) {
-            return _react2.default.createElement(
-              _react.Fragment,
-              {
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 11
-                },
-                __self: _this2
-              },
-              _react2.default.createElement(
-                TopSection,
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 12
-                  },
-                  __self: _this2
-                },
-                _react2.default.createElement(
-                  Score,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 13
-                    },
-                    __self: _this2
-                  },
-                  context.state.score
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: context.togglePlay, __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 14
-                    },
-                    __self: _this2
-                  },
-                  context.state.isPlaying ? 'Pause' : 'Start'
-                )
-              ),
-              _react2.default.createElement(
-                BottomSection,
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 18
-                  },
-                  __self: _this2
-                },
-                _react2.default.createElement('input', {
-                  defaultValue: context.state.speedPercent,
-                  id: 'speedPercent',
-                  max: '100',
-                  min: '10',
-                  name: 'speedPercent',
-                  onChange: context.handleSpeedChange,
-                  step: '10',
-                  type: 'range',
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 19
-                  },
-                  __self: _this2
-                }),
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'speedPercent', __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 29
-                    },
-                    __self: _this2
-                  },
-                  'Speed: ',
-                  context.state.speedPercent,
-                  '%'
-                )
-              )
-            );
-          }
-        )
-      );
-    }
-  }]);
-
-  return Header;
-}(_react.Component);
-
-var Root = _styledComponents2.default.header(_templateObject);
-
-var TopSection = _styledComponents2.default.div(_templateObject2);
-
-var Score = _styledComponents2.default.p(_templateObject3);
-
-var BottomSection = _styledComponents2.default.div(_templateObject4);
-
-exports.default = Header;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
-var define;
-/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		classNames.default = classNames;
-		module.exports = classNames;
-	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
-		// register as 'classnames', consistent with npm package name
-		define('classnames', [], function () {
-			return classNames;
-		});
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
-},{}],"components/CircleSvg.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSvg.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _styledComponents = require('styled-components');
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CircleSvg = function (_Component) {
-  _inherits(CircleSvg, _Component);
-
-  function CircleSvg() {
-    _classCallCheck(this, CircleSvg);
-
-    return _possibleConstructorReturn(this, (CircleSvg.__proto__ || Object.getPrototypeOf(CircleSvg)).apply(this, arguments));
-  }
-
-  _createClass(CircleSvg, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          size = _props.size,
-          fill = _props.fill;
-
-      var radius = size / 2;
-      var viewBox = '0 0 ' + size + ' ' + size;
-
-      return _react2.default.createElement(
-        'svg',
-        { width: size, height: size, viewBox: viewBox, fill: fill, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 22
-          },
-          __self: this
-        },
-        _react2.default.createElement('circle', { cx: radius, cy: radius, r: radius, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 23
-          },
-          __self: this
-        })
-      );
-    }
-  }]);
-
-  return CircleSvg;
-}(_react.Component);
-
-CircleSvg.propTypes = {
-  size: _propTypes2.default.number,
-  fill: _propTypes2.default.string
-};
-CircleSvg.defaultProps = {
-  size: 100,
-  fill: 'transparent'
-};
-exports.default = CircleSvg;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/CircleButton.css":[function(require,module,exports) {
-
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-module.exports = {
-        "noAnimation": "_noAnimation_4x3ds_15",
-        "slideDown": "_slideDown_4x3ds_19",
-        "visibilityVisible": "_visibilityVisible_4x3ds_23",
-        "visibilityHidden": "_visibilityHidden_4x3ds_28"
-};
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"utils.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// Return random hex string
-var getRandomColor = exports.getRandomColor = function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-// Return random number between min and max
-var randomNumber = exports.randomNumber = function randomNumber(min, max) {
-  return Math.floor(Math.random() * max) + min;
-};
-
-// Return random number between 40 - 100
-var randomSize = exports.randomSize = function randomSize() {
-  return Math.floor(Math.random() * 100) + 40;
-};
-},{}],"components/CircleButton.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n']);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styledComponents = require('styled-components');
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _Context = require('./Context');
-
-var _CircleSvg = require('./CircleSvg');
-
-var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
-
-var _CircleButton = require('./CircleButton.css');
-
-var _CircleButton2 = _interopRequireDefault(_CircleButton);
-
-var _utils = require('../utils');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CircleButton = function (_Component) {
-  _inherits(CircleButton, _Component);
-
-  function CircleButton() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, CircleButton);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      size: (0, _utils.randomSize)(),
-      animationDelay: 0,
-      isClicked: false,
-      isVisible: _this.props.isVisible
-    }, _this.handleClick = function () {
-      console.log('isClicked');
-      _this.setState({ isClicked: true });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(CircleButton, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize and random animationDelay
-      if (prevProps.isVisible !== this.props.isVisible) {
-        this.setState({
-          size: (0, _utils.randomSize)(),
-          animationDelay: (0, _utils.randomNumber)(1, 10) * 500,
-          isClicked: false
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _classNames,
-          _this2 = this;
-
-      var _props = this.props,
-          index = _props.index,
-          isVisible = _props.isVisible;
-
-      var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.slideDown, isVisible), _defineProperty(_classNames, _CircleButton2.default.noAnimation, !isVisible), _defineProperty(_classNames, _CircleButton2.default.visibilityHidden, this.state.isClicked), _defineProperty(_classNames, _CircleButton2.default.visibilityVisible, !this.state.isClicked), _classNames));
-      return _react2.default.createElement(
-        _Context.MyContext.Consumer,
-        {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 48
-          },
-          __self: this
-        },
-        function (context) {
-          return _react2.default.createElement(
-            RootButton,
-            {
-              animationDelay: _this2.state.animationDelay,
-              animationDuration: context.state.animationDuration,
-              className: classList,
-              index: index,
-              isPlaying: context.state.isPlaying,
-              isVisible: isVisible,
-              size: _this2.state.size,
-              onClick: _this2.handleClick,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 50
-              },
-              __self: _this2
-            },
-            _react2.default.createElement(_CircleSvg2.default, { size: _this2.state.size, isVisible: isVisible, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 60
-              },
-              __self: _this2
-            })
-          );
-        }
-      );
-    }
-  }]);
-
-  return CircleButton;
-}(_react.Component);
-
-// TODO: All these animations need to be controlled by a className that can be toggled on/off
-
-
-CircleButton.propTypes = {
-  index: _propTypes2.default.number.isRequired,
-  isVisible: _propTypes2.default.bool
-};
-var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
-  return props.animationDelay + 'ms';
-}, function (props) {
-  return props.animationDuration + 'ms';
-}, function (props) {
-  return props.isPlaying ? 'running' : 'paused';
-}, function (props) {
-  return props.size + 'px';
-}, function (props) {
-  return props.size + 'px';
-});
-
-exports.default = CircleButton;
-},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.js","./CircleSvg":"components/CircleSvg.js","./CircleButton.css":"components/CircleButton.css","../utils":"utils.js"}],"components/CircleButtonColumn.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/CircleButtonColumn.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44909,8 +44908,6 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _utils = require('../utils');
-
 var _Context = require('./Context');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44937,16 +44934,14 @@ var CircleSection = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props,
-          children = _props.children,
-          columnCount = _props.columnCount;
+      var children = this.props.children;
 
       return _react2.default.createElement(
         _Context.MyContext.Consumer,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 18
+            lineNumber: 14
           },
           __self: this
         },
@@ -44955,7 +44950,7 @@ var CircleSection = function (_Component) {
             Root,
             { columnCount: context.state.columnCount, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 20
+                lineNumber: 16
               },
               __self: _this2
             },
@@ -44970,10 +44965,8 @@ var CircleSection = function (_Component) {
 }(_react.Component);
 
 CircleSection.propTypes = {
-  children: _propTypes2.default.node.isRequired,
-  columnCount: _propTypes2.default.number
+  children: _propTypes2.default.node.isRequired
 };
-CircleSection.defaultProps = {};
 
 
 var Root = _styledComponents2.default.div(_templateObject, function (props) {
@@ -44981,15 +44974,14 @@ var Root = _styledComponents2.default.div(_templateObject, function (props) {
 });
 
 exports.default = CircleSection;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","../utils":"utils.js","./Context":"components/Context.js"}],"components/App.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"components/App.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.js',
+    _this = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n  background: lightpink;\n  height: 100vh;\n  overflow-y: hidden;\n'], ['\n  background: lightpink;\n  height: 100vh;\n  overflow-y: hidden;\n']);
 
@@ -45002,10 +44994,6 @@ var _styledComponents = require('styled-components');
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _lodash = require('lodash');
-
-var _reactVisibilitySensor = require('react-visibility-sensor');
-
-var _reactVisibilitySensor2 = _interopRequireDefault(_reactVisibilitySensor);
 
 var _Context = require('./Context');
 
@@ -45021,89 +45009,64 @@ var _CircleSection = require('./CircleSection');
 
 var _CircleSection2 = _interopRequireDefault(_CircleSection);
 
-var _utils = require('../utils');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_Component) {
-  _inherits(App, _Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        MainSection,
+var App = function App() {
+  return _react2.default.createElement(
+    MainSection,
+    {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      },
+      __self: _this
+    },
+    _react2.default.createElement(_Header2.default, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      },
+      __self: _this
+    }),
+    _react2.default.createElement(
+      _CircleSection2.default,
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13
+        },
+        __self: _this
+      },
+      _react2.default.createElement(
+        _Context.MyContext.Consumer,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 15
+            lineNumber: 14
           },
-          __self: this
+          __self: _this
         },
-        _react2.default.createElement(_Header2.default, {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 16
-          },
-          __self: this
-        }),
-        _react2.default.createElement(
-          _CircleSection2.default,
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 17
-            },
-            __self: this
-          },
-          _react2.default.createElement(
-            _Context.MyContext.Consumer,
-            {
-              __source: {
+        function (context) {
+          return (0, _lodash.times)(context.state.columnCount).map(function (index) {
+            return _react2.default.createElement(_CircleButtonColumn2.default, { index: index, key: index, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 18
+                lineNumber: 17
               },
-              __self: this
-            },
-            function (context) {
-              return (0, _lodash.times)(context.state.columnCount).map(function (index) {
-                return _react2.default.createElement(_CircleButtonColumn2.default, { index: index, key: index, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 21
-                  },
-                  __self: _this2
-                });
-              });
-            }
-          )
-        )
-      );
-    }
-  }]);
-
-  return App;
-}(_react.Component);
+              __self: _this
+            });
+          });
+        }
+      )
+    )
+  );
+};
 
 var MainSection = _styledComponents2.default.section(_templateObject);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js","./Context":"components/Context.js","./Header":"components/Header.js","./CircleButtonColumn":"components/CircleButtonColumn.js","./CircleSection":"components/CircleSection.js","../utils":"utils.js"}],"index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.js","./Header":"components/Header.js","./CircleButtonColumn":"components/CircleButtonColumn.js","./CircleSection":"components/CircleSection.js"}],"index.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);

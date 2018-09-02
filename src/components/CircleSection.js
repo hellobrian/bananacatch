@@ -1,19 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { randomNumber } from '../utils';
 import { MyContext } from './Context';
 
 class CircleSection extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    columnCount: PropTypes.number,
   };
 
-  static defaultProps = {};
-
   render() {
-    const { children, columnCount } = this.props;
+    const { children } = this.props;
     return (
       <MyContext.Consumer>
         {context => (

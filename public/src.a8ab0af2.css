@@ -1,4 +1,4 @@
-@keyframes _slideDown_4x3ds_19 {
+@keyframes _slideDown_1eama_19 {
   0% {
     transform: translateY(0);
   }
@@ -12,21 +12,19 @@
   }
 }
 
-._noAnimation_4x3ds_15 {
+._noAnimation_1eama_15 {
   animation: none;
 }
 
-._slideDown_4x3ds_19 {
-  animation-name: _slideDown_4x3ds_19;
+._slideDown_1eama_19 {
+  animation-name: _slideDown_1eama_19;
 }
 
-._visibilityVisible_4x3ds_23 {
-  /* visibility: visible; */
+._visibilityVisible_1eama_23 {
   opacity: 1;
 }
 
-._visibilityHidden_4x3ds_28 {
-  /* visibility: hidden; */
+._visibilityHidden_1eama_27 {
   opacity: 0;
 }
 * {

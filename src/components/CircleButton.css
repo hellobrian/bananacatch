@@ -21,11 +21,9 @@
 }
 
 .visibilityVisible {
-  /* visibility: visible; */
   opacity: 1;
 }
 
 .visibilityHidden {
-  /* visibility: hidden; */
   opacity: 0;
 }

@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+
 import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
-import styles from './CircleButton.css';
 import { randomSize, randomNumber } from '../utils';
+import styles from './CircleButton.css';
 
 class CircleButton extends Component {
   static propTypes = {
@@ -65,7 +66,6 @@ class CircleButton extends Component {
   }
 }
 
-// TODO: All these animations need to be controlled by a className that can be toggled on/off
 const RootButton = styled.button`
   animation-delay: ${props => props.animationDelay + 'ms'};
   animation-duration: ${props => props.animationDuration + 'ms'};

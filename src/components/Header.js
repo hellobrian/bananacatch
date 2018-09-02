@@ -1,65 +1,76 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import { MyContext } from './Context';
 
 class Header extends Component {
   render() {
-    const { speedPercent, onChange, children } = this.props;
     return (
       <Root>
-        <TopSection>
-          <Score>0</Score>
-          {children}
-        </TopSection>
-        <BottomSection>
-          <input
-            defaultValue={speedPercent}
-            id="speedPercent"
-            max="100"
-            min="10"
-            name="speedPercent"
-            onChange={onChange}
-            step="10"
-            type="range"
-          />
-          <label htmlFor="speedPercent">Speed: {speedPercent}%</label>
-        </BottomSection>
+        <MyContext.Consumer>
+          {context => (
+            <Fragment>
+              <TopSection>
+                <Score>{context.state.score}</Score>
+                <button onClick={context.togglePlay}>
+                  {context.state.isPlaying ? 'Pause' : 'Start'}
+                </button>
+              </TopSection>
+              <BottomSection>
+                <input
+                  defaultValue={context.state.speedPercent}
+                  id="speedPercent"
+                  max="100"
+                  min="10"
+                  name="speedPercent"
+                  onChange={context.handleSpeedChange}
+                  step="10"
+                  type="range"
+                />
+                <label htmlFor="speedPercent">
+                  Speed: {context.state.speedPercent}%
+                </label>
+              </BottomSection>
+            </Fragment>
+          )}
+        </MyContext.Consumer>
       </Root>
     );
   }
 }
 
 const Root = styled.header`
+  align-items: center;
+  background-color: salmon;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 150px;
   justify-content: center;
-  width: 100%;
-  background-color: salmon;
   position: relative;
-  z-index: 1;
+  width: 100%;
+  z-index: 3;
 `;
 
 const TopSection = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
-  width: 50%;
   padding: 1rem;
+  width: 50%;
 `;
 
 const Score = styled.p`
   font-size: 2rem;
-  width: 50%;
-  text-align: right;
   padding: 0.5rem;
+  text-align: right;
+  width: 50%;
 `;
 
 const BottomSection = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
   padding: 1rem;
+  width: 50%;
 `;
 
 export default Header;

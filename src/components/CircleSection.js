@@ -1,22 +1,29 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { MyContext } from './Context';
 
 class CircleSection extends Component {
   static propTypes = {
-    columnCount: PropTypes.number
+    children: PropTypes.node.isRequired,
   };
 
-  static defaultProps = {};
   render() {
-    const { children, ...props } = this.props;
-    return <Root {...props}>{children}</Root>;
+    const { children } = this.props;
+    return (
+      <MyContext.Consumer>
+        {context => (
+          <Root columnCount={context.state.columnCount}>{children}</Root>
+        )}
+      </MyContext.Consumer>
+    );
   }
 }
 
 const Root = styled.div`
   display: grid;
-  grid-template-columns: ${props => `repeat(${props.columnCount}, minmax(150px, 1fr))`};
+  grid-template-columns: ${props => `repeat(${props.columnCount}, 1fr)`};
+  padding: 0 2%;
 `;
 
 export default CircleSection;

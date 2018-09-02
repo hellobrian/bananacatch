@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import styled, { keyframes } from "styled-components";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 class CircleSvg extends Component {
   static propTypes = {
     size: PropTypes.number,
-    fill: PropTypes.string
+    fill: PropTypes.string,
   };
 
   static defaultProps = {
     size: 100,
-    fill: "red"
+    fill: 'transparent',
   };
 
   render() {
@@ -19,27 +19,11 @@ class CircleSvg extends Component {
     const viewBox = `0 0 ${size} ${size}`;
 
     return (
-      <Root>
-        <Svg width={size} height={size} viewBox={viewBox} fill={fill}>
-          <circle cx={radius} cy={radius} r={radius} />
-        </Svg>
-      </Root>
+      <svg width={size} height={size} viewBox={viewBox} fill={fill}>
+        <circle cx={radius} cy={radius} r={radius} />
+      </svg>
     );
   }
 }
-
-const fadeIn = keyframes`
-  0% { opacity: 0 }
-  100% { opacity: 1 }
-`;
-
-const Root = styled.div`
-  animation-name: ${fadeIn};
-  animation-duration: 500ms;
-`;
-
-const Svg = styled.svg`
-  transition: all 500ms cubic-bezier(0.5, 0, 0.1, 1);
-`;
 
 export default CircleSvg;

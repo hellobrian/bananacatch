@@ -1,0 +1,29 @@
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  99% {
+    transform: translateY(110vh);
+  }
+
+  100% {
+    transform: translateY(110vh);
+  }
+}
+
+.noAnimation {
+  animation: none;
+}
+
+.slideDown {
+  animation-name: slideDown;
+}
+
+.visibilityVisible {
+  opacity: 1;
+}
+
+.visibilityHidden {
+  opacity: 0;
+}

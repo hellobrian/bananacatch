@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
 import styles from './CircleButton.css';
@@ -15,6 +16,8 @@ class CircleButton extends Component {
   state = {
     size: randomSize(),
     animationDelay: 0,
+    isClicked: false,
+    isVisible: this.props.isVisible,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -23,28 +26,36 @@ class CircleButton extends Component {
       this.setState({
         size: randomSize(),
         animationDelay: randomNumber(1, 10) * 500,
+        isClicked: false,
       });
     }
   }
 
+  handleClick = () => {
+    console.log('isClicked');
+    this.setState({ isClicked: true });
+  };
+
   render() {
     const { index, isVisible } = this.props;
+    const classList = classNames({
+      [styles.slideDown]: isVisible,
+      [styles.noAnimation]: !isVisible,
+      [styles.visibilityHidden]: this.state.isClicked,
+      [styles.visibilityVisible]: !this.state.isClicked,
+    });
     return (
       <MyContext.Consumer>
         {context => (
           <RootButton
             animationDelay={this.state.animationDelay}
             animationDuration={context.state.animationDuration}
-            className={isVisible ? styles.slideDown : ''}
+            className={classList}
             index={index}
             isPlaying={context.state.isPlaying}
             isVisible={isVisible}
             size={this.state.size}
-            onClick={() =>
-              console.log(
-                'TODO: restart animation, add to score, re-enable button when isVisible',
-              )
-            }
+            onClick={this.handleClick}
           >
             <CircleSvg size={this.state.size} isVisible={isVisible} />
           </RootButton>
@@ -69,6 +80,11 @@ const RootButton = styled.button`
   padding: 0;
   transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   width: ${props => `${props.size}px`};
+
+  &:focus,
+  &:active {
+    outline: 5px solid blue;
+  }
 `;
 
 export default CircleButton;

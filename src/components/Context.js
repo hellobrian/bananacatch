@@ -5,15 +5,11 @@ export const MyContext = React.createContext();
 class MyProvider extends Component {
   state = {
     speedPercent: 50,
-    fastestAnimationDuration: 3500,
+    fastestAnimationDuration: 4500,
     columnCount: 6,
     isPlaying: false,
     score: 0,
   };
-
-  componentDidUpdate(prevState) {
-    console.log('prevState', prevState, 'state', this.state);
-  }
 
   handleSpeedChange = event =>
     this.setState({ speedPercent: parseInt(event.target.value, 10) });

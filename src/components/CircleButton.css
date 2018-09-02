@@ -12,6 +12,20 @@
   }
 }
 
+.noAnimation {
+  animation: none;
+}
+
 .slideDown {
   animation-name: slideDown;
+}
+
+.visibilityVisible {
+  /* visibility: visible; */
+  opacity: 1;
+}
+
+.visibilityHidden {
+  /* visibility: hidden; */
+  opacity: 0;
 }

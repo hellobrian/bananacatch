@@ -19,8 +19,6 @@ CircleButtonColumn.propTypes = {
 const Root = styled.div`
   display: flex;
   justify-content: center;
-  background-color: white;
-  border: 5px dotted red;
   height: calc(100vh - 150px);
   position: relative;
   top: -150px;

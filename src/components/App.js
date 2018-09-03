@@ -14,7 +14,7 @@ const App = () => (
       <MyContext.Consumer>
         {context =>
           times(context.state.columnCount).map(index => (
-            <CircleButtonColumn index={index} key={index} />
+            <CircleButtonColumn context={context} index={index} key={index} />
           ))
         }
       </MyContext.Consumer>

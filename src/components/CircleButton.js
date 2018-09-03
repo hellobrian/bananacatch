@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
-import { randomSize, randomNumber } from '../utils';
+import { randomSize, randomNumber, maxSize, minSize } from '../utils';
 import styles from './CircleButton.css';
 
 class CircleButton extends Component {
@@ -33,7 +33,18 @@ class CircleButton extends Component {
   }
 
   handleClick = () => {
-    console.log('isClicked');
+    const points = { max: 100, min: 10 };
+    let score = this.state.size;
+
+    if (this.state.score === maxSize) {
+      score = 100;
+    }
+
+    if (this.state.score === minSize) {
+      score = 10;
+    }
+    console.log({ score });
+    this.props.context.incrementScore(score);
     this.setState({ isClicked: true });
   };
 

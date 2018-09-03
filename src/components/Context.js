@@ -16,6 +16,9 @@ class MyProvider extends Component {
 
   togglePlay = () => this.setState({ isPlaying: !this.state.isPlaying });
 
+  incrementScore = (size = 0) =>
+    this.setState({ score: this.state.score + size });
+
   render() {
     return (
       <MyContext.Provider
@@ -28,6 +31,7 @@ class MyProvider extends Component {
           },
           handleSpeedChange: this.handleSpeedChange,
           togglePlay: this.togglePlay,
+          incrementScore: this.incrementScore,
         }}
       >
         {this.props.children}

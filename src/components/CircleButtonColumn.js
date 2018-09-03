@@ -4,24 +4,27 @@ import styled from 'styled-components';
 import CircleButton from './CircleButton';
 import VisibilitySensor from 'react-visibility-sensor';
 
-const CircleButtonColumn = ({ index }) => (
+const CircleButtonColumn = ({ index, context }) => (
   <Root>
     <VisibilitySensor partialVisibility>
-      {({ isVisible }) => <CircleButton index={index} isVisible={isVisible} />}
+      {({ isVisible }) => (
+        <CircleButton index={index} context={context} isVisible={isVisible} />
+      )}
     </VisibilitySensor>
   </Root>
 );
 
 CircleButtonColumn.propTypes = {
   index: PropTypes.number.isRequired,
+  context: PropTypes.object,
+  isVisible: PropTypes.bool,
 };
 
 const Root = styled.div`
   display: flex;
   justify-content: center;
-  height: calc(100vh - 150px);
   position: relative;
-  top: -150px;
+  top: -200px;
 `;
 
 export default CircleButtonColumn;

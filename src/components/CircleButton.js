@@ -45,7 +45,7 @@ class CircleButton extends Component {
       [styles.visibilityVisible]: !this.state.isClicked,
     });
 
-    const accessibleSize = this.state.size * 1.5;
+    const accessibleSize = this.state.size * 1.25;
     return (
       <MyContext.Consumer>
         {context => (

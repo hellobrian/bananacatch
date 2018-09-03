@@ -43043,7 +43043,7 @@ var MyProvider = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       speedPercent: 100,
       fastestAnimationDuration: 4000,
-      columnCount: 6,
+      columnCount: 3,
       isPlaying: false,
       score: 0
     }, _this.handleSpeedChange = function (event) {
@@ -43597,7 +43597,7 @@ var CircleButton = function (_Component) {
 
       var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.slideDown, isVisible), _defineProperty(_classNames, _CircleButton2.default.noAnimation, !isVisible), _defineProperty(_classNames, _CircleButton2.default.visibilityHidden, this.state.isClicked), _defineProperty(_classNames, _CircleButton2.default.visibilityVisible, !this.state.isClicked), _classNames));
 
-      var accessibleSize = this.state.size * 1.5;
+      var accessibleSize = this.state.size * 1.25;
       return _react2.default.createElement(
         _Context.MyContext.Consumer,
         {

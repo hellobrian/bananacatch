@@ -18,7 +18,7 @@ class CircleButton extends Component {
     size: randomSize(),
     animationDelay: 0,
     isClicked: false,
-    value: 0,
+    value: null,
   };
 
   componentDidMount() {
@@ -27,7 +27,6 @@ class CircleButton extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize and random animationDelay
     if (prevProps.isVisible !== this.props.isVisible) {
       this.setState({
         size: randomSize(),
@@ -35,13 +34,7 @@ class CircleButton extends Component {
         isClicked: false,
       });
     }
-    console.log(this.state);
   }
-
-  handleClick = () => {
-    this.props.context.incrementScore(this.state.value);
-    this.setState({ isClicked: true });
-  };
 
   render() {
     const { index, isVisible } = this.props;
@@ -64,7 +57,10 @@ class CircleButton extends Component {
             isPlaying={context.state.isPlaying}
             isVisible={isVisible}
             size={accessibleSize}
-            onClick={this.handleClick}
+            onClick={() => {
+              context.incrementScore(this.state.value);
+              this.setState({ isClicked: true });
+            }} 
           >
             <CircleSvg size={accessibleSize} isVisible={isVisible} />
           </RootButton>

@@ -43564,10 +43564,7 @@ var CircleButton = function (_Component) {
       size: (0, _utils.randomSize)(),
       animationDelay: 0,
       isClicked: false,
-      value: 0
-    }, _this.handleClick = function () {
-      _this.props.context.incrementScore(_this.state.value);
-      _this.setState({ isClicked: true });
+      value: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -43580,7 +43577,6 @@ var CircleButton = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize and random animationDelay
       if (prevProps.isVisible !== this.props.isVisible) {
         this.setState({
           size: (0, _utils.randomSize)(),
@@ -43588,7 +43584,6 @@ var CircleButton = function (_Component) {
           isClicked: false
         });
       }
-      console.log(this.state);
     }
   }, {
     key: 'render',
@@ -43608,7 +43603,7 @@ var CircleButton = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 50
           },
           __self: this
         },
@@ -43623,16 +43618,19 @@ var CircleButton = function (_Component) {
               isPlaying: context.state.isPlaying,
               isVisible: isVisible,
               size: accessibleSize,
-              onClick: _this2.handleClick,
+              onClick: function onClick() {
+                context.incrementScore(_this2.state.value);
+                _this2.setState({ isClicked: true });
+              },
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 59
+                lineNumber: 52
               },
               __self: _this2
             },
             _react2.default.createElement(_CircleSvg2.default, { size: accessibleSize, isVisible: isVisible, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 69
+                lineNumber: 65
               },
               __self: _this2
             })
@@ -44873,8 +44871,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var CircleButtonColumn = function CircleButtonColumn(_ref) {
-  var index = _ref.index,
-      context = _ref.context;
+  var index = _ref.index;
   return _react2.default.createElement(
     Root,
     {
@@ -44894,7 +44891,7 @@ var CircleButtonColumn = function CircleButtonColumn(_ref) {
       },
       function (_ref2) {
         var isVisible = _ref2.isVisible;
-        return _react2.default.createElement(_CircleButton2.default, { index: index, context: context, isVisible: isVisible, __source: {
+        return _react2.default.createElement(_CircleButton2.default, { index: index, isVisible: isVisible, __source: {
             fileName: _jsxFileName,
             lineNumber: 11
           },
@@ -44907,7 +44904,6 @@ var CircleButtonColumn = function CircleButtonColumn(_ref) {
 
 CircleButtonColumn.propTypes = {
   index: _propTypes2.default.number.isRequired,
-  context: _propTypes2.default.object,
   isVisible: _propTypes2.default.bool
 };
 
@@ -45080,7 +45076,7 @@ var App = function App() {
         },
         function (context) {
           return (0, _lodash.times)(context.state.columnCount).map(function (index) {
-            return _react2.default.createElement(_CircleButtonColumn2.default, { context: context, index: index, key: index, __source: {
+            return _react2.default.createElement(_CircleButtonColumn2.default, { index: index, key: index, __source: {
                 fileName: _jsxFileName,
                 lineNumber: 17
               },
@@ -45171,7 +45167,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58047' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52946' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -4,8 +4,8 @@ export const MyContext = React.createContext();
 
 class MyProvider extends Component {
   state = {
-    speedPercent: 50,
-    fastestAnimationDuration: 4500,
+    speedPercent: 100,
+    fastestAnimationDuration: 4000,
     columnCount: 6,
     isPlaying: false,
     score: 0,
@@ -15,6 +15,9 @@ class MyProvider extends Component {
     this.setState({ speedPercent: parseInt(event.target.value, 10) });
 
   togglePlay = () => this.setState({ isPlaying: !this.state.isPlaying });
+
+  incrementScore = (size = 0) =>
+    this.setState({ score: this.state.score + size });
 
   render() {
     return (
@@ -28,6 +31,7 @@ class MyProvider extends Component {
           },
           handleSpeedChange: this.handleSpeedChange,
           togglePlay: this.togglePlay,
+          incrementScore: this.incrementScore,
         }}
       >
         {this.props.children}

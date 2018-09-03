@@ -11,9 +11,12 @@ class Header extends Component {
             <Fragment>
               <TopSection>
                 <Score>{context.state.score}</Score>
-                <button onClick={context.togglePlay}>
+                <Button
+                  onClick={context.togglePlay}
+                  isPlaying={context.state.isPlaying}
+                >
                   {context.state.isPlaying ? 'Pause' : 'Start'}
-                </button>
+                </Button>
               </TopSection>
               <BottomSection>
                 <input
@@ -40,8 +43,9 @@ class Header extends Component {
 
 const Root = styled.header`
   align-items: center;
-  background-color: salmon;
-  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(45, 52, 54, 1);
+  box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);
+  color: white;
   display: flex;
   flex-direction: column;
   height: 150px;
@@ -57,6 +61,31 @@ const TopSection = styled.div`
   justify-content: space-between;
   padding: 1rem;
   width: 50%;
+`;
+
+const green = 'rgba(0, 184, 148, 1.0)';
+const yellow = 'rgba(253, 203, 110, 1.0)';
+
+const Button = styled.button`
+  all: unset;
+  background-color: ${props => (props.isPlaying ? green : 'transparent')};
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+  border: 2px solid white;
+  height: 40px;
+  width: 100px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: ${props => (props.isPlaying ? yellow : green)};
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
 `;
 
 const Score = styled.p`

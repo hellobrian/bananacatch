@@ -18,10 +18,15 @@ class CircleButton extends Component {
     size: randomSize(),
     animationDelay: 0,
     isClicked: false,
-    isVisible: this.props.isVisible,
+    value: 0,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidMount() {
+    const value = maxSize - this.state.size + minSize;
+    this.setState({ value });
+  }
+
+  componentDidUpdate(prevProps) {
     // whenever CircleButton is invisibile based on isVisible prop, it should reset to a randomSize and random animationDelay
     if (prevProps.isVisible !== this.props.isVisible) {
       this.setState({
@@ -30,10 +35,11 @@ class CircleButton extends Component {
         isClicked: false,
       });
     }
+    console.log(this.state);
   }
 
   handleClick = () => {
-    this.props.context.incrementScore(this.state.size);
+    this.props.context.incrementScore(this.state.value);
     this.setState({ isClicked: true });
   };
 

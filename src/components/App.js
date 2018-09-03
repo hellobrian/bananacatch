@@ -23,7 +23,7 @@ const App = () => (
 );
 
 const MainSection = styled.section`
-  background: lightpink;
+  background: rgba(250, 177, 160, 1);
   height: 100vh;
   overflow-y: hidden;
 `;

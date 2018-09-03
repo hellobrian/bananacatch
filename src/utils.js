@@ -12,7 +12,6 @@ export const getRandomColor = () => {
 export const randomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min) + min);
 
-// Return random number between 40 - 100
-export const maxSize = 150;
-export const minSize = 50;
+export const maxSize = 100;
+export const minSize = 10;
 export const randomSize = () => randomNumber(minSize, maxSize);

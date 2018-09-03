@@ -33,18 +33,7 @@ class CircleButton extends Component {
   }
 
   handleClick = () => {
-    const points = { max: 100, min: 10 };
-    let score = this.state.size;
-
-    if (this.state.score === maxSize) {
-      score = 100;
-    }
-
-    if (this.state.score === minSize) {
-      score = 10;
-    }
-    console.log({ score });
-    this.props.context.incrementScore(score);
+    this.props.context.incrementScore(this.state.size);
     this.setState({ isClicked: true });
   };
 
@@ -56,6 +45,8 @@ class CircleButton extends Component {
       [styles.visibilityHidden]: this.state.isClicked,
       [styles.visibilityVisible]: !this.state.isClicked,
     });
+
+    const accessibleSize = this.state.size * 1.5;
     return (
       <MyContext.Consumer>
         {context => (
@@ -66,10 +57,10 @@ class CircleButton extends Component {
             index={index}
             isPlaying={context.state.isPlaying}
             isVisible={isVisible}
-            size={this.state.size}
+            size={accessibleSize}
             onClick={this.handleClick}
           >
-            <CircleSvg size={this.state.size} isVisible={isVisible} />
+            <CircleSvg size={accessibleSize} isVisible={isVisible} />
           </RootButton>
         )}
       </MyContext.Consumer>
@@ -81,7 +72,7 @@ const RootButton = styled.button`
   animation-delay: ${props => props.animationDelay + 'ms'};
   animation-duration: ${props => props.animationDuration + 'ms'};
   animation-play-state: ${props => (props.isPlaying ? 'running' : 'paused')};
-  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation-timing-function: linear;
   appearance: none;
   background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
   border-radius: 100%;

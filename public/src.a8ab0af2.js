@@ -43001,14 +43001,14 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"components/Context.js":[function(require,module,exports) {
+},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"components/Context.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.MyContext = undefined;
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Context.js';
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Context.jsx';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -43085,21 +43085,19 @@ var MyProvider = function (_Component) {
 }(_react.Component);
 
 exports.default = MyProvider;
-},{"react":"../node_modules/react/index.js"}],"components/Header.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/Button.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.js';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _templateObject = _taggedTemplateLiteral(['\n  align-items: center;\n  background-color: rgba(45, 52, 54, 1);\n  box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);\n  color: white;\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n'], ['\n  align-items: center;\n  background-color: rgba(45, 52, 54, 1);\n  box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);\n  color: white;\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n  position: relative;\n  width: 100%;\n  z-index: 3;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem;\n  width: 50%;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n'], ['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n'], ['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: right;\n  width: 50%;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n'], ['\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  width: 50%;\n']);
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Button.jsx',
+    _this = undefined;
+
+var _templateObject = _taggedTemplateLiteral(['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n'], ['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n']);
 
 var _react = require('react');
 
@@ -43109,7 +43107,135 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Button = function Button(_ref) {
+  var isPlaying = _ref.isPlaying,
+      props = _objectWithoutProperties(_ref, ['isPlaying']);
+
+  return _react2.default.createElement(RootButton, _extends({ isPlaying: isPlaying }, props, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: _this
+  }));
+};
+
+var green = 'rgba(0, 184, 148, 1.0)';
+var yellow = 'rgba(253, 203, 110, 1.0)';
+
+var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
+  return props.isPlaying ? green : 'transparent';
+}, function (props) {
+  return props.isPlaying ? yellow : green;
+});
+
+exports.default = Button;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/InputRange.jsx":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/InputRange.jsx',
+    _this = undefined;
+
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n'], ['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var InputRange = function InputRange(_ref) {
+  var defaultValue = _ref.defaultValue,
+      onChange = _ref.onChange,
+      labelText = _ref.labelText;
+  return _react2.default.createElement(
+    Root,
+    {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 5
+      },
+      __self: _this
+    },
+    _react2.default.createElement('input', {
+      defaultValue: defaultValue,
+      id: 'speedPercent',
+      max: '100',
+      min: '10',
+      name: 'speedPercent',
+      onChange: onChange,
+      step: '10',
+      type: 'range',
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6
+      },
+      __self: _this
+    }),
+    _react2.default.createElement(
+      'label',
+      { htmlFor: 'speedPercent', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16
+        },
+        __self: _this
+      },
+      labelText
+    )
+  );
+};
+
+var Root = _styledComponents2.default.div(_templateObject);
+
+exports.default = InputRange;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/Header.jsx":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.jsx';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  justify-content: flex-end;\n'], ['\n  justify-content: flex-end;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  justify-content: flex-start;\n'], ['\n  justify-content: flex-start;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 1rem;\n  position: relative;\n  z-index: 3;\n  ', ';\n'], ['\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 1rem;\n  position: relative;\n  z-index: 3;\n  ', ';\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: center;\n  width: 50%;\n'], ['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: center;\n  width: 50%;\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _Button = require('./Button');
+
+var _Button2 = _interopRequireDefault(_Button);
+
 var _Context = require('./Context');
+
+var _InputRange = require('./InputRange');
+
+var _InputRange2 = _interopRequireDefault(_InputRange);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43136,69 +43262,55 @@ var Header = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        Root,
+        _Context.MyContext.Consumer,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 8
+            lineNumber: 10
           },
           __self: this
         },
-        _react2.default.createElement(
-          _Context.MyContext.Consumer,
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 9
+        function (context) {
+          return _react2.default.createElement(
+            Root,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 12
+              },
+              __self: _this2
             },
-            __self: this
-          },
-          function (context) {
-            return _react2.default.createElement(
-              _react.Fragment,
+            _react2.default.createElement(
+              InputRangeColumn,
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 11
+                  lineNumber: 13
+                },
+                __self: _this2
+              },
+              _react2.default.createElement(_InputRange2.default, {
+                defaultValue: context.state.speedPercent,
+                onChange: context.handleSpeedChange,
+                labelText: 'Speed: ' + context.state.speedPercent + '%',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 14
+                },
+                __self: _this2
+              })
+            ),
+            _react2.default.createElement(
+              Column,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 20
                 },
                 __self: _this2
               },
               _react2.default.createElement(
-                TopSection,
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 12
-                  },
-                  __self: _this2
-                },
-                _react2.default.createElement(
-                  Score,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 13
-                    },
-                    __self: _this2
-                  },
-                  context.state.score
-                ),
-                _react2.default.createElement(
-                  Button,
-                  {
-                    onClick: context.togglePlay,
-                    isPlaying: context.state.isPlaying,
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 14
-                    },
-                    __self: _this2
-                  },
-                  context.state.isPlaying ? 'Pause' : 'Start'
-                )
-              ),
-              _react2.default.createElement(
-                BottomSection,
+                Score,
                 {
                   __source: {
                     fileName: _jsxFileName,
@@ -43206,37 +43318,34 @@ var Header = function (_Component) {
                   },
                   __self: _this2
                 },
-                _react2.default.createElement('input', {
-                  defaultValue: context.state.speedPercent,
-                  id: 'speedPercent',
-                  max: '100',
-                  min: '10',
-                  name: 'speedPercent',
-                  onChange: context.handleSpeedChange,
-                  step: '10',
-                  type: 'range',
+                context.state.score
+              )
+            ),
+            _react2.default.createElement(
+              ButtonColumn,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 23
+                },
+                __self: _this2
+              },
+              _react2.default.createElement(
+                _Button2.default,
+                {
+                  onClick: context.togglePlay,
+                  isPlaying: context.state.isPlaying,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 22
+                    lineNumber: 24
                   },
                   __self: _this2
-                }),
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'speedPercent', __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 32
-                    },
-                    __self: _this2
-                  },
-                  'Speed: ',
-                  context.state.speedPercent,
-                  '%'
-                )
+                },
+                context.state.isPlaying ? 'Pause' : 'Start'
               )
-            );
-          }
-        )
+            )
+          );
+        }
       );
     }
   }]);
@@ -43244,25 +43353,21 @@ var Header = function (_Component) {
   return Header;
 }(_react.Component);
 
-var Root = _styledComponents2.default.header(_templateObject);
+var boxShadowPopOut = 'box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);';
+var greyDark = 'rgba(45, 52, 54, 1)';
 
-var TopSection = _styledComponents2.default.div(_templateObject2);
+var Column = _styledComponents2.default.div(_templateObject);
 
-var green = 'rgba(0, 184, 148, 1.0)';
-var yellow = 'rgba(253, 203, 110, 1.0)';
+var ButtonColumn = (0, _styledComponents2.default)(Column)(_templateObject2);
 
-var Button = _styledComponents2.default.button(_templateObject3, function (props) {
-  return props.isPlaying ? green : 'transparent';
-}, function (props) {
-  return props.isPlaying ? yellow : green;
-});
+var InputRangeColumn = (0, _styledComponents2.default)(Column)(_templateObject3);
 
-var Score = _styledComponents2.default.p(_templateObject4);
+var Root = _styledComponents2.default.header(_templateObject4, greyDark, boxShadowPopOut);
 
-var BottomSection = _styledComponents2.default.div(_templateObject5);
+var Score = _styledComponents2.default.p(_templateObject5);
 
 exports.default = Header;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Button":"components/Button.jsx","./Context":"components/Context.jsx","./InputRange":"components/InputRange.jsx"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -43317,13 +43422,13 @@ var define;
 	}
 }());
 
-},{}],"components/CircleSvg.js":[function(require,module,exports) {
+},{}],"components/CircleSvg.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSvg.js';
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSvg.jsx';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -43494,17 +43599,17 @@ module.exports = {
         "visibilityVisible": "_visibilityVisible_h73oc_23",
         "visibilityHidden": "_visibilityHidden_h73oc_27"
 };
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CircleButton.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CircleButton.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js';
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.jsx';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);\n  border-radius: 100%;\n  border: 5px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n']);
 
 var _propTypes = require('prop-types');
 
@@ -43649,20 +43754,22 @@ CircleButton.propTypes = {
 };
 
 
+var circleLinearGradient = 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)';
+
 var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
   return props.animationDelay + 'ms';
 }, function (props) {
   return props.animationDuration + 'ms';
 }, function (props) {
   return props.isPlaying ? 'running' : 'paused';
-}, function (props) {
+}, circleLinearGradient, function (props) {
   return props.size + 'px';
 }, function (props) {
   return props.size + 'px';
 });
 
 exports.default = CircleButton;
-},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.js","./CircleSvg":"components/CircleSvg.js","../utils":"utils.js","./CircleButton.css":"components/CircleButton.css"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.jsx","./CircleSvg":"components/CircleSvg.jsx","../utils":"utils.js","./CircleButton.css":"components/CircleButton.css"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -44835,16 +44942,16 @@ module.exports = createReactClass({
   }
 });
 
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/CircleButtonColumn.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/CircleButtonColumn.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButtonColumn.js',
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButtonColumn.jsx',
     _this = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -150px;\n'], ['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -150px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -130px;\n'], ['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -130px;\n']);
 
 var _propTypes = require('prop-types');
 
@@ -44893,7 +45000,7 @@ var CircleButtonColumn = function CircleButtonColumn(_ref) {
         var isVisible = _ref2.isVisible;
         return _react2.default.createElement(_CircleButton2.default, { index: index, isVisible: isVisible, __source: {
             fileName: _jsxFileName,
-            lineNumber: 11
+            lineNumber: 10
           },
           __self: _this
         });
@@ -44910,13 +45017,13 @@ CircleButtonColumn.propTypes = {
 var Root = _styledComponents2.default.div(_templateObject);
 
 exports.default = CircleButtonColumn;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleButton":"components/CircleButton.js","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js"}],"components/CircleSection.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleButton":"components/CircleButton.jsx","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js"}],"components/CircleSection.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSection.js';
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSection.jsx';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -45000,13 +45107,13 @@ var Root = _styledComponents2.default.div(_templateObject, function (props) {
 });
 
 exports.default = CircleSection;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.js"}],"components/App.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.jsx"}],"components/App.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.js',
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.jsx',
     _this = undefined;
 
 var _templateObject = _taggedTemplateLiteral(['\n  background: rgba(250, 177, 160, 1);\n  height: 100vh;\n  overflow-y: hidden;\n'], ['\n  background: rgba(250, 177, 160, 1);\n  height: 100vh;\n  overflow-y: hidden;\n']);
@@ -45092,7 +45199,7 @@ var App = function App() {
 var MainSection = _styledComponents2.default.section(_templateObject);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.js","./Header":"components/Header.js","./CircleButtonColumn":"components/CircleButtonColumn.js","./CircleSection":"components/CircleSection.js"}],"index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.jsx","./Header":"components/Header.jsx","./CircleButtonColumn":"components/CircleButtonColumn.jsx","./CircleSection":"components/CircleSection.jsx"}],"index.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
@@ -45138,7 +45245,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     __self: undefined
   })
 ), document.getElementById('app'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/App":"components/App.js","./index.css":"index.css","./components/Context":"components/Context.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/App":"components/App.jsx","./index.css":"index.css","./components/Context":"components/Context.jsx"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -45167,7 +45274,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52946' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62297' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

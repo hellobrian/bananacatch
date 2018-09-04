@@ -3,12 +3,8 @@
     transform: translateY(0);
   }
 
-  99% {
-    transform: translateY(105vh);
-  }
-
   100% {
-    transform: translateY(105vh);
+    transform: translateY(125vh);
   }
 }
 

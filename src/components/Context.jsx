@@ -12,8 +12,6 @@ class MyProvider extends Component {
     isReset: false,
   };
 
-  componentDidUpdate(prevState) {}
-
   handleSpeedChange = event =>
     this.setState({ speedPercent: parseInt(event.target.value, 10) });
 

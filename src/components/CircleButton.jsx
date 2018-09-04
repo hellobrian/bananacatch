@@ -10,7 +10,6 @@ import { linearGradients } from './colors';
 
 class CircleButton extends Component {
   static propTypes = {
-    index: PropTypes.number.isRequired,
     isVisible: PropTypes.bool,
     isReset: PropTypes.bool,
   };
@@ -23,7 +22,7 @@ class CircleButton extends Component {
   };
 
   componentDidMount() {
-    const value = maxSize - this.state.size + minSize;
+    const value = this.calculateValue();
     this.setState({ value });
   }
 
@@ -37,8 +36,46 @@ class CircleButton extends Component {
     }
   }
 
+  calculateValue = () => {
+    let value;
+    switch (this.state.size) {
+      case 100:
+        value = 10;
+        break;
+      case 90:
+        value = 20;
+        break;
+      case 80:
+        value = 30;
+        break;
+      case 70:
+        value = 40;
+        break;
+      case 60:
+        value = 50;
+        break;
+      case 50:
+        value = 60;
+        break;
+      case 40:
+        value = 70;
+        break;
+      case 30:
+        value = 80;
+        break;
+      case 20:
+        value = 90;
+        break;
+
+      default:
+        value = 100;
+        break;
+    }
+    return value;
+  };
+
   render() {
-    const { index, isVisible, isReset } = this.props;
+    const { isVisible, isReset } = this.props;
     const classList = classNames({
       [styles.slideDown]: isVisible && !isReset,
       [styles.noAnimation]: !isVisible && isReset,
@@ -46,7 +83,7 @@ class CircleButton extends Component {
       [styles.visibilityVisible]: !this.state.isClicked,
     });
 
-    const visualSize = this.state.size * 1.1;
+    const visualSize = this.state.size * 1.25;
 
     return (
       <MyContext.Consumer>
@@ -55,7 +92,6 @@ class CircleButton extends Component {
             animationDelay={this.state.animationDelay}
             animationDuration={context.state.animationDuration}
             className={classList}
-            index={index}
             isPlaying={context.state.isPlaying}
             isVisible={isVisible}
             size={visualSize}
@@ -64,6 +100,7 @@ class CircleButton extends Component {
               this.setState({ isClicked: true });
             }}
           >
+            {this.state.value}
             <CircleSvg size={visualSize} isVisible={isVisible} />
           </RootButton>
         )}

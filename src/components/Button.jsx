@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from './colors';
 
 const Button = ({ isPlaying, ...props }) => (
   <RootButton isPlaying={isPlaying} {...props} />
@@ -19,13 +20,13 @@ const RootButton = styled.button`
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 300;
-  border: 2px solid white;
+  border: 2px solid ${colors.white};
   height: 40px;
   width: 100px;
   border-radius: 5px;
 
   &:hover {
-    background-color: ${props => (props.isPlaying ? yellow : green)};
+    background-color: ${props => (props.isPlaying ? colors.yellow : colors.green)};
     transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 `;

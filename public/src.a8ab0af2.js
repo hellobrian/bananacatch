@@ -43085,7 +43085,31 @@ var MyProvider = function (_Component) {
 }(_react.Component);
 
 exports.default = MyProvider;
-},{"react":"../node_modules/react/index.js"}],"components/Button.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/colors.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var colors = exports.colors = {
+  green: 'rgba(0, 184, 148, 1.0)',
+  grey: 'rgba(99, 110, 114, 1.0)',
+  greyDark: 'rgba(45, 52, 54, 1.0)',
+  pink: 'rgba(250, 177, 160, 1.0)',
+  purple: 'rgba(108, 92, 231, 1.0)',
+  white: 'rgba(255, 255, 255, 1.0)',
+  yellow: 'rgba(253, 203, 110, 1.0)'
+};
+
+var linearGradients = exports.linearGradients = {
+  circle: 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)',
+  purpleToGrey: 'linear-gradient(90deg, ' + colors.purple + ' 0%, ' + colors.grey + ' 100%)'
+};
+
+var boxShadow = exports.boxShadow = {
+  popOut: '0 12px 24px 0 rgba(45, 52, 54, 0.1)'
+};
+},{}],"components/Button.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43097,7 +43121,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Button.jsx',
     _this = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n'], ['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid white;\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid ', ';\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n'], ['\n  all: unset;\n  background-color: ', ';\n  color: white;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.25rem;\n  letter-spacing: 2px;\n  text-transform: uppercase;\n  font-weight: 300;\n  border: 2px solid ', ';\n  height: 40px;\n  width: 100px;\n  border-radius: 5px;\n\n  &:hover {\n    background-color: ', ';\n    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  }\n']);
 
 var _react = require('react');
 
@@ -43106,6 +43130,8 @@ var _react2 = _interopRequireDefault(_react);
 var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _colors = require('./colors');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43120,7 +43146,7 @@ var Button = function Button(_ref) {
   return _react2.default.createElement(RootButton, _extends({ isPlaying: isPlaying }, props, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 6
     },
     __self: _this
   }));
@@ -43131,12 +43157,12 @@ var yellow = 'rgba(253, 203, 110, 1.0)';
 
 var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
   return props.isPlaying ? green : 'transparent';
-}, function (props) {
-  return props.isPlaying ? yellow : green;
+}, _colors.colors.white, function (props) {
+  return props.isPlaying ? _colors.colors.yellow : _colors.colors.green;
 });
 
 exports.default = Button;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/InputRange.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./colors":"components/colors.js"}],"components/InputRange.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43145,7 +43171,7 @@ Object.defineProperty(exports, "__esModule", {
 var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/InputRange.jsx',
     _this = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n'], ['\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n'], ['\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n\n  input {\n    margin-bottom: 1rem;\n    width: 100%;\n  }\n\n  label {\n    font-weight: 300;\n  }\n']);
 
 var _react = require('react');
 
@@ -43203,28 +43229,7 @@ var InputRange = function InputRange(_ref) {
 var Root = _styledComponents2.default.div(_templateObject);
 
 exports.default = InputRange;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/colors.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var colors = exports.colors = {
-  pink: 'rgba(250, 177, 160, 1.0)',
-  greyDark: 'rgba(45, 52, 54, 1)',
-  grey: 'rgba(99, 110, 114,1.0)',
-  purple: 'rgba(108, 92, 231,1.0)'
-};
-
-var linearGradients = exports.linearGradients = {
-  circle: 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)',
-  purpleToGrey: 'linear-gradient(90deg, ' + colors.purple + ' 0%, ' + colors.grey + ' 100%)'
-};
-
-var boxShadow = exports.boxShadow = {
-  popOut: '0 12px 24px 0 rgba(45, 52, 54, 0.1)'
-};
-},{}],"components/Header.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/Header.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43236,8 +43241,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  justify-content: flex-end;\n'], ['\n  justify-content: flex-end;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  justify-content: flex-start;\n'], ['\n  justify-content: flex-start;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 1rem;\n  position: relative;\n  z-index: 3;\n  ', ';\n'], ['\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 1rem;\n  position: relative;\n  z-index: 3;\n  ', ';\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  grid-column: span 3;\n'], ['\n  grid-column: span 3;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: grid;\n  grid-gap: 3rem;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: repeat(2, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 10%;\n  position: relative;\n  z-index: 3;\n  ', ';\n'], ['\n  display: grid;\n  grid-gap: 3rem;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: repeat(2, 1fr);\n  align-items: center;\n  background: ', ';\n  color: white;\n  top: 0;\n  width: 100%;\n  padding: 2rem 10%;\n  position: relative;\n  z-index: 3;\n  ', ';\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: center;\n  width: 50%;\n'], ['\n  font-size: 2rem;\n  padding: 0.5rem;\n  text-align: center;\n  width: 50%;\n']);
 
 var _react = require('react');
@@ -43303,32 +43308,19 @@ var Header = function (_Component) {
               },
               __self: _this2
             },
-            _react2.default.createElement(
-              InputRangeColumn,
-              {
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 14
-                },
-                __self: _this2
+            _react2.default.createElement(Column, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 14
               },
-              _react2.default.createElement(_InputRange2.default, {
-                defaultValue: context.state.speedPercent,
-                onChange: context.handleSpeedChange,
-                labelText: 'Speed: ' + context.state.speedPercent + '%',
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 15
-                },
-                __self: _this2
-              })
-            ),
+              __self: _this2
+            }),
             _react2.default.createElement(
               Column,
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 21
+                  lineNumber: 15
                 },
                 __self: _this2
               },
@@ -43337,7 +43329,7 @@ var Header = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 22
+                    lineNumber: 16
                   },
                   __self: _this2
                 },
@@ -43349,7 +43341,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 24
+                  lineNumber: 18
                 },
                 __self: _this2
               },
@@ -43360,12 +43352,32 @@ var Header = function (_Component) {
                   isPlaying: context.state.isPlaying,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 25
+                    lineNumber: 19
                   },
                   __self: _this2
                 },
                 context.state.isPlaying ? 'Pause' : 'Start'
               )
+            ),
+            _react2.default.createElement(
+              InputRangeRow,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 26
+                },
+                __self: _this2
+              },
+              _react2.default.createElement(_InputRange2.default, {
+                defaultValue: context.state.speedPercent,
+                onChange: context.handleSpeedChange,
+                labelText: 'Speed: ' + context.state.speedPercent + '%',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 27
+                },
+                __self: _this2
+              })
             )
           );
         }
@@ -43380,7 +43392,7 @@ var Column = _styledComponents2.default.div(_templateObject);
 
 var ButtonColumn = (0, _styledComponents2.default)(Column)(_templateObject2);
 
-var InputRangeColumn = (0, _styledComponents2.default)(Column)(_templateObject3);
+var InputRangeRow = _styledComponents2.default.div(_templateObject3);
 
 var Root = _styledComponents2.default.header(_templateObject4, _colors.colors.greyDark, _colors.boxShadow.popOut);
 
@@ -43614,10 +43626,10 @@ var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 module.exports = {
-        "noAnimation": "_noAnimation_h73oc_15",
-        "slideDown": "_slideDown_h73oc_19",
-        "visibilityVisible": "_visibilityVisible_h73oc_23",
-        "visibilityHidden": "_visibilityHidden_h73oc_27"
+        "noAnimation": "_noAnimation_qo530_11",
+        "slideDown": "_slideDown_qo530_15",
+        "visibilityVisible": "_visibilityVisible_qo530_19",
+        "visibilityHidden": "_visibilityHidden_qo530_23"
 };
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CircleButton.jsx":[function(require,module,exports) {
 'use strict';
@@ -43629,7 +43641,7 @@ var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n\n  &:focus,\n  &:active {\n    outline: 5px solid blue;\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n']);
 
 var _propTypes = require('prop-types');
 

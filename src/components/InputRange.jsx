@@ -20,7 +20,8 @@ const InputRange = ({ defaultValue, onChange, labelText }) => (
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
+  align-items: center;
 
   input {
     margin-bottom: 1rem;

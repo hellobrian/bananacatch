@@ -11,13 +11,7 @@ class Header extends Component {
       <MyContext.Consumer>
         {context => (
           <Root>
-            <InputRangeColumn>
-              <InputRange
-                defaultValue={context.state.speedPercent}
-                onChange={context.handleSpeedChange}
-                labelText={`Speed: ${context.state.speedPercent}%`}
-              />
-            </InputRangeColumn>
+            <Column />
             <Column>
               <Score>{context.state.score}</Score>
             </Column>
@@ -29,6 +23,13 @@ class Header extends Component {
                 {context.state.isPlaying ? 'Pause' : 'Start'}
               </Button>
             </ButtonColumn>
+            <InputRangeRow>
+              <InputRange
+                  defaultValue={context.state.speedPercent}
+                  onChange={context.handleSpeedChange}
+                  labelText={`Speed: ${context.state.speedPercent}%`}
+                />
+            </InputRangeRow>
           </Root>
         )}
       </MyContext.Consumer>
@@ -46,19 +47,21 @@ const ButtonColumn = styled(Column)`
   justify-content: flex-end;
 `;
 
-const InputRangeColumn = styled(Column)`
-  justify-content: flex-start;
-`;
+const InputRangeRow = styled.div`
+  grid-column: span 3;
+`
 
 const Root = styled.header`
   display: grid;
+  grid-gap: 3rem;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   align-items: center;
   background: ${colors.greyDark};
   color: white;
   top: 0;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 2rem 10%;
   position: relative;
   z-index: 3;
   ${boxShadow.popOut};

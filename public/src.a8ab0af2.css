@@ -1,10 +1,6 @@
-@keyframes _slideDown_h73oc_19 {
+@keyframes _slideDown_qo530_15 {
   0% {
     transform: translateY(0);
-  }
-
-  99% {
-    transform: translateY(105vh);
   }
 
   100% {
@@ -12,19 +8,19 @@
   }
 }
 
-._noAnimation_h73oc_15 {
+._noAnimation_qo530_11 {
   animation: none;
 }
 
-._slideDown_h73oc_19 {
-  animation-name: _slideDown_h73oc_19;
+._slideDown_qo530_15 {
+  animation-name: _slideDown_qo530_15;
 }
 
-._visibilityVisible_h73oc_23 {
+._visibilityVisible_qo530_19 {
   opacity: 1;
 }
 
-._visibilityHidden_h73oc_27 {
+._visibilityHidden_qo530_23 {
   opacity: 0;
 }
 * {

@@ -6,9 +6,6 @@ const Button = ({ isPlaying, ...props }) => (
   <RootButton isPlaying={isPlaying} {...props} />
 );
 
-const green = 'rgba(0, 184, 148, 1.0)';
-const yellow = 'rgba(253, 203, 110, 1.0)';
-
 const RootButton = styled.button`
   all: unset;
   background-color: ${props => (props.isPlaying ? green : 'transparent')};

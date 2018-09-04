@@ -43152,9 +43152,6 @@ var Button = function Button(_ref) {
   }));
 };
 
-var green = 'rgba(0, 184, 148, 1.0)';
-var yellow = 'rgba(253, 203, 110, 1.0)';
-
 var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
   return props.isPlaying ? green : 'transparent';
 }, _colors.colors.white, function (props) {
@@ -43736,7 +43733,8 @@ var CircleButton = function (_Component) {
 
       var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.slideDown, isVisible), _defineProperty(_classNames, _CircleButton2.default.noAnimation, !isVisible), _defineProperty(_classNames, _CircleButton2.default.visibilityHidden, this.state.isClicked), _defineProperty(_classNames, _CircleButton2.default.visibilityVisible, !this.state.isClicked), _classNames));
 
-      var accessibleSize = this.state.size * 1.25;
+      var visualSize = this.state.size * 1.25;
+
       return _react2.default.createElement(
         _Context.MyContext.Consumer,
         {
@@ -43756,7 +43754,7 @@ var CircleButton = function (_Component) {
               index: index,
               isPlaying: context.state.isPlaying,
               isVisible: isVisible,
-              size: accessibleSize,
+              size: visualSize,
               onClick: function onClick() {
                 context.incrementScore(_this2.state.value);
                 _this2.setState({ isClicked: true });
@@ -43767,7 +43765,7 @@ var CircleButton = function (_Component) {
               },
               __self: _this2
             },
-            _react2.default.createElement(_CircleSvg2.default, { size: accessibleSize, isVisible: isVisible, __source: {
+            _react2.default.createElement(_CircleSvg2.default, { size: visualSize, isVisible: isVisible, __source: {
                 fileName: _jsxFileName,
                 lineNumber: 66
               },
@@ -45186,7 +45184,7 @@ var App = function App() {
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 11
       },
       __self: _this
     },
@@ -45195,14 +45193,14 @@ var App = function App() {
         MainSection,
         { isPlaying: context.state.isPlaying, __source: {
             fileName: _jsxFileName,
-            lineNumber: 14
+            lineNumber: 13
           },
           __self: _this
         },
         _react2.default.createElement(_Header2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 15
+            lineNumber: 14
           },
           __self: _this
         }),
@@ -45211,14 +45209,14 @@ var App = function App() {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 16
+              lineNumber: 15
             },
             __self: _this
           },
           (0, _lodash.times)(context.state.columnCount).map(function (index) {
             return _react2.default.createElement(_CircleButtonColumn2.default, { index: index, key: index, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 18
+                lineNumber: 17
               },
               __self: _this
             });

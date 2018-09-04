@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { times } from 'lodash';
-
 import { MyContext } from './Context';
 import Header from './Header';
 import CircleButtonColumn from './CircleButtonColumn';

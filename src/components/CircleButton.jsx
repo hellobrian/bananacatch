@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-
 import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
 import { randomSize, randomNumber, maxSize, minSize } from '../utils';
@@ -46,7 +45,8 @@ class CircleButton extends Component {
       [styles.visibilityVisible]: !this.state.isClicked,
     });
 
-    const accessibleSize = this.state.size * 1.25;
+    const visualSize = this.state.size * 1.25;
+
     return (
       <MyContext.Consumer>
         {context => (
@@ -57,21 +57,19 @@ class CircleButton extends Component {
             index={index}
             isPlaying={context.state.isPlaying}
             isVisible={isVisible}
-            size={accessibleSize}
+            size={visualSize}
             onClick={() => {
               context.incrementScore(this.state.value);
               this.setState({ isClicked: true });
             }} 
           >
-            <CircleSvg size={accessibleSize} isVisible={isVisible} />
+            <CircleSvg size={visualSize} isVisible={isVisible} />
           </RootButton>
         )}
       </MyContext.Consumer>
     );
   }
 }
-
-
 
 const RootButton = styled.button`
   animation-delay: ${props => props.animationDelay + 'ms'};

@@ -1,0 +1,32 @@
+@keyframes _slideDown_1fu96_15 {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(125vh);
+  }
+}
+
+._noAnimation_1fu96_11 {
+  animation: none;
+}
+
+._slideDown_1fu96_15 {
+  animation-name: _slideDown_1fu96_15;
+  animation: _slideDown_1fu96_15 3000ms linear;
+}
+
+._visibilityVisible_1fu96_20 {
+  opacity: 1;
+}
+
+._visibilityHidden_1fu96_24 {
+  opacity: 0;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}

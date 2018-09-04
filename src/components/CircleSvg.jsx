@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
 
 class CircleSvg extends Component {
   static propTypes = {

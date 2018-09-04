@@ -23,7 +23,8 @@ const RootButton = styled.button`
   border-radius: 5px;
 
   &:hover {
-    background-color: ${props => (props.isPlaying ? colors.yellow : colors.green)};
+    background-color: ${props =>
+      props.isPlaying ? colors.yellow : colors.green};
     transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 `;

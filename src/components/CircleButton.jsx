@@ -31,7 +31,7 @@ class CircleButton extends Component {
     if (prevProps.isVisible !== this.props.isVisible) {
       this.setState({
         size: randomSize(),
-        animationDelay: randomNumber(1, 10) * 500,
+        animationDelay: randomNumber(1, 4) * 1000,
         isClicked: false,
       });
     }

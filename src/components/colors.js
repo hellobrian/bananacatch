@@ -2,11 +2,12 @@ export const colors = {
   green: 'rgba(0, 184, 148, 1.0)',
   grey: 'rgba(99, 110, 114, 1.0)',
   greyDark: 'rgba(45, 52, 54, 1.0)',
+  orange: 'rgba(225, 112, 85,1.0)',
   pink: 'rgba(250, 177, 160, 1.0)',
   purple: 'rgba(108, 92, 231, 1.0)',
   white: 'rgba(255, 255, 255, 1.0)',
+  white_10: 'rgba(255, 255, 255, 0.1)',
   yellow: 'rgba(253, 203, 110, 1.0)',
-  orange: 'rgba(225, 112, 85,1.0)',
 };
 
 export const linearGradients = {

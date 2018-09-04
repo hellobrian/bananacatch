@@ -23,7 +23,7 @@ const Root = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  top: -130px;
+  top: -150px;
 `;
 
 export default CircleButtonColumn;

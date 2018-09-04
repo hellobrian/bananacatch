@@ -12,7 +12,6 @@ class Header extends Component {
       <MyContext.Consumer>
         {context => (
           <Root>
-            <Column />
             <Column>
               <Score>{context.state.score}</Score>
             </Column>
@@ -55,30 +54,38 @@ const ButtonColumn = styled(Column)`
 `;
 
 const InputRangeRow = styled.div`
-  grid-column: span 3;
+  grid-column: span 2;
 `;
 
 const Root = styled.header`
   display: grid;
   grid-gap: 3rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 100px 1fr;
   grid-template-rows: repeat(2, 1fr);
   align-items: center;
   background: ${colors.greyDark};
   color: white;
   top: 0;
   width: 100%;
-  padding: 2rem 10%;
+  padding: 2rem;
   position: relative;
   z-index: 3;
   ${boxShadow.popOut};
+
+  @media (max-width: 400px) {
+    padding: 5px;
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Score = styled.p`
+  display: inline-flex;
+  align-items: center;
   font-size: 2rem;
   padding: 0.5rem;
-  text-align: center;
-  width: 50%;
+  justify-content: center;
+  width: 100%;
+  background-color: ${colors.white_10};
 `;
 
 export default Header;

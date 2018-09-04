@@ -43043,7 +43043,7 @@ var MyProvider = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       speedPercent: 50,
       fastestAnimationDuration: 4000,
-      columnCount: 3,
+      columnCount: 10,
       isPlaying: false,
       score: 0,
       isReset: false
@@ -43710,7 +43710,7 @@ var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.js
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  margin: 5px;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n'], ['\n  animation-delay: ', ';\n  animation-duration: ', ';\n  animation-play-state: ', ';\n  animation-timing-function: linear;\n  appearance: none;\n  background: ', ';\n  border-radius: 100%;\n  border: 2px solid white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  height: ', ';\n  padding: 0;\n  margin: 5px;\n  transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);\n  width: ', ';\n  outline: none;\n']);
 
 var _propTypes = require('prop-types');
 
@@ -43770,7 +43770,7 @@ var CircleButton = function (_Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       size: (0, _utils.randomSize)(),
-      animationDelay: 0,
+      animationDelay: (0, _utils.randomNumber)(1, 5) * 500,
       isClicked: false,
       value: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -43788,7 +43788,7 @@ var CircleButton = function (_Component) {
       if (prevProps.isVisible !== this.props.isVisible) {
         this.setState({
           size: (0, _utils.randomSize)(),
-          animationDelay: (0, _utils.randomNumber)(1, 4) * 1000,
+          animationDelay: (0, _utils.randomNumber)(1, 5) * 500,
           isClicked: false
         });
       }
@@ -43806,7 +43806,7 @@ var CircleButton = function (_Component) {
 
       var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.slideDown, isVisible && !isReset), _defineProperty(_classNames, _CircleButton2.default.noAnimation, !isVisible && isReset), _defineProperty(_classNames, _CircleButton2.default.visibilityHidden, this.state.isClicked), _defineProperty(_classNames, _CircleButton2.default.visibilityVisible, !this.state.isClicked), _classNames));
 
-      var visualSize = this.state.size * 1.25;
+      var visualSize = this.state.size * 1.1;
 
       return _react2.default.createElement(
         _Context.MyContext.Consumer,
@@ -45055,7 +45055,8 @@ Object.defineProperty(exports, "__esModule", {
 var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButtonColumn.jsx',
     _this = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -150px;\n'], ['\n  display: flex;\n  justify-content: center;\n  position: relative;\n  top: -150px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  /* display: block; */\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  /* grid-template-columns: repeat(2, 1fr); */\n  /* overflow: hidden; */\n'], ['\n  /* display: block; */\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  /* grid-template-columns: repeat(2, 1fr); */\n  /* overflow: hidden; */\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  top: -150px;\n  display: flex;\n  justify-content: center;\n  height: 100vh;\n'], ['\n  position: relative;\n  top: -150px;\n  display: flex;\n  justify-content: center;\n  height: 100vh;\n']);
 
 var _propTypes = require('prop-types');
 
@@ -45094,22 +45095,64 @@ var CircleButtonColumn = function CircleButtonColumn(_ref) {
       __self: _this
     },
     _react2.default.createElement(
-      _reactVisibilitySensor2.default,
-      { partialVisibility: true, __source: {
+      Column,
+      {
+        __source: {
           fileName: _jsxFileName,
           lineNumber: 9
         },
         __self: _this
       },
-      function (_ref2) {
-        var isVisible = _ref2.isVisible;
-        return _react2.default.createElement(_CircleButton2.default, { index: index, isVisible: isVisible, isReset: isReset, __source: {
+      _react2.default.createElement(
+        _reactVisibilitySensor2.default,
+        { partialVisibility: true, __source: {
             fileName: _jsxFileName,
-            lineNumber: 11
+            lineNumber: 10
           },
           __self: _this
-        });
-      }
+        },
+        function (_ref2) {
+          var isVisible = _ref2.isVisible;
+          return _react2.default.createElement(_CircleButton2.default, { index: index, isVisible: isVisible, isReset: isReset, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 12
+            },
+            __self: _this
+          });
+        }
+      )
+    ),
+    _react2.default.createElement(
+      Column,
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16
+        },
+        __self: _this
+      },
+      _react2.default.createElement(
+        _reactVisibilitySensor2.default,
+        { partialVisibility: true, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 17
+          },
+          __self: _this
+        },
+        function (_ref3) {
+          var isVisible = _ref3.isVisible;
+          return _react2.default.createElement(_CircleButton2.default, {
+            index: index + '-a',
+            isVisible: isVisible,
+            isReset: isReset,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 19
+            },
+            __self: _this
+          });
+        }
+      )
     )
   );
 };
@@ -45120,6 +45163,8 @@ CircleButtonColumn.propTypes = {
 };
 
 var Root = _styledComponents2.default.div(_templateObject);
+
+var Column = _styledComponents2.default.div(_templateObject2);
 
 exports.default = CircleButtonColumn;
 },{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleButton":"components/CircleButton.jsx","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js"}],"components/CircleSection.jsx":[function(require,module,exports) {
@@ -45132,7 +45177,7 @@ var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleSection.j
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: grid;\n  grid-template-columns: ', ';\n  padding: 0 2%;\n'], ['\n  display: grid;\n  grid-template-columns: ', ';\n  padding: 0 2%;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display: grid;\n  padding: 0 2%;\n\n  @media (min-width: 400px) {\n    grid-template-columns: repeat(1, 1fr);\n  }\n\n  @media (min-width: 600px) {\n    grid-template-columns: repeat(2, 1fr);\n  }\n\n  @media (min-width: 800px) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n\n  @media (min-width: 1000px) {\n    grid-template-columns: repeat(4, 1fr);\n  }\n\n  @media (min-width: 1200px) {\n    grid-template-columns: repeat(5, 1fr);\n  }\n\n  @media (min-width: 1400px) {\n    grid-template-columns: repeat(6, 1fr);\n  }\n\n  @media (min-width: 1600px) {\n    grid-template-columns: repeat(7, 1fr);\n  }\n\n  @media (min-width: 1800px) {\n    grid-template-columns: repeat(8, 1fr);\n  }\n\n  @media (min-width: 2000px) {\n    grid-template-columns: repeat(9, 1fr);\n  }\n\n  @media (min-width: 2200px) {\n    grid-template-columns: repeat(10, 1fr);\n  }\n'], ['\n  display: grid;\n  padding: 0 2%;\n\n  @media (min-width: 400px) {\n    grid-template-columns: repeat(1, 1fr);\n  }\n\n  @media (min-width: 600px) {\n    grid-template-columns: repeat(2, 1fr);\n  }\n\n  @media (min-width: 800px) {\n    grid-template-columns: repeat(3, 1fr);\n  }\n\n  @media (min-width: 1000px) {\n    grid-template-columns: repeat(4, 1fr);\n  }\n\n  @media (min-width: 1200px) {\n    grid-template-columns: repeat(5, 1fr);\n  }\n\n  @media (min-width: 1400px) {\n    grid-template-columns: repeat(6, 1fr);\n  }\n\n  @media (min-width: 1600px) {\n    grid-template-columns: repeat(7, 1fr);\n  }\n\n  @media (min-width: 1800px) {\n    grid-template-columns: repeat(8, 1fr);\n  }\n\n  @media (min-width: 2000px) {\n    grid-template-columns: repeat(9, 1fr);\n  }\n\n  @media (min-width: 2200px) {\n    grid-template-columns: repeat(10, 1fr);\n  }\n']);
 
 var _propTypes = require('prop-types');
 
@@ -45207,9 +45252,7 @@ CircleSection.propTypes = {
 };
 
 
-var Root = _styledComponents2.default.div(_templateObject, function (props) {
-  return 'repeat(' + props.columnCount + ', 1fr)';
-});
+var Root = _styledComponents2.default.div(_templateObject);
 
 exports.default = CircleSection;
 },{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.jsx"}],"components/App.jsx":[function(require,module,exports) {

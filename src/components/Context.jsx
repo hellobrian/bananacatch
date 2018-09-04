@@ -6,7 +6,7 @@ class MyProvider extends Component {
   state = {
     speedPercent: 50,
     fastestAnimationDuration: 4000,
-    columnCount: 3,
+    columnCount: 10,
     isPlaying: false,
     score: 0,
     isReset: false,

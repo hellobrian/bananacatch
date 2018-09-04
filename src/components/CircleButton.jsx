@@ -17,7 +17,7 @@ class CircleButton extends Component {
 
   state = {
     size: randomSize(),
-    animationDelay: 0,
+    animationDelay: randomNumber(1, 5) * 500,
     isClicked: false,
     value: null,
   };
@@ -31,7 +31,7 @@ class CircleButton extends Component {
     if (prevProps.isVisible !== this.props.isVisible) {
       this.setState({
         size: randomSize(),
-        animationDelay: randomNumber(1, 4) * 1000,
+        animationDelay: randomNumber(1, 5) * 500,
         isClicked: false,
       });
     }
@@ -46,7 +46,7 @@ class CircleButton extends Component {
       [styles.visibilityVisible]: !this.state.isClicked,
     });
 
-    const visualSize = this.state.size * 1.25;
+    const visualSize = this.state.size * 1.1;
 
     return (
       <MyContext.Consumer>
@@ -84,6 +84,7 @@ const RootButton = styled.button`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   height: ${props => `${props.size}px`};
   padding: 0;
+  margin: 5px;
   transition: all 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   width: ${props => `${props.size}px`};
   outline: none;

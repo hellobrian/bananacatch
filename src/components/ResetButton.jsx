@@ -2,14 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from './colors';
 
-const Button = ({ isPlaying, ...props }) => (
-  <RootButton isPlaying={isPlaying} {...props} />
-);
+const ResetButton = ({ ...props }) => <RootButton {...props} />;
 
 const RootButton = styled.button`
   all: unset;
-  background-color: ${props =>
-    props.isPlaying ? colors.green : 'transparent'};
+  background-color: ${colors.orange};
   color: white;
   display: inline-flex;
   justify-content: center;
@@ -22,13 +19,12 @@ const RootButton = styled.button`
   height: 40px;
   width: 100px;
   border-radius: 5px;
-  margin-right: 1rem;
+  transition: opacity 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  &:hover {
-    background-color: ${props =>
-      props.isPlaying ? colors.yellow : colors.green};
-    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:disabled {
+    opacity: 0.1;
+    transition: opacity 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 `;
 
-export default Button;
+export default ResetButton;

@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import CircleButton from './CircleButton';
 import VisibilitySensor from 'react-visibility-sensor';
 
-const CircleButtonColumn = ({ index }) => (
+const CircleButtonColumn = ({ index, isReset }) => (
   <Root>
     <VisibilitySensor partialVisibility>
-      {({ isVisible }) => <CircleButton index={index} isVisible={isVisible} />}
+      {({ isVisible }) => (
+        <CircleButton index={index} isVisible={isVisible} isReset={isReset} />
+      )}
     </VisibilitySensor>
   </Root>
 );

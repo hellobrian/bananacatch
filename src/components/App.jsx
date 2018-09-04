@@ -14,7 +14,11 @@ const App = () => (
         <Header />
         <CircleSection>
           {times(context.state.columnCount).map(index => (
-            <CircleButtonColumn index={index} key={index} />
+            <CircleButtonColumn
+              index={index}
+              key={index}
+              isReset={context.state.isReset}
+            />
           ))}
         </CircleSection>
       </MainSection>

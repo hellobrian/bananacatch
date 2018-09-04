@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
+import ResetButton from './ResetButton';
 import { MyContext } from './Context';
 import InputRange from './InputRange';
 import { colors, boxShadow } from './colors';
@@ -22,13 +23,19 @@ class Header extends Component {
               >
                 {context.state.isPlaying ? 'Pause' : 'Start'}
               </Button>
+              <ResetButton
+                disabled={!context.state.isPlaying}
+                onClick={context.reset}
+              >
+                Reset
+              </ResetButton>
             </ButtonColumn>
             <InputRangeRow>
               <InputRange
-                  defaultValue={context.state.speedPercent}
-                  onChange={context.handleSpeedChange}
-                  labelText={`Speed: ${context.state.speedPercent}%`}
-                />
+                defaultValue={context.state.speedPercent}
+                onChange={context.handleSpeedChange}
+                labelText={`Speed: ${context.state.speedPercent}%`}
+              />
             </InputRangeRow>
           </Root>
         )}
@@ -49,7 +56,7 @@ const ButtonColumn = styled(Column)`
 
 const InputRangeRow = styled.div`
   grid-column: span 3;
-`
+`;
 
 const Root = styled.header`
   display: grid;

@@ -6,12 +6,13 @@ import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
 import { randomSize, randomNumber, maxSize, minSize } from '../utils';
 import styles from './CircleButton.css';
-import { linearGradients } from './colors'
+import { linearGradients } from './colors';
 
 class CircleButton extends Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
     isVisible: PropTypes.bool,
+    isReset: PropTypes.bool,
   };
 
   state = {
@@ -37,10 +38,10 @@ class CircleButton extends Component {
   }
 
   render() {
-    const { index, isVisible } = this.props;
+    const { index, isVisible, isReset } = this.props;
     const classList = classNames({
-      [styles.slideDown]: isVisible,
-      [styles.noAnimation]: !isVisible,
+      [styles.slideDown]: isVisible && !isReset,
+      [styles.noAnimation]: !isVisible && isReset,
       [styles.visibilityHidden]: this.state.isClicked,
       [styles.visibilityVisible]: !this.state.isClicked,
     });
@@ -61,7 +62,7 @@ class CircleButton extends Component {
             onClick={() => {
               context.incrementScore(this.state.value);
               this.setState({ isClicked: true });
-            }} 
+            }}
           >
             <CircleSvg size={visualSize} isVisible={isVisible} />
           </RootButton>

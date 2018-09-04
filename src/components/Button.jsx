@@ -8,7 +8,8 @@ const Button = ({ isPlaying, ...props }) => (
 
 const RootButton = styled.button`
   all: unset;
-  background-color: ${props => (props.isPlaying ? green : 'transparent')};
+  background-color: ${props =>
+    props.isPlaying ? colors.green : 'transparent'};
   color: white;
   display: inline-flex;
   justify-content: center;

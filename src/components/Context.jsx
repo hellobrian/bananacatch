@@ -4,7 +4,7 @@ export const MyContext = React.createContext();
 
 class MyProvider extends Component {
   state = {
-    speedPercent: 100,
+    speedPercent: 50,
     fastestAnimationDuration: 4000,
     columnCount: 3,
     isPlaying: false,

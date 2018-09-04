@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from './Button';
 import { MyContext } from './Context';
 import InputRange from './InputRange';
+import { colors, boxShadow } from './colors';
 
 class Header extends Component {
   render() {
@@ -35,9 +36,6 @@ class Header extends Component {
   }
 }
 
-const boxShadowPopOut = `box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);`;
-const greyDark = 'rgba(45, 52, 54, 1)';
-
 const Column = styled.div`
   display: flex;
   align-items: center;
@@ -56,14 +54,14 @@ const Root = styled.header`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  background: ${greyDark};
+  background: ${colors.greyDark};
   color: white;
   top: 0;
   width: 100%;
   padding: 2rem 1rem;
   position: relative;
   z-index: 3;
-  ${boxShadowPopOut};
+  ${boxShadow.popOut};
 `;
 
 const Score = styled.p`

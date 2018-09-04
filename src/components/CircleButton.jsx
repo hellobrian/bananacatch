@@ -7,6 +7,7 @@ import { MyContext } from './Context';
 import CircleSvg from './CircleSvg';
 import { randomSize, randomNumber, maxSize, minSize } from '../utils';
 import styles from './CircleButton.css';
+import { linearGradients } from './colors'
 
 class CircleButton extends Component {
   static propTypes = {
@@ -70,7 +71,7 @@ class CircleButton extends Component {
   }
 }
 
-const circleLinearGradient = 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)';
+
 
 const RootButton = styled.button`
   animation-delay: ${props => props.animationDelay + 'ms'};
@@ -78,7 +79,7 @@ const RootButton = styled.button`
   animation-play-state: ${props => (props.isPlaying ? 'running' : 'paused')};
   animation-timing-function: linear;
   appearance: none;
-  background: ${circleLinearGradient};
+  background: ${linearGradients.circle};
   border-radius: 100%;
   border: 2px solid white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);

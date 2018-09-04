@@ -43041,7 +43041,7 @@ var MyProvider = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      speedPercent: 100,
+      speedPercent: 50,
       fastestAnimationDuration: 4000,
       columnCount: 3,
       isPlaying: false,
@@ -43203,7 +43203,28 @@ var InputRange = function InputRange(_ref) {
 var Root = _styledComponents2.default.div(_templateObject);
 
 exports.default = InputRange;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/Header.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js"}],"components/colors.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var colors = exports.colors = {
+  pink: 'rgba(250, 177, 160, 1.0)',
+  greyDark: 'rgba(45, 52, 54, 1)',
+  grey: 'rgba(99, 110, 114,1.0)',
+  purple: 'rgba(108, 92, 231,1.0)'
+};
+
+var linearGradients = exports.linearGradients = {
+  circle: 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)',
+  purpleToGrey: 'linear-gradient(90deg, ' + colors.purple + ' 0%, ' + colors.grey + ' 100%)'
+};
+
+var boxShadow = exports.boxShadow = {
+  popOut: '0 12px 24px 0 rgba(45, 52, 54, 0.1)'
+};
+},{}],"components/Header.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43237,6 +43258,8 @@ var _InputRange = require('./InputRange');
 
 var _InputRange2 = _interopRequireDefault(_InputRange);
 
+var _colors = require('./colors');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -43266,7 +43289,7 @@ var Header = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 10
+            lineNumber: 11
           },
           __self: this
         },
@@ -43276,7 +43299,7 @@ var Header = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 12
+                lineNumber: 13
               },
               __self: _this2
             },
@@ -43285,7 +43308,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 13
+                  lineNumber: 14
                 },
                 __self: _this2
               },
@@ -43295,7 +43318,7 @@ var Header = function (_Component) {
                 labelText: 'Speed: ' + context.state.speedPercent + '%',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 14
+                  lineNumber: 15
                 },
                 __self: _this2
               })
@@ -43305,7 +43328,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 20
+                  lineNumber: 21
                 },
                 __self: _this2
               },
@@ -43314,7 +43337,7 @@ var Header = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 21
+                    lineNumber: 22
                   },
                   __self: _this2
                 },
@@ -43326,7 +43349,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 23
+                  lineNumber: 24
                 },
                 __self: _this2
               },
@@ -43337,7 +43360,7 @@ var Header = function (_Component) {
                   isPlaying: context.state.isPlaying,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 24
+                    lineNumber: 25
                   },
                   __self: _this2
                 },
@@ -43353,21 +43376,18 @@ var Header = function (_Component) {
   return Header;
 }(_react.Component);
 
-var boxShadowPopOut = 'box-shadow: 0 12px 24px 0 rgba(45, 52, 54, 0.1);';
-var greyDark = 'rgba(45, 52, 54, 1)';
-
 var Column = _styledComponents2.default.div(_templateObject);
 
 var ButtonColumn = (0, _styledComponents2.default)(Column)(_templateObject2);
 
 var InputRangeColumn = (0, _styledComponents2.default)(Column)(_templateObject3);
 
-var Root = _styledComponents2.default.header(_templateObject4, greyDark, boxShadowPopOut);
+var Root = _styledComponents2.default.header(_templateObject4, _colors.colors.greyDark, _colors.boxShadow.popOut);
 
 var Score = _styledComponents2.default.p(_templateObject5);
 
 exports.default = Header;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Button":"components/Button.jsx","./Context":"components/Context.jsx","./InputRange":"components/InputRange.jsx"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Button":"components/Button.jsx","./Context":"components/Context.jsx","./InputRange":"components/InputRange.jsx","./colors":"components/colors.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -43639,6 +43659,8 @@ var _CircleButton = require('./CircleButton.css');
 
 var _CircleButton2 = _interopRequireDefault(_CircleButton);
 
+var _colors = require('./colors');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -43708,7 +43730,7 @@ var CircleButton = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           },
           __self: this
         },
@@ -43729,13 +43751,13 @@ var CircleButton = function (_Component) {
               },
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 52
+                lineNumber: 53
               },
               __self: _this2
             },
             _react2.default.createElement(_CircleSvg2.default, { size: accessibleSize, isVisible: isVisible, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 65
+                lineNumber: 66
               },
               __self: _this2
             })
@@ -43754,22 +43776,20 @@ CircleButton.propTypes = {
 };
 
 
-var circleLinearGradient = 'linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%)';
-
 var RootButton = _styledComponents2.default.button(_templateObject, function (props) {
   return props.animationDelay + 'ms';
 }, function (props) {
   return props.animationDuration + 'ms';
 }, function (props) {
   return props.isPlaying ? 'running' : 'paused';
-}, circleLinearGradient, function (props) {
+}, _colors.linearGradients.circle, function (props) {
   return props.size + 'px';
 }, function (props) {
   return props.size + 'px';
 });
 
 exports.default = CircleButton;
-},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.jsx","./CircleSvg":"components/CircleSvg.jsx","../utils":"utils.js","./CircleButton.css":"components/CircleButton.css"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","react":"../node_modules/react/index.js","classnames":"../node_modules/classnames/index.js","./Context":"components/Context.jsx","./CircleSvg":"components/CircleSvg.jsx","../utils":"utils.js","./CircleButton.css":"components/CircleButton.css","./colors":"components/colors.js"}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -45116,7 +45136,7 @@ Object.defineProperty(exports, "__esModule", {
 var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.jsx',
     _this = undefined;
 
-var _templateObject = _taggedTemplateLiteral(['\n  background: rgba(250, 177, 160, 1);\n  height: 100vh;\n  overflow-y: hidden;\n'], ['\n  background: rgba(250, 177, 160, 1);\n  height: 100vh;\n  overflow-y: hidden;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  background: ', ';\n  height: 100vh;\n  overflow-y: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n'], ['\n  background: ', ';\n  height: 100vh;\n  overflow-y: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n']);
 
 var _react = require('react');
 
@@ -45142,64 +45162,67 @@ var _CircleSection = require('./CircleSection');
 
 var _CircleSection2 = _interopRequireDefault(_CircleSection);
 
+var _colors = require('./colors');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var App = function App() {
   return _react2.default.createElement(
-    MainSection,
+    _Context.MyContext.Consumer,
     {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 11
-      },
-      __self: _this
-    },
-    _react2.default.createElement(_Header2.default, {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 12
       },
       __self: _this
-    }),
-    _react2.default.createElement(
-      _CircleSection2.default,
-      {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 13
-        },
-        __self: _this
-      },
-      _react2.default.createElement(
-        _Context.MyContext.Consumer,
-        {
-          __source: {
+    },
+    function (context) {
+      return _react2.default.createElement(
+        MainSection,
+        { isPlaying: context.state.isPlaying, __source: {
             fileName: _jsxFileName,
             lineNumber: 14
           },
           __self: _this
         },
-        function (context) {
-          return (0, _lodash.times)(context.state.columnCount).map(function (index) {
+        _react2.default.createElement(_Header2.default, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 15
+          },
+          __self: _this
+        }),
+        _react2.default.createElement(
+          _CircleSection2.default,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 16
+            },
+            __self: _this
+          },
+          (0, _lodash.times)(context.state.columnCount).map(function (index) {
             return _react2.default.createElement(_CircleButtonColumn2.default, { index: index, key: index, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 17
+                lineNumber: 18
               },
               __self: _this
             });
-          });
-        }
-      )
-    )
+          })
+        )
+      );
+    }
   );
 };
 
-var MainSection = _styledComponents2.default.section(_templateObject);
+var MainSection = _styledComponents2.default.section(_templateObject, function (props) {
+  return props.isPlaying ? _colors.colors.grey : _colors.colors.greyDark;
+});
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.jsx","./Header":"components/Header.jsx","./CircleButtonColumn":"components/CircleButtonColumn.jsx","./CircleSection":"components/CircleSection.jsx"}],"index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.jsx","./Header":"components/Header.jsx","./CircleButtonColumn":"components/CircleButtonColumn.jsx","./CircleSection":"components/CircleSection.jsx","./colors":"components/colors.js"}],"index.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);

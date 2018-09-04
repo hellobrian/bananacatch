@@ -6,26 +6,28 @@ import { MyContext } from './Context';
 import Header from './Header';
 import CircleButtonColumn from './CircleButtonColumn';
 import CircleSection from './CircleSection';
+import { colors, linearGradients } from './colors';
 
 const App = () => (
-  <MainSection>
-    <Header />
-    <CircleSection>
-      <MyContext.Consumer>
-        {context =>
-          times(context.state.columnCount).map(index => (
+  <MyContext.Consumer>
+    {context => (
+      <MainSection isPlaying={context.state.isPlaying}>
+        <Header />
+        <CircleSection>
+          {times(context.state.columnCount).map(index => (
             <CircleButtonColumn index={index} key={index} />
-          ))
-        }
-      </MyContext.Consumer>
-    </CircleSection>
-  </MainSection>
+          ))}
+        </CircleSection>
+      </MainSection>
+    )}
+  </MyContext.Consumer>
 );
 
 const MainSection = styled.section`
-  background: rgba(250, 177, 160, 1);
+  background: ${props => (props.isPlaying ? colors.grey : colors.greyDark)};
   height: 100vh;
   overflow-y: hidden;
+  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
 `;
 
 export default App;

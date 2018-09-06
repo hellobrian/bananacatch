@@ -43041,29 +43041,20 @@ var MyProvider = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyProvider.__proto__ || Object.getPrototypeOf(MyProvider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      speedPercent: 50,
+      speedPercent: 100,
       fastestAnimationDuration: 4000,
       columnCount: 10,
       isPlaying: false,
-      score: 0,
-      isReset: false
+      score: 0
     }, _this.handleSpeedChange = function (event) {
       return _this.setState({ speedPercent: parseInt(event.target.value, 10) });
     }, _this.togglePlay = function () {
       return _this.setState({
-        isPlaying: !_this.state.isPlaying,
-        isReset: false
+        isPlaying: !_this.state.isPlaying
       });
     }, _this.incrementScore = function () {
       var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       return _this.setState({ score: _this.state.score + size });
-    }, _this.reset = function () {
-      return _this.setState({
-        isPlaying: false,
-        score: 0,
-        speedPercent: 50,
-        isReset: !_this.state.isReset
-      });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -43079,12 +43070,11 @@ var MyProvider = function (_Component) {
             }),
             handleSpeedChange: this.handleSpeedChange,
             togglePlay: this.togglePlay,
-            incrementScore: this.incrementScore,
-            reset: this.reset
+            incrementScore: this.incrementScore
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 37
+            lineNumber: 27
           },
           __self: this
         },
@@ -43123,1180 +43113,142 @@ var linearGradients = exports.linearGradients = {
 var boxShadow = exports.boxShadow = {
   popOut: '0 12px 24px 0 rgba(45, 52, 54, 0.1)'
 };
-},{}],"../node_modules/create-react-class/factory.js":[function(require,module,exports) {
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
+},{}],"components/Header.jsx":[function(require,module,exports) {
 'use strict';
 
-var _assign = require('object-assign');
-
-var emptyObject = require('fbjs/lib/emptyObject');
-var _invariant = require('fbjs/lib/invariant');
-
-if ('development' !== 'production') {
-  var warning = require('fbjs/lib/warning');
-}
-
-var MIXINS_KEY = 'mixins';
-
-// Helper function to allow the creation of anonymous functions which do not
-// have .name set to the name of the variable being assigned to.
-function identity(fn) {
-  return fn;
-}
-
-var ReactPropTypeLocationNames;
-if ('development' !== 'production') {
-  ReactPropTypeLocationNames = {
-    prop: 'prop',
-    context: 'context',
-    childContext: 'child context'
-  };
-} else {
-  ReactPropTypeLocationNames = {};
-}
-
-function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
-  /**
-   * Policies that describe methods in `ReactClassInterface`.
-   */
-
-  var injectedMixins = [];
-
-  /**
-   * Composite components are higher-level components that compose other composite
-   * or host components.
-   *
-   * To create a new type of `ReactClass`, pass a specification of
-   * your new class to `React.createClass`. The only requirement of your class
-   * specification is that you implement a `render` method.
-   *
-   *   var MyComponent = React.createClass({
-   *     render: function() {
-   *       return <div>Hello World</div>;
-   *     }
-   *   });
-   *
-   * The class specification supports a specific protocol of methods that have
-   * special meaning (e.g. `render`). See `ReactClassInterface` for
-   * more the comprehensive protocol. Any other properties and methods in the
-   * class specification will be available on the prototype.
-   *
-   * @interface ReactClassInterface
-   * @internal
-   */
-  var ReactClassInterface = {
-    /**
-     * An array of Mixin objects to include when defining your component.
-     *
-     * @type {array}
-     * @optional
-     */
-    mixins: 'DEFINE_MANY',
-
-    /**
-     * An object containing properties and methods that should be defined on
-     * the component's constructor instead of its prototype (static methods).
-     *
-     * @type {object}
-     * @optional
-     */
-    statics: 'DEFINE_MANY',
-
-    /**
-     * Definition of prop types for this component.
-     *
-     * @type {object}
-     * @optional
-     */
-    propTypes: 'DEFINE_MANY',
-
-    /**
-     * Definition of context types for this component.
-     *
-     * @type {object}
-     * @optional
-     */
-    contextTypes: 'DEFINE_MANY',
-
-    /**
-     * Definition of context types this component sets for its children.
-     *
-     * @type {object}
-     * @optional
-     */
-    childContextTypes: 'DEFINE_MANY',
-
-    // ==== Definition methods ====
-
-    /**
-     * Invoked when the component is mounted. Values in the mapping will be set on
-     * `this.props` if that prop is not specified (i.e. using an `in` check).
-     *
-     * This method is invoked before `getInitialState` and therefore cannot rely
-     * on `this.state` or use `this.setState`.
-     *
-     * @return {object}
-     * @optional
-     */
-    getDefaultProps: 'DEFINE_MANY_MERGED',
-
-    /**
-     * Invoked once before the component is mounted. The return value will be used
-     * as the initial value of `this.state`.
-     *
-     *   getInitialState: function() {
-     *     return {
-     *       isOn: false,
-     *       fooBaz: new BazFoo()
-     *     }
-     *   }
-     *
-     * @return {object}
-     * @optional
-     */
-    getInitialState: 'DEFINE_MANY_MERGED',
-
-    /**
-     * @return {object}
-     * @optional
-     */
-    getChildContext: 'DEFINE_MANY_MERGED',
-
-    /**
-     * Uses props from `this.props` and state from `this.state` to render the
-     * structure of the component.
-     *
-     * No guarantees are made about when or how often this method is invoked, so
-     * it must not have side effects.
-     *
-     *   render: function() {
-     *     var name = this.props.name;
-     *     return <div>Hello, {name}!</div>;
-     *   }
-     *
-     * @return {ReactComponent}
-     * @required
-     */
-    render: 'DEFINE_ONCE',
-
-    // ==== Delegate methods ====
-
-    /**
-     * Invoked when the component is initially created and about to be mounted.
-     * This may have side effects, but any external subscriptions or data created
-     * by this method must be cleaned up in `componentWillUnmount`.
-     *
-     * @optional
-     */
-    componentWillMount: 'DEFINE_MANY',
-
-    /**
-     * Invoked when the component has been mounted and has a DOM representation.
-     * However, there is no guarantee that the DOM node is in the document.
-     *
-     * Use this as an opportunity to operate on the DOM when the component has
-     * been mounted (initialized and rendered) for the first time.
-     *
-     * @param {DOMElement} rootNode DOM element representing the component.
-     * @optional
-     */
-    componentDidMount: 'DEFINE_MANY',
-
-    /**
-     * Invoked before the component receives new props.
-     *
-     * Use this as an opportunity to react to a prop transition by updating the
-     * state using `this.setState`. Current props are accessed via `this.props`.
-     *
-     *   componentWillReceiveProps: function(nextProps, nextContext) {
-     *     this.setState({
-     *       likesIncreasing: nextProps.likeCount > this.props.likeCount
-     *     });
-     *   }
-     *
-     * NOTE: There is no equivalent `componentWillReceiveState`. An incoming prop
-     * transition may cause a state change, but the opposite is not true. If you
-     * need it, you are probably looking for `componentWillUpdate`.
-     *
-     * @param {object} nextProps
-     * @optional
-     */
-    componentWillReceiveProps: 'DEFINE_MANY',
-
-    /**
-     * Invoked while deciding if the component should be updated as a result of
-     * receiving new props, state and/or context.
-     *
-     * Use this as an opportunity to `return false` when you're certain that the
-     * transition to the new props/state/context will not require a component
-     * update.
-     *
-     *   shouldComponentUpdate: function(nextProps, nextState, nextContext) {
-     *     return !equal(nextProps, this.props) ||
-     *       !equal(nextState, this.state) ||
-     *       !equal(nextContext, this.context);
-     *   }
-     *
-     * @param {object} nextProps
-     * @param {?object} nextState
-     * @param {?object} nextContext
-     * @return {boolean} True if the component should update.
-     * @optional
-     */
-    shouldComponentUpdate: 'DEFINE_ONCE',
-
-    /**
-     * Invoked when the component is about to update due to a transition from
-     * `this.props`, `this.state` and `this.context` to `nextProps`, `nextState`
-     * and `nextContext`.
-     *
-     * Use this as an opportunity to perform preparation before an update occurs.
-     *
-     * NOTE: You **cannot** use `this.setState()` in this method.
-     *
-     * @param {object} nextProps
-     * @param {?object} nextState
-     * @param {?object} nextContext
-     * @param {ReactReconcileTransaction} transaction
-     * @optional
-     */
-    componentWillUpdate: 'DEFINE_MANY',
-
-    /**
-     * Invoked when the component's DOM representation has been updated.
-     *
-     * Use this as an opportunity to operate on the DOM when the component has
-     * been updated.
-     *
-     * @param {object} prevProps
-     * @param {?object} prevState
-     * @param {?object} prevContext
-     * @param {DOMElement} rootNode DOM element representing the component.
-     * @optional
-     */
-    componentDidUpdate: 'DEFINE_MANY',
-
-    /**
-     * Invoked when the component is about to be removed from its parent and have
-     * its DOM representation destroyed.
-     *
-     * Use this as an opportunity to deallocate any external resources.
-     *
-     * NOTE: There is no `componentDidUnmount` since your component will have been
-     * destroyed by that point.
-     *
-     * @optional
-     */
-    componentWillUnmount: 'DEFINE_MANY',
-
-    /**
-     * Replacement for (deprecated) `componentWillMount`.
-     *
-     * @optional
-     */
-    UNSAFE_componentWillMount: 'DEFINE_MANY',
-
-    /**
-     * Replacement for (deprecated) `componentWillReceiveProps`.
-     *
-     * @optional
-     */
-    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
-
-    /**
-     * Replacement for (deprecated) `componentWillUpdate`.
-     *
-     * @optional
-     */
-    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
-
-    // ==== Advanced methods ====
-
-    /**
-     * Updates the component's currently mounted DOM representation.
-     *
-     * By default, this implements React's rendering and reconciliation algorithm.
-     * Sophisticated clients may wish to override this.
-     *
-     * @param {ReactReconcileTransaction} transaction
-     * @internal
-     * @overridable
-     */
-    updateComponent: 'OVERRIDE_BASE'
-  };
-
-  /**
-   * Similar to ReactClassInterface but for static methods.
-   */
-  var ReactClassStaticInterface = {
-    /**
-     * This method is invoked after a component is instantiated and when it
-     * receives new props. Return an object to update state in response to
-     * prop changes. Return null to indicate no change to state.
-     *
-     * If an object is returned, its keys will be merged into the existing state.
-     *
-     * @return {object || null}
-     * @optional
-     */
-    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
-  };
-
-  /**
-   * Mapping from class specification keys to special processing functions.
-   *
-   * Although these are declared like instance properties in the specification
-   * when defining classes using `React.createClass`, they are actually static
-   * and are accessible on the constructor instead of the prototype. Despite
-   * being static, they must be defined outside of the "statics" key under
-   * which all other static methods are defined.
-   */
-  var RESERVED_SPEC_KEYS = {
-    displayName: function (Constructor, displayName) {
-      Constructor.displayName = displayName;
-    },
-    mixins: function (Constructor, mixins) {
-      if (mixins) {
-        for (var i = 0; i < mixins.length; i++) {
-          mixSpecIntoComponent(Constructor, mixins[i]);
-        }
-      }
-    },
-    childContextTypes: function (Constructor, childContextTypes) {
-      if ('development' !== 'production') {
-        validateTypeDef(Constructor, childContextTypes, 'childContext');
-      }
-      Constructor.childContextTypes = _assign({}, Constructor.childContextTypes, childContextTypes);
-    },
-    contextTypes: function (Constructor, contextTypes) {
-      if ('development' !== 'production') {
-        validateTypeDef(Constructor, contextTypes, 'context');
-      }
-      Constructor.contextTypes = _assign({}, Constructor.contextTypes, contextTypes);
-    },
-    /**
-     * Special case getDefaultProps which should move into statics but requires
-     * automatic merging.
-     */
-    getDefaultProps: function (Constructor, getDefaultProps) {
-      if (Constructor.getDefaultProps) {
-        Constructor.getDefaultProps = createMergedResultFunction(Constructor.getDefaultProps, getDefaultProps);
-      } else {
-        Constructor.getDefaultProps = getDefaultProps;
-      }
-    },
-    propTypes: function (Constructor, propTypes) {
-      if ('development' !== 'production') {
-        validateTypeDef(Constructor, propTypes, 'prop');
-      }
-      Constructor.propTypes = _assign({}, Constructor.propTypes, propTypes);
-    },
-    statics: function (Constructor, statics) {
-      mixStaticSpecIntoComponent(Constructor, statics);
-    },
-    autobind: function () {}
-  };
-
-  function validateTypeDef(Constructor, typeDef, location) {
-    for (var propName in typeDef) {
-      if (typeDef.hasOwnProperty(propName)) {
-        // use a warning instead of an _invariant so components
-        // don't show up in prod but only in __DEV__
-        if ('development' !== 'production') {
-          warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName);
-        }
-      }
-    }
-  }
-
-  function validateMethodOverride(isAlreadyDefined, name) {
-    var specPolicy = ReactClassInterface.hasOwnProperty(name) ? ReactClassInterface[name] : null;
-
-    // Disallow overriding of base class methods unless explicitly allowed.
-    if (ReactClassMixin.hasOwnProperty(name)) {
-      _invariant(specPolicy === 'OVERRIDE_BASE', 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name);
-    }
-
-    // Disallow defining methods more than once unless explicitly allowed.
-    if (isAlreadyDefined) {
-      _invariant(specPolicy === 'DEFINE_MANY' || specPolicy === 'DEFINE_MANY_MERGED', 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name);
-    }
-  }
-
-  /**
-   * Mixin helper which handles policy validation and reserved
-   * specification keys when building React classes.
-   */
-  function mixSpecIntoComponent(Constructor, spec) {
-    if (!spec) {
-      if ('development' !== 'production') {
-        var typeofSpec = typeof spec;
-        var isMixinValid = typeofSpec === 'object' && spec !== null;
-
-        if ('development' !== 'production') {
-          warning(isMixinValid, "%s: You're attempting to include a mixin that is either null " + 'or not an object. Check the mixins included by the component, ' + 'as well as any mixins they include themselves. ' + 'Expected object but got %s.', Constructor.displayName || 'ReactClass', spec === null ? null : typeofSpec);
-        }
-      }
-
-      return;
-    }
-
-    _invariant(typeof spec !== 'function', "ReactClass: You're attempting to " + 'use a component class or function as a mixin. Instead, just use a ' + 'regular object.');
-    _invariant(!isValidElement(spec), "ReactClass: You're attempting to " + 'use a component as a mixin. Instead, just use a regular object.');
-
-    var proto = Constructor.prototype;
-    var autoBindPairs = proto.__reactAutoBindPairs;
-
-    // By handling mixins before any other properties, we ensure the same
-    // chaining order is applied to methods with DEFINE_MANY policy, whether
-    // mixins are listed before or after these methods in the spec.
-    if (spec.hasOwnProperty(MIXINS_KEY)) {
-      RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
-    }
-
-    for (var name in spec) {
-      if (!spec.hasOwnProperty(name)) {
-        continue;
-      }
-
-      if (name === MIXINS_KEY) {
-        // We have already handled mixins in a special case above.
-        continue;
-      }
-
-      var property = spec[name];
-      var isAlreadyDefined = proto.hasOwnProperty(name);
-      validateMethodOverride(isAlreadyDefined, name);
-
-      if (RESERVED_SPEC_KEYS.hasOwnProperty(name)) {
-        RESERVED_SPEC_KEYS[name](Constructor, property);
-      } else {
-        // Setup methods on prototype:
-        // The following member methods should not be automatically bound:
-        // 1. Expected ReactClass methods (in the "interface").
-        // 2. Overridden methods (that were mixed in).
-        var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
-        var isFunction = typeof property === 'function';
-        var shouldAutoBind = isFunction && !isReactClassMethod && !isAlreadyDefined && spec.autobind !== false;
-
-        if (shouldAutoBind) {
-          autoBindPairs.push(name, property);
-          proto[name] = property;
-        } else {
-          if (isAlreadyDefined) {
-            var specPolicy = ReactClassInterface[name];
-
-            // These cases should already be caught by validateMethodOverride.
-            _invariant(isReactClassMethod && (specPolicy === 'DEFINE_MANY_MERGED' || specPolicy === 'DEFINE_MANY'), 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name);
-
-            // For methods which are defined more than once, call the existing
-            // methods before calling the new property, merging if appropriate.
-            if (specPolicy === 'DEFINE_MANY_MERGED') {
-              proto[name] = createMergedResultFunction(proto[name], property);
-            } else if (specPolicy === 'DEFINE_MANY') {
-              proto[name] = createChainedFunction(proto[name], property);
-            }
-          } else {
-            proto[name] = property;
-            if ('development' !== 'production') {
-              // Add verbose displayName to the function, which helps when looking
-              // at profiling tools.
-              if (typeof property === 'function' && spec.displayName) {
-                proto[name].displayName = spec.displayName + '_' + name;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  function mixStaticSpecIntoComponent(Constructor, statics) {
-    if (!statics) {
-      return;
-    }
-
-    for (var name in statics) {
-      var property = statics[name];
-      if (!statics.hasOwnProperty(name)) {
-        continue;
-      }
-
-      var isReserved = name in RESERVED_SPEC_KEYS;
-      _invariant(!isReserved, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name);
-
-      var isAlreadyDefined = name in Constructor;
-      if (isAlreadyDefined) {
-        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name) ? ReactClassStaticInterface[name] : null;
-
-        _invariant(specPolicy === 'DEFINE_MANY_MERGED', 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name);
-
-        Constructor[name] = createMergedResultFunction(Constructor[name], property);
-
-        return;
-      }
-
-      Constructor[name] = property;
-    }
-  }
-
-  /**
-   * Merge two objects, but throw if both contain the same key.
-   *
-   * @param {object} one The first object, which is mutated.
-   * @param {object} two The second object
-   * @return {object} one after it has been mutated to contain everything in two.
-   */
-  function mergeIntoWithNoDuplicateKeys(one, two) {
-    _invariant(one && two && typeof one === 'object' && typeof two === 'object', 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.');
-
-    for (var key in two) {
-      if (two.hasOwnProperty(key)) {
-        _invariant(one[key] === undefined, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key);
-        one[key] = two[key];
-      }
-    }
-    return one;
-  }
-
-  /**
-   * Creates a function that invokes two functions and merges their return values.
-   *
-   * @param {function} one Function to invoke first.
-   * @param {function} two Function to invoke second.
-   * @return {function} Function that invokes the two argument functions.
-   * @private
-   */
-  function createMergedResultFunction(one, two) {
-    return function mergedResult() {
-      var a = one.apply(this, arguments);
-      var b = two.apply(this, arguments);
-      if (a == null) {
-        return b;
-      } else if (b == null) {
-        return a;
-      }
-      var c = {};
-      mergeIntoWithNoDuplicateKeys(c, a);
-      mergeIntoWithNoDuplicateKeys(c, b);
-      return c;
-    };
-  }
-
-  /**
-   * Creates a function that invokes two functions and ignores their return vales.
-   *
-   * @param {function} one Function to invoke first.
-   * @param {function} two Function to invoke second.
-   * @return {function} Function that invokes the two argument functions.
-   * @private
-   */
-  function createChainedFunction(one, two) {
-    return function chainedFunction() {
-      one.apply(this, arguments);
-      two.apply(this, arguments);
-    };
-  }
-
-  /**
-   * Binds a method to the component.
-   *
-   * @param {object} component Component whose method is going to be bound.
-   * @param {function} method Method to be bound.
-   * @return {function} The bound method.
-   */
-  function bindAutoBindMethod(component, method) {
-    var boundMethod = method.bind(component);
-    if ('development' !== 'production') {
-      boundMethod.__reactBoundContext = component;
-      boundMethod.__reactBoundMethod = method;
-      boundMethod.__reactBoundArguments = null;
-      var componentName = component.constructor.displayName;
-      var _bind = boundMethod.bind;
-      boundMethod.bind = function (newThis) {
-        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-
-        // User is trying to bind() an autobound method; we effectively will
-        // ignore the value of "this" that the user is trying to use, so
-        // let's warn.
-        if (newThis !== component && newThis !== null) {
-          if ('development' !== 'production') {
-            warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName);
-          }
-        } else if (!args.length) {
-          if ('development' !== 'production') {
-            warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName);
-          }
-          return boundMethod;
-        }
-        var reboundMethod = _bind.apply(boundMethod, arguments);
-        reboundMethod.__reactBoundContext = component;
-        reboundMethod.__reactBoundMethod = method;
-        reboundMethod.__reactBoundArguments = args;
-        return reboundMethod;
-      };
-    }
-    return boundMethod;
-  }
-
-  /**
-   * Binds all auto-bound methods in a component.
-   *
-   * @param {object} component Component whose method is going to be bound.
-   */
-  function bindAutoBindMethods(component) {
-    var pairs = component.__reactAutoBindPairs;
-    for (var i = 0; i < pairs.length; i += 2) {
-      var autoBindKey = pairs[i];
-      var method = pairs[i + 1];
-      component[autoBindKey] = bindAutoBindMethod(component, method);
-    }
-  }
-
-  var IsMountedPreMixin = {
-    componentDidMount: function () {
-      this.__isMounted = true;
-    }
-  };
-
-  var IsMountedPostMixin = {
-    componentWillUnmount: function () {
-      this.__isMounted = false;
-    }
-  };
-
-  /**
-   * Add more to the ReactClass base class. These are all legacy features and
-   * therefore not already part of the modern ReactComponent.
-   */
-  var ReactClassMixin = {
-    /**
-     * TODO: This will be deprecated because state should always keep a consistent
-     * type signature and the only use case for this, is to avoid that.
-     */
-    replaceState: function (newState, callback) {
-      this.updater.enqueueReplaceState(this, newState, callback);
-    },
-
-    /**
-     * Checks whether or not this composite component is mounted.
-     * @return {boolean} True if mounted, false otherwise.
-     * @protected
-     * @final
-     */
-    isMounted: function () {
-      if ('development' !== 'production') {
-        warning(this.__didWarnIsMounted, '%s: isMounted is deprecated. Instead, make sure to clean up ' + 'subscriptions and pending requests in componentWillUnmount to ' + 'prevent memory leaks.', this.constructor && this.constructor.displayName || this.name || 'Component');
-        this.__didWarnIsMounted = true;
-      }
-      return !!this.__isMounted;
-    }
-  };
-
-  var ReactClassComponent = function () {};
-  _assign(ReactClassComponent.prototype, ReactComponent.prototype, ReactClassMixin);
-
-  /**
-   * Creates a composite component class given a class specification.
-   * See https://facebook.github.io/react/docs/top-level-api.html#react.createclass
-   *
-   * @param {object} spec Class specification (which must define `render`).
-   * @return {function} Component constructor function.
-   * @public
-   */
-  function createClass(spec) {
-    // To keep our warnings more understandable, we'll use a little hack here to
-    // ensure that Constructor.name !== 'Constructor'. This makes sure we don't
-    // unnecessarily identify a class without displayName as 'Constructor'.
-    var Constructor = identity(function (props, context, updater) {
-      // This constructor gets overridden by mocks. The argument is used
-      // by mocks to assert on what gets mounted.
-
-      if ('development' !== 'production') {
-        warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory');
-      }
-
-      // Wire up auto-binding
-      if (this.__reactAutoBindPairs.length) {
-        bindAutoBindMethods(this);
-      }
-
-      this.props = props;
-      this.context = context;
-      this.refs = emptyObject;
-      this.updater = updater || ReactNoopUpdateQueue;
-
-      this.state = null;
-
-      // ReactClasses doesn't have constructors. Instead, they use the
-      // getInitialState and componentWillMount methods for initialization.
-
-      var initialState = this.getInitialState ? this.getInitialState() : null;
-      if ('development' !== 'production') {
-        // We allow auto-mocks to proceed as if they're returning null.
-        if (initialState === undefined && this.getInitialState._isMockFunction) {
-          // This is probably bad practice. Consider warning here and
-          // deprecating this convenience.
-          initialState = null;
-        }
-      }
-      _invariant(typeof initialState === 'object' && !Array.isArray(initialState), '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent');
-
-      this.state = initialState;
-    });
-    Constructor.prototype = new ReactClassComponent();
-    Constructor.prototype.constructor = Constructor;
-    Constructor.prototype.__reactAutoBindPairs = [];
-
-    injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
-
-    mixSpecIntoComponent(Constructor, IsMountedPreMixin);
-    mixSpecIntoComponent(Constructor, spec);
-    mixSpecIntoComponent(Constructor, IsMountedPostMixin);
-
-    // Initialize the defaultProps property after all mixins have been merged.
-    if (Constructor.getDefaultProps) {
-      Constructor.defaultProps = Constructor.getDefaultProps();
-    }
-
-    if ('development' !== 'production') {
-      // This is a tag to indicate that the use of these method names is ok,
-      // since it's used with createClass. If it's not, then it's likely a
-      // mistake so we'll warn you to use the static property, property
-      // initializer or constructor respectively.
-      if (Constructor.getDefaultProps) {
-        Constructor.getDefaultProps.isReactClassApproved = {};
-      }
-      if (Constructor.prototype.getInitialState) {
-        Constructor.prototype.getInitialState.isReactClassApproved = {};
-      }
-    }
-
-    _invariant(Constructor.prototype.render, 'createClass(...): Class specification must implement a `render` method.');
-
-    if ('development' !== 'production') {
-      warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component');
-      warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component');
-      warning(!Constructor.prototype.UNSAFE_componentWillRecieveProps, '%s has a method called UNSAFE_componentWillRecieveProps(). ' + 'Did you mean UNSAFE_componentWillReceiveProps()?', spec.displayName || 'A component');
-    }
-
-    // Reduce time spent doing lookups by setting these on the prototype.
-    for (var methodName in ReactClassInterface) {
-      if (!Constructor.prototype[methodName]) {
-        Constructor.prototype[methodName] = null;
-      }
-    }
-
-    return Constructor;
-  }
-
-  return createClass;
-}
-
-module.exports = factory;
-},{"object-assign":"../node_modules/object-assign/index.js","fbjs/lib/emptyObject":"../node_modules/fbjs/lib/emptyObject.js","fbjs/lib/invariant":"../node_modules/fbjs/lib/invariant.js","fbjs/lib/warning":"../node_modules/fbjs/lib/warning.js"}],"../node_modules/create-react-class/index.js":[function(require,module,exports) {
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-'use strict';
-
-var React = require('react');
-var factory = require('./factory');
-
-if (typeof React === 'undefined') {
-  throw Error(
-    'create-react-class could not find the React object. If you are using script tags, ' +
-      'make sure that React is being loaded before create-react-class.'
-  );
-}
-
-// Hack to grab NoopUpdateQueue from isomorphic React
-var ReactNoopUpdateQueue = new React.Component().updater;
-
-module.exports = factory(
-  React.Component,
-  React.isValidElement,
-  ReactNoopUpdateQueue
-);
-
-},{"react":"../node_modules/react/index.js","./factory":"../node_modules/create-react-class/factory.js"}],"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js":[function(require,module,exports) {
-// Tell whether the rect is visible, given an offset
-//
-// return: boolean
-module.exports = function (offset, rect, containmentRect) {
-  var offsetDir = offset.direction;
-  var offsetVal = offset.value;
-
-  // Rules for checking different kind of offsets. In example if the element is
-  // 90px below viewport and offsetTop is 100, it is considered visible.
-  switch (offsetDir) {
-  case 'top':
-    return ((containmentRect.top + offsetVal) < rect.top) &&
-      (containmentRect.bottom > rect.bottom) &&
-      (containmentRect.left < rect.left) &&
-      (containmentRect.right > rect.right);
-
-  case 'left':
-    return ((containmentRect.left + offsetVal) < rect.left) &&
-      (containmentRect.bottom > rect.bottom) &&
-      (containmentRect.top < rect.top) &&
-      (containmentRect.right > rect.right);
-
-  case 'bottom':
-    return ((containmentRect.bottom - offsetVal) > rect.bottom) &&
-      (containmentRect.left < rect.left) &&
-      (containmentRect.right > rect.right) &&
-      (containmentRect.top < rect.top);
-
-  case 'right':
-    return ((containmentRect.right - offsetVal) > rect.right) &&
-      (containmentRect.left < rect.left) &&
-      (containmentRect.top < rect.top) &&
-      (containmentRect.bottom > rect.bottom);
-  }
-}
-
-},{}],"../node_modules/react-visibility-sensor/visibility-sensor.js":[function(require,module,exports) {
-'use strict';
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var PropTypes = require('prop-types');
-var createReactClass = require('create-react-class');
-var isVisibleWithOffset = require('./lib/is-visible-with-offset')
-
-var containmentPropType = PropTypes.any;
-
-if (typeof window !== 'undefined') {
-  containmentPropType = PropTypes.instanceOf(window.Element);
-}
-
-function throttle (callback, limit) {
-    var wait = false;
-    return function () {
-        if (!wait) {
-            wait = true;
-            setTimeout(function () {
-                callback();
-                wait = false;
-            }, limit);
-        }
-    }
-}
-
-function debounce(func, wait) {
-  var timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      func.apply(context, args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-module.exports = createReactClass({
-  displayName: 'VisibilitySensor',
-
-  propTypes: {
-    onChange: PropTypes.func,
-    active: PropTypes.bool,
-    partialVisibility: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    ]),
-    delayedCall: PropTypes.bool,
-    offset: PropTypes.oneOfType([
-      PropTypes.shape({
-        top: PropTypes.number,
-        left: PropTypes.number,
-        bottom: PropTypes.number,
-        right: PropTypes.number
-      }),
-      // deprecated offset property
-      PropTypes.shape({
-        direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-        value: PropTypes.number
-      })
-    ]),
-    scrollCheck: PropTypes.bool,
-    scrollDelay: PropTypes.number,
-    scrollThrottle: PropTypes.number,
-    resizeCheck: PropTypes.bool,
-    resizeDelay: PropTypes.number,
-    resizeThrottle: PropTypes.number,
-    intervalCheck: PropTypes.bool,
-    intervalDelay: PropTypes.number,
-    containment: containmentPropType,
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func,
-    ]),
-    minTopValue: PropTypes.number,
-  },
-
-  getDefaultProps: function () {
-    return {
-      active: true,
-      partialVisibility: false,
-      minTopValue: 0,
-      scrollCheck: false,
-      scrollDelay: 250,
-      scrollThrottle: -1,
-      resizeCheck: false,
-      resizeDelay: 250,
-      resizeThrottle: -1,
-      intervalCheck: true,
-      intervalDelay: 100,
-      delayedCall: false,
-      offset: {},
-      containment: null,
-      children: React.createElement('span')
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      isVisible: null,
-      visibilityRect: {}
-    };
-  },
-
-  componentDidMount: function () {
-    this.node = ReactDOM.findDOMNode(this);
-    if (this.props.active) {
-      this.startWatching();
-    }
-  },
-
-  componentWillUnmount: function () {
-    this.stopWatching();
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    if (nextProps.active && !this.props.active) {
-      this.setState(this.getInitialState());
-      this.startWatching();
-    } else if (!nextProps.active) {
-      this.stopWatching();
-    }
-  },
-
-  getContainer: function () {
-    return this.props.containment || window;
-  },
-
-  addEventListener: function (target, event, delay, throttle) {
-    if (!this.debounceCheck) {
-      this.debounceCheck = {};
-    }
-
-    var timeout;
-    var func;
-
-    var later = function () {
-      timeout = null;
-      this.check();
-    }.bind(this);
-
-    if (throttle > -1) {
-      func = function () {
-        if (!timeout) {
-          timeout = setTimeout(later, throttle || 0);
-        }
-      };
-    } else {
-      func = function () {
-        clearTimeout(timeout);
-        timeout = setTimeout(later, delay || 0);
-      };
-    }
-
-    var info = {
-      target: target,
-      fn: func,
-      getLastTimeout: function () {
-        return timeout;
-      },
-    };
-
-    target.addEventListener(event, info.fn);
-    this.debounceCheck[event] = info;
-  },
-
-  startWatching: function () {
-    if (this.debounceCheck || this.interval) { return; }
-
-    if (this.props.intervalCheck) {
-      this.interval = setInterval(this.check, this.props.intervalDelay);
-    }
-
-    if (this.props.scrollCheck) {
-      this.addEventListener(
-        this.getContainer(),
-        'scroll',
-        this.props.scrollDelay,
-        this.props.scrollThrottle
-      );
-    }
-
-    if (this.props.resizeCheck) {
-      this.addEventListener(
-        window,
-        'resize',
-        this.props.resizeDelay,
-        this.props.resizeThrottle
-      );
-    }
-
-    // if dont need delayed call, check on load ( before the first interval fires )
-    !this.props.delayedCall && this.check();
-  },
-
-  stopWatching: function () {
-    if (this.debounceCheck) {
-      // clean up event listeners and their debounce callers
-      for (var debounceEvent in this.debounceCheck) {
-        if (this.debounceCheck.hasOwnProperty(debounceEvent)) {
-          var debounceInfo = this.debounceCheck[debounceEvent];
-
-          clearTimeout(debounceInfo.getLastTimeout());
-          debounceInfo.target.removeEventListener(
-            debounceEvent, debounceInfo.fn
-          );
-
-          this.debounceCheck[debounceEvent] = null;
-        }
-      }
-    }
-    this.debounceCheck = null;
-
-    if (this.interval) { this.interval = clearInterval(this.interval); }
-  },
-
-  /**
-   * Check if the element is within the visible viewport
-   */
-  check: function () {
-    var el = this.node;
-    var rect;
-    var containmentRect;
-    // if the component has rendered to null, dont update visibility
-    if (!el) {
-      return this.state;
-    }
-
-    rect = el.getBoundingClientRect();
-
-    if (this.props.containment) {
-      var containmentDOMRect = this.props.containment.getBoundingClientRect();
-      containmentRect = {
-        top: containmentDOMRect.top,
-        left: containmentDOMRect.left,
-        bottom: containmentDOMRect.bottom,
-        right: containmentDOMRect.right,
-      }
-    } else {
-      containmentRect = {
-        top: 0,
-        left: 0,
-        bottom: window.innerHeight || document.documentElement.clientHeight,
-        right: window.innerWidth || document.documentElement.clientWidth
-      };
-    }
-
-    // Check if visibility is wanted via offset?
-    var offset = this.props.offset || {};
-    var hasValidOffset = typeof offset === 'object';
-    if (hasValidOffset) {
-      containmentRect.top += offset.top || 0;
-      containmentRect.left += offset.left || 0;
-      containmentRect.bottom -= offset.bottom || 0;
-      containmentRect.right -= offset.right || 0;
-    }
-
-    var visibilityRect = {
-      top: rect.top >= containmentRect.top,
-      left: rect.left >= containmentRect.left,
-      bottom: rect.bottom <= containmentRect.bottom,
-      right: rect.right <= containmentRect.right
-    };
-
-    var isVisible = (
-      visibilityRect.top &&
-      visibilityRect.left &&
-      visibilityRect.bottom &&
-      visibilityRect.right
-    );
-
-    // check for partial visibility
-    if (this.props.partialVisibility) {
-      var partialVisible =
-          rect.top <= containmentRect.bottom && rect.bottom >= containmentRect.top &&
-          rect.left <= containmentRect.right && rect.right >= containmentRect.left;
-
-      // account for partial visibility on a single edge
-      if (typeof this.props.partialVisibility === 'string') {
-        partialVisible = visibilityRect[this.props.partialVisibility]
-      }
-
-      // if we have minimum top visibility set by props, lets check, if it meets the passed value
-      // so if for instance element is at least 200px in viewport, then show it.
-      isVisible = this.props.minTopValue
-        ? partialVisible && rect.top <= (containmentRect.bottom - this.props.minTopValue)
-        : partialVisible
-    }
-
-    // Deprecated options for calculating offset.
-    if (typeof offset.direction === 'string' &&
-        typeof offset.value === 'number') {
-      console.warn('[notice] offset.direction and offset.value have been deprecated. They still work for now, but will be removed in next major version. Please upgrade to the new syntax: { %s: %d }', offset.direction, offset.value)
-
-      isVisible = isVisibleWithOffset(offset, rect, containmentRect);
-    }
-
-    var state = this.state;
-    // notify the parent when the value changes
-    if (this.state.isVisible !== isVisible) {
-      state = {
-        isVisible: isVisible,
-        visibilityRect: visibilityRect
-      };
-      this.setState(state);
-      if (this.props.onChange) this.props.onChange(isVisible, visibilityRect);
-    }
-
-    return state;
-  },
-
-  render: function () {
-    if (this.props.children instanceof Function) {
-      return this.props.children({
-        isVisible: this.state.isVisible,
-        visibilityRect: this.state.visibilityRect,
-      });
-    }
-    return React.Children.only(this.props.children);
-  }
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/Header.jsx';
 
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","prop-types":"../node_modules/prop-types/index.js","create-react-class":"../node_modules/create-react-class/index.js","./lib/is-visible-with-offset":"../node_modules/react-visibility-sensor/lib/is-visible-with-offset.js"}],"components/CircleSvg.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: flex-end;\n  background: ', ';\n  height: 120px;\n  width: 100%;\n  color: white;\n  position: relative;\n  z-index: 3;\n'], ['\n  display: flex;\n  justify-content: flex-end;\n  background: ', ';\n  height: 120px;\n  width: 100%;\n  color: white;\n  position: relative;\n  z-index: 3;\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _Context = require('./Context');
+
+var _colors = require('./colors');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        _Context.MyContext.Consumer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 9
+          },
+          __self: this
+        },
+        function (context) {
+          return _react2.default.createElement(
+            StyledHeader,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 11
+              },
+              __self: _this2
+            },
+            _react2.default.createElement(
+              'button',
+              { onClick: context.togglePlay, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 12
+                },
+                __self: _this2
+              },
+              context.state.isPlaying ? 'Pause' : 'Start'
+            ),
+            _react2.default.createElement(
+              'p',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 15
+                },
+                __self: _this2
+              },
+              context.state.score
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 16
+                },
+                __self: _this2
+              },
+              _react2.default.createElement('input', {
+                defaultValue: context.state.speedPercent,
+                id: 'speedPercent',
+                max: '100',
+                min: '10',
+                name: 'speedPercent',
+                onChange: context.handleSpeedChange,
+                step: '10',
+                type: 'range',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 17
+                },
+                __self: _this2
+              }),
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'speedPercent', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 27
+                  },
+                  __self: _this2
+                },
+                context.state.speedPercent
+              )
+            )
+          );
+        }
+      );
+    }
+  }]);
+
+  return Header;
+}(_react.Component);
+
+var StyledHeader = _styledComponents2.default.header(_templateObject, _colors.colors.greyDark);
+
+exports.default = Header;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./Context":"components/Context.jsx","./colors":"components/colors.js"}],"components/CircleSvg.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44371,36 +43323,7 @@ CircleSvg.defaultProps = {
   fill: 'transparent'
 };
 exports.default = CircleSvg;
-},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js"}],"utils.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// Return random hex string
-var getRandomColor = exports.getRandomColor = function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-// Return random number between min and max
-var randomNumber = exports.randomNumber = function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-
-var maxSize = exports.maxSize = 100;
-var minSize = exports.minSize = 10;
-// export const randomSize = () => randomNumber(minSize, maxSize);
-
-var sizes = exports.sizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-var randomSize = exports.randomSize = function randomSize() {
-  return sizes[randomNumber(0, 9)];
-};
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"prop-types":"../node_modules/prop-types/index.js","react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -44461,16 +43384,15 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/App.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/CircleButton.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 module.exports = {
-        "noAnimation": "_noAnimation_1fu96_11",
-        "slideDown": "_slideDown_1fu96_15",
-        "visibilityVisible": "_visibilityVisible_1fu96_20",
-        "visibilityHidden": "_visibilityHidden_1fu96_24"
+        "slideDown": "_slideDown_1l5gq_11",
+        "isPlaying": "_isPlaying_1l5gq_15",
+        "isPaused": "_isPaused_1l5gq_19"
 };
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
@@ -44527,23 +43449,17 @@ var define;
 	}
 }());
 
-},{}],"components/App.jsx":[function(require,module,exports) {
+},{}],"components/CircleButton.jsx":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.jsx';
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleButton.jsx';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  height: 100vh;\n  overflow-y: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n'], ['\n  height: 100vh;\n  overflow-y: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  background: ', ';\n  height: 100px;\n  width: 100%;\n  color: white;\n'], ['\n  background: ', ';\n  height: 100px;\n  width: 100%;\n  color: white;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 100%;\n  height: calc(100vh - 100px);\n  background: #ccc;\n'], ['\n  display: inline-block;\n  width: 100%;\n  height: calc(100vh - 100px);\n  background: #ccc;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n'], ['\n  position: absolute;\n  top: 0;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  z-index: 1;\n'], ['\n  position: absolute;\n  top: 0;\n  z-index: 1;\n']);
 
 var _react = require('react');
 
@@ -44553,31 +43469,151 @@ var _styledComponents = require('styled-components');
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _lodash = require('lodash');
-
-var _Context = require('./Context');
-
-var _colors = require('./colors');
-
-var _reactDom = require('react-dom');
-
-var _reactVisibilitySensor = require('react-visibility-sensor');
-
-var _reactVisibilitySensor2 = _interopRequireDefault(_reactVisibilitySensor);
-
 var _CircleSvg = require('./CircleSvg');
 
 var _CircleSvg2 = _interopRequireDefault(_CircleSvg);
 
-var _utils = require('../utils');
+var _reactDom = require('react-dom');
 
-var _App = require('./App.css');
+var _CircleButton = require('./CircleButton.css');
 
-var _App2 = _interopRequireDefault(_App);
+var _CircleButton2 = _interopRequireDefault(_CircleButton);
 
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CircleButton = function (_Component) {
+  _inherits(CircleButton, _Component);
+
+  function CircleButton() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, CircleButton);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this), _this.handleUnmount = function () {
+      return (0, _reactDom.unmountComponentAtNode)(document.getElementById(_this.props.id));
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(CircleButton, [{
+    key: 'render',
+    value: function render() {
+      var _classNames;
+
+      var context = this.props.context;
+
+      var classList = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, _CircleButton2.default.isPlaying, context.state.isPlaying), _defineProperty(_classNames, _CircleButton2.default.isPaused, !context.state.isPlaying), _defineProperty(_classNames, _CircleButton2.default.slideDown, true), _classNames));
+      return _react2.default.createElement(
+        StyledCircleButton,
+        {
+          className: classList,
+          isPlaying: context.state.isPlaying,
+          onAnimationEnd: this.handleUnmount,
+          onClick: this.handleUnmount,
+          style: {
+            '--animation-playing': 'running',
+            '--animation-paused': 'paused'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 20
+          },
+          __self: this
+        },
+        _react2.default.createElement(_CircleSvg2.default, { size: 100, fill: 'teal', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          },
+          __self: this
+        })
+      );
+    }
+  }]);
+
+  return CircleButton;
+}(_react.Component);
+
+var StyledCircleButton = _styledComponents2.default.button(_templateObject);
+
+exports.default = CircleButton;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleSvg":"components/CircleSvg.jsx","react-dom":"../node_modules/react-dom/index.js","./CircleButton.css":"components/CircleButton.css","classnames":"../node_modules/classnames/index.js"}],"utils.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Return random hex string
+var getRandomColor = exports.getRandomColor = function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+// Return random number between min and max
+var randomNumber = exports.randomNumber = function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+var maxSize = exports.maxSize = 100;
+var minSize = exports.minSize = 10;
+// export const randomSize = () => randomNumber(minSize, maxSize);
+
+var sizes = exports.sizes = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+var randomSize = exports.randomSize = function randomSize() {
+  return sizes[randomNumber(0, 9)];
+};
+},{}],"components/CircleRenderer.jsx":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/CircleRenderer.jsx';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  justify-content: center;\n  overflow: hidden;\n  width: 100%;\n'], ['\n  display: flex;\n  justify-content: center;\n  overflow: hidden;\n  width: 100%;\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _CircleButton = require('./CircleButton');
+
+var _CircleButton2 = _interopRequireDefault(_CircleButton);
+
+var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44591,7 +43627,140 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// class CircleButton extends Component {}
+var CircleRenderer = function (_Component) {
+  _inherits(CircleRenderer, _Component);
+
+  function CircleRenderer() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, CircleRenderer);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = CircleRenderer.__proto__ || Object.getPrototypeOf(CircleRenderer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      renderInterval: _this.props.index * 666 + 1234
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(CircleRenderer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.timerID = setInterval(function () {
+        return _this2.tick();
+      }, this.state.renderInterval);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.timerID);
+    }
+  }, {
+    key: 'tick',
+    value: function tick() {
+      (0, _reactDom.render)(_react2.default.createElement(_CircleButton2.default, { id: this.props.id, context: this.props.context, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 22
+        },
+        __self: this
+      }), document.getElementById(this.props.id));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          id = _props.id,
+          props = _objectWithoutProperties(_props, ['id']);
+
+      return _react2.default.createElement(
+        _react.Fragment,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          },
+          __self: this
+        },
+        _react2.default.createElement(
+          'pre',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 31
+            },
+            __self: this
+          },
+          JSON.stringify(this.state, null, 2)
+        ),
+        _react2.default.createElement(StyledCircleRenderer, _extends({ id: id }, props, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 32
+          },
+          __self: this
+        }))
+      );
+    }
+  }]);
+
+  return CircleRenderer;
+}(_react.Component);
+
+var StyledCircleRenderer = _styledComponents2.default.section(_templateObject);
+
+exports.default = CircleRenderer;
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","./CircleButton":"components/CircleButton.jsx","../utils":"utils.js"}],"components/App.jsx":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/brian.han/dev/dot-game/src/components/App.jsx';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  overflow: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  width: 100%;\n'], ['\n  display: block;\n  overflow: hidden;\n  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);\n  width: 100%;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  overflow: hidden;\n'], ['\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  overflow: hidden;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  background-color: palegoldenrod;\n'], ['\n  display: inline-block;\n  background-color: palegoldenrod;\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _lodash = require('lodash');
+
+var _Header = require('./Header');
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _CircleRenderer = require('./CircleRenderer');
+
+var _CircleRenderer2 = _interopRequireDefault(_CircleRenderer);
+
+var _Context = require('./Context');
+
+var _CircleButton = require('./CircleButton');
+
+var _CircleButton2 = _interopRequireDefault(_CircleButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -44612,7 +43781,7 @@ var App = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 18
+            lineNumber: 12
           },
           __self: this
         },
@@ -44622,82 +43791,54 @@ var App = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 20
+                lineNumber: 14
               },
               __self: _this2
             },
+            _react2.default.createElement(_Header2.default, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 15
+              },
+              __self: _this2
+            }),
             _react2.default.createElement(
-              Header,
+              Grid,
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 21
+                  lineNumber: 16
                 },
                 __self: _this2
               },
-              _react2.default.createElement(
-                'button',
-                { onClick: context.togglePlay, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 22
-                  },
-                  __self: _this2
+              _react2.default.createElement(_CircleButton2.default, { context: context, id: 'some-id', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 17
                 },
-                context.state.isPlaying ? 'Pause' : 'Start'
-              ),
-              _react2.default.createElement(
-                'p',
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 25
-                  },
-                  __self: _this2
-                },
-                context.state.score
-              ),
-              _react2.default.createElement(
-                'div',
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 26
-                  },
-                  __self: _this2
-                },
-                _react2.default.createElement('input', {
-                  defaultValue: context.state.speedPercent,
-                  id: 'speedPercent',
-                  max: '100',
-                  min: '10',
-                  name: 'speedPercent',
-                  onChange: context.handleSpeedChange,
-                  step: '10',
-                  type: 'range',
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 27
-                  },
-                  __self: _this2
-                }),
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'speedPercent', __source: {
+                __self: _this2
+              }),
+              (0, _lodash.times)(4).map(function (index) {
+                return _react2.default.createElement(
+                  Column,
+                  { key: index, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 37
+                      lineNumber: 19
                     },
                     __self: _this2
                   },
-                  context.state.speedPercent
-                )
-              )
-            ),
-            _react2.default.createElement(CircleRenderer, { context: context, __source: {
-                fileName: _jsxFileName,
-                lineNumber: 42
-              },
-              __self: _this2
-            })
+                  _react2.default.createElement(_CircleRenderer2.default, {
+                    context: context,
+                    index: index,
+                    id: 'circle-section-' + index,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 20
+                    },
+                    __self: _this2
+                  })
+                );
+              })
+            )
           );
         }
       );
@@ -44707,114 +43848,14 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
-var CircleRenderer = function (_Component2) {
-  _inherits(CircleRenderer, _Component2);
-
-  function CircleRenderer() {
-    _classCallCheck(this, CircleRenderer);
-
-    return _possibleConstructorReturn(this, (CircleRenderer.__proto__ || Object.getPrototypeOf(CircleRenderer)).apply(this, arguments));
-  }
-
-  _createClass(CircleRenderer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this4 = this;
-
-      this.timerID = setInterval(function () {
-        return _this4.tick();
-      }, 1000);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      clearInterval(this.timerID);
-    }
-  }, {
-    key: 'tick',
-    value: function tick() {
-      (0, _reactDom.render)(_react2.default.createElement(CircleButton, { context: this.props.context, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 61
-        },
-        __self: this
-      }), document.getElementById('circle-section'));
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var props = _objectWithoutProperties(this.props, []);
-
-      return _react2.default.createElement(StyledCircleRenderer, _extends({ id: 'circle-section' }, props, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 68
-        },
-        __self: this
-      }));
-    }
-  }]);
-
-  return CircleRenderer;
-}(_react.Component);
-
-var CircleButton = function (_Component3) {
-  _inherits(CircleButton, _Component3);
-
-  function CircleButton() {
-    var _ref;
-
-    var _temp, _this5, _ret;
-
-    _classCallCheck(this, CircleButton);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this5 = _possibleConstructorReturn(this, (_ref = CircleButton.__proto__ || Object.getPrototypeOf(CircleButton)).call.apply(_ref, [this].concat(args))), _this5), _this5.handleUnmount = function () {
-      return (0, _reactDom.unmountComponentAtNode)(document.getElementById('circle-section'));
-    }, _temp), _possibleConstructorReturn(_this5, _ret);
-  }
-
-  _createClass(CircleButton, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        StyledCircleButton,
-        {
-          onClick: this.handleUnmount,
-          className: _App2.default.slideDown,
-          onAnimationEnd: this.handleUnmount,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 78
-          },
-          __self: this
-        },
-        _react2.default.createElement(_CircleSvg2.default, { size: 100, fill: 'teal', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 83
-          },
-          __self: this
-        })
-      );
-    }
-  }]);
-
-  return CircleButton;
-}(_react.Component);
-
 var MainSection = _styledComponents2.default.section(_templateObject);
 
-var Header = _styledComponents2.default.header(_templateObject2, _colors.colors.greyDark);
+var Grid = _styledComponents2.default.div(_templateObject2);
 
-var StyledCircleRenderer = _styledComponents2.default.section(_templateObject3);
-
-var StyledCircleButton = _styledComponents2.default.button(_templateObject4);
+var Column = _styledComponents2.default.div(_templateObject3);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Context":"components/Context.jsx","./colors":"components/colors.js","react-dom":"../node_modules/react-dom/index.js","react-visibility-sensor":"../node_modules/react-visibility-sensor/visibility-sensor.js","./CircleSvg":"components/CircleSvg.jsx","../utils":"utils.js","./App.css":"components/App.css","classnames":"../node_modules/classnames/index.js"}],"index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.es.js","lodash":"../node_modules/lodash/lodash.js","./Header":"components/Header.jsx","./CircleRenderer":"components/CircleRenderer.jsx","./Context":"components/Context.jsx","./CircleButton":"components/CircleButton.jsx"}],"index.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
@@ -44889,7 +43930,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54134' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58451' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

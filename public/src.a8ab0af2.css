@@ -1,32 +1,31 @@
-@keyframes _slideDown_1fu96_15 {
+@keyframes _slideDown_1l5gq_11 {
   0% {
     transform: translateY(0);
   }
 
   100% {
-    transform: translateY(125vh);
+    transform: translateY(100vh);
   }
 }
 
-._noAnimation_1fu96_11 {
-  animation: none;
+._slideDown_1l5gq_11 {
+  animation: _slideDown_1l5gq_11 3000ms linear;
 }
 
-._slideDown_1fu96_15 {
-  animation-name: _slideDown_1fu96_15;
-  animation: _slideDown_1fu96_15 3000ms linear;
+._isPlaying_1l5gq_15 {
+  animation-play-state: var(--animation-playing);
 }
 
-._visibilityVisible_1fu96_20 {
-  opacity: 1;
-}
-
-._visibilityHidden_1fu96_24 {
-  opacity: 0;
+._isPaused_1l5gq_19 {
+  animation-play-state: var(--animation-paused);
 }
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+main {
+  overflow: hidden;
 }

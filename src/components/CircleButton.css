@@ -4,22 +4,18 @@
   }
 
   100% {
-    transform: translateY(125vh);
+    transform: translateY(100vh);
   }
 }
 
-.noAnimation {
-  animation: none;
-}
-
 .slideDown {
-  animation-name: slideDown;
+  animation: slideDown 3000ms linear;
 }
 
-.visibilityVisible {
-  opacity: 1;
+.isPlaying {
+  animation-play-state: var(--animation-playing);
 }
 
-.visibilityHidden {
-  opacity: 0;
+.isPaused {
+  animation-play-state: var(--animation-paused);
 }

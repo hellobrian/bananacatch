@@ -33,13 +33,16 @@ main {
 
 .column {
   display: flex;
-  justify-content: center;
   position: relative;
-  top: -10px;
+  top: -100px;
 }
 
 @keyframes slideDown {
   0% {
+    transform: translateY(0);
+  }
+
+  20% {
     transform: translateY(0);
   }
 
@@ -48,7 +51,11 @@ main {
   }
 }
 
-svg {
+.animation {
   animation: slideDown 2000ms linear;
   animation-play-state: var(--animation-play-state);
+}
+
+svg {
+  margin: 0 auto;
 }

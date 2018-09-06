@@ -1,4 +1,5 @@
-const circleSvg = (size = 100, fill = 'blue') => {
+import { $, $$ } from "./bling";
+const circleSvg = (size = 100, fill = "blue") => {
   const radius = size / 2;
   return `
     <svg 
@@ -13,4 +14,15 @@ const circleSvg = (size = 100, fill = 'blue') => {
   `;
 };
 
-export { circleSvg };
+const banana = () => {
+  return `
+    <button 
+      class="banana animation" 
+      type="button"
+    >
+      🍌
+    </button>
+  `;
+};
+
+export { circleSvg, banana };

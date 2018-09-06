@@ -7,10 +7,26 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: white;
 }
 
 main {
   overflow: hidden;
+}
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
+
+.btn {
+  width: 100px;
+  border: 2px solid white;
+  color: white;
+  height: 40px;
+  margin: 0 1rem;
+  font-size: 1rem;
 }
 
 .header {
@@ -58,4 +74,15 @@ main {
 
 svg {
   margin: 0 auto;
+}
+
+.banana {
+  position: relative;
+  top: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
 }

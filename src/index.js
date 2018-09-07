@@ -10,9 +10,10 @@ import {
 let intervalId;
 
 let state = {
-  isPlaying: false,
   intervalSpeed: 900,
-  score: 0
+  isPlaying: false,
+  score: 0,
+  animationSpeedPercent: 50
 };
 
 $(".togglePlay").on("click", () => {
@@ -42,6 +43,10 @@ $(".reset").on("click", () => {
   destroyBananas();
 });
 
+$("#speedPercent").on("change", event => {
+  console.log(event.target.value);
+});
+
 const observer = new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type == "childList") {
@@ -63,11 +68,17 @@ const observer = new MutationObserver(mutationsList => {
       if (bananaNode && bananaNode.length > 0) {
         const banana = bananaNode[0];
         banana.addEventListener("click", event => {
-          console.log(event.currentTarget);
+          // banana.classList.add("exit-animation");
+          // banana.classList.remove('slideDown-animation');
           const points = parseInt(event.target.dataset.points, 10);
           state = { ...state, score: state.score + points };
           $("#score").innerHTML = state.score;
-          event.target.parentNode.removeChild(event.target);
+
+          const span = event.target.querySelector("span");
+          span.classList.add("exit-animation");
+          span.on("animationend", () => {
+            event.target.parentNode.removeChild(event.target);
+          });
         });
 
         /**

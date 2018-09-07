@@ -19369,9 +19369,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var intervalId = void 0;
 
 var state = {
-  isPlaying: false,
   intervalSpeed: 900,
-  score: 0
+  isPlaying: false,
+  score: 0,
+  animationSpeedPercent: 50
 };
 
 (0, _bling.$)(".togglePlay").on("click", function () {
@@ -19399,6 +19400,10 @@ var state = {
   (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
   (0, _methods.destroyBananas)();
+});
+
+(0, _bling.$)("#speedPercent").on("change", function (event) {
+  console.log(event.target.value);
 });
 
 var observer = new MutationObserver(function (mutationsList) {
@@ -19429,11 +19434,17 @@ var observer = new MutationObserver(function (mutationsList) {
         if (bananaNode && bananaNode.length > 0) {
           var banana = bananaNode[0];
           banana.addEventListener("click", function (event) {
-            console.log(event.currentTarget);
+            // banana.classList.add("exit-animation");
+            // banana.classList.remove('slideDown-animation');
             var points = parseInt(event.target.dataset.points, 10);
             state = _extends({}, state, { score: state.score + points });
             (0, _bling.$)("#score").innerHTML = state.score;
-            event.target.parentNode.removeChild(event.target);
+
+            var span = event.target.querySelector("span");
+            span.classList.add("exit-animation");
+            span.on("animationend", function () {
+              event.target.parentNode.removeChild(event.target);
+            });
           });
 
           /**

@@ -1,5 +1,6 @@
 :root {
   --animation-play-state: paused;
+  --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
 }
 
 * {
@@ -18,6 +19,10 @@ button {
   appearance: none;
   background: none;
   border: none;
+}
+
+button > * {
+  pointer-events: none;
 }
 
 .btn {
@@ -75,6 +80,22 @@ button {
   }
 }
 
+@keyframes exit {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(-800deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+}
+
 .slideDown-animation {
   animation: slideDown 10000ms linear;
   animation-play-state: var(--animation-play-state);
@@ -83,6 +104,10 @@ button {
 .swing-animation {
   animation: swing ease-in-out 1s infinite alternate;
   transform-origin: center -20px;
+}
+
+.exit-animation {
+  animation: exit 500ms var(--cubic-bezier-standard);
 }
 
 .banana {
@@ -96,11 +121,11 @@ button {
   font-size: 2rem;
 }
 
+.banana:focus {
+  outline: none;
+}
+
 .banana:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-button > * {
-  pointer-events: none;
 }

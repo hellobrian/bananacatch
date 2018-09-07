@@ -35,7 +35,8 @@ $(".togglePlay").on("click", () => {
 });
 
 $(".reset").on("click", () => {
-  state = { ...state, isPlaying: false };
+  state = { ...state, isPlaying: false, score: 0 };
+  $("#score").innerHTML = state.score;
   resetPlayState(state, document.documentElement);
   clearInterval(intervalId);
   destroyBananas();

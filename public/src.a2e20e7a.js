@@ -19394,7 +19394,8 @@ var state = {
 });
 
 (0, _bling.$)(".reset").on("click", function () {
-  state = _extends({}, state, { isPlaying: false });
+  state = _extends({}, state, { isPlaying: false, score: 0 });
+  (0, _bling.$)("#score").innerHTML = state.score;
   (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
   (0, _methods.destroyBananas)();

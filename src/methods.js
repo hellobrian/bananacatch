@@ -33,8 +33,19 @@ export const togglePlayState = (state, rootElement) => {
   rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
 };
 
+export const changeAnimationSpeedPercent = (state, rootElement) => {
+  const calcSpeedPercent = state.animationSpeedPercent / 100;
+  const calcSpeed = state.fastestAnimationDuration / calcSpeedPercent;
+  console.log({ calcSpeedPercent, calcSpeed });
+  rootElement.style.setProperty("--animation-play-speed", `${calcSpeed}ms`);
+};
+
 export const resetPlayState = (state, rootElement) => {
-  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
+  const defaultStyle = `
+    --animation-play-state: ${state.isPlaying ? "running" : "paused"}; --animation-play-speed: ${
+    state.defaultAnimationDuration
+  }ms;`.trim();
+  rootElement.setAttribute("style", defaultStyle);
 };
 
 export const destroyBananas = () => {

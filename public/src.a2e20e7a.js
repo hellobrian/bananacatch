@@ -19302,7 +19302,7 @@ var define;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.destroyBananas = exports.resetPlayState = exports.togglePlayState = exports.insertBanana = exports.getAnimationPlayState = exports.randomSize = exports.sizesAndPoints = exports.points = exports.sizes = exports.randomNumber = undefined;
+exports.destroyBananas = exports.resetPlayState = exports.changeAnimationSpeedPercent = exports.togglePlayState = exports.insertBanana = exports.getAnimationPlayState = exports.randomSize = exports.sizesAndPoints = exports.points = exports.sizes = exports.randomNumber = undefined;
 
 var _bling = require("./bling");
 
@@ -19346,8 +19346,16 @@ var togglePlayState = exports.togglePlayState = function togglePlayState(state, 
   rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
 };
 
+var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function changeAnimationSpeedPercent(state, rootElement) {
+  var calcSpeedPercent = state.animationSpeedPercent / 100;
+  var calcSpeed = state.fastestAnimationDuration / calcSpeedPercent;
+  console.log({ calcSpeedPercent: calcSpeedPercent, calcSpeed: calcSpeed });
+  rootElement.style.setProperty("--animation-play-speed", calcSpeed + "ms");
+};
+
 var resetPlayState = exports.resetPlayState = function resetPlayState(state, rootElement) {
-  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
+  var defaultStyle = ("\n    --animation-play-state: " + (state.isPlaying ? "running" : "paused") + "; --animation-play-speed: " + state.defaultAnimationDuration + "ms;").trim();
+  rootElement.setAttribute("style", defaultStyle);
 };
 
 var destroyBananas = exports.destroyBananas = function destroyBananas() {
@@ -19368,12 +19376,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var intervalId = void 0;
 
-var state = {
+var initialAnimationState = {
+  animationSpeedPercent: 50,
+  fastestAnimationDuration: 4000,
+  defaultAnimationDuration: 8000
+};
+
+var state = _extends({}, initialAnimationState, {
   intervalSpeed: 900,
   isPlaying: false,
   score: 0,
-  animationSpeedPercent: 50
-};
+  defaultAnimationDuration: initialAnimationState.fastestAnimationDuration * 2
+});
 
 (0, _bling.$)(".togglePlay").on("click", function () {
   state = _extends({}, state, { isPlaying: !state.isPlaying });
@@ -19395,15 +19409,19 @@ var state = {
 });
 
 (0, _bling.$)(".reset").on("click", function () {
-  state = _extends({}, state, { isPlaying: false, score: 0 });
+  state = _extends({}, state, { isPlaying: false, score: 0, animationSpeedPercent: 50 });
   (0, _bling.$)("#score").innerHTML = state.score;
+  (0, _bling.$)(".label").innerHTML = "Speed: " + state.animationSpeedPercent + "%";
+  (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
   (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
   (0, _methods.destroyBananas)();
 });
 
 (0, _bling.$)("#speedPercent").on("change", function (event) {
-  console.log(event.target.value);
+  state = _extends({}, state, { animationSpeedPercent: event.target.value });
+  (0, _methods.changeAnimationSpeedPercent)(state, document.documentElement);
+  (0, _bling.$)(".label").innerHTML = "Speed: " + event.target.value + "%";
 });
 
 var observer = new MutationObserver(function (mutationsList) {
@@ -19527,7 +19545,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60622' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54194' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

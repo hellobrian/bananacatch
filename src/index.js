@@ -4,16 +4,24 @@ import {
   insertBanana,
   togglePlayState,
   resetPlayState,
-  destroyBananas
+  destroyBananas,
+  changeAnimationSpeedPercent
 } from "./methods";
 
 let intervalId;
 
+const initialAnimationState = {
+  animationSpeedPercent: 50,
+  fastestAnimationDuration: 4000,
+  defaultAnimationDuration: 8000
+};
+
 let state = {
+  ...initialAnimationState,
   intervalSpeed: 900,
   isPlaying: false,
   score: 0,
-  animationSpeedPercent: 50
+  defaultAnimationDuration: initialAnimationState.fastestAnimationDuration * 2
 };
 
 $(".togglePlay").on("click", () => {
@@ -36,15 +44,19 @@ $(".togglePlay").on("click", () => {
 });
 
 $(".reset").on("click", () => {
-  state = { ...state, isPlaying: false, score: 0 };
+  state = { ...state, isPlaying: false, score: 0, animationSpeedPercent: 50 };
   $("#score").innerHTML = state.score;
+  $(".label").innerHTML = `Speed: ${state.animationSpeedPercent}%`;
+  $("#speedPercent").value = state.animationSpeedPercent;
   resetPlayState(state, document.documentElement);
   clearInterval(intervalId);
   destroyBananas();
 });
 
 $("#speedPercent").on("change", event => {
-  console.log(event.target.value);
+  state = { ...state, animationSpeedPercent: event.target.value };
+  changeAnimationSpeedPercent(state, document.documentElement);
+  $(".label").innerHTML = `Speed: ${event.target.value}%`;
 });
 
 const observer = new MutationObserver(mutationsList => {

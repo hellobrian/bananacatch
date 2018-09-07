@@ -1,4 +1,5 @@
 :root {
+  --animation-play-speed: 8000ms;
   --animation-play-state: paused;
   --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
   --white-50: rgba(255, 255, 255, 0.5);
@@ -112,7 +113,7 @@ button > * {
 }
 
 .slideDown-animation {
-  animation: slideDown 10000ms linear;
+  animation: slideDown var(--animation-play-speed) linear;
   animation-play-state: var(--animation-play-state);
 }
 

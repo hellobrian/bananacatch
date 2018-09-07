@@ -1,6 +1,11 @@
-const banana = (fontSize = 40) => {
+import { sizesAndPoints } from "./methods";
+
+export const banana = (fontSize = 40) => {
+  const { points } = sizesAndPoints.filter(object => object.size === fontSize)[0];
+
   return `
-    <button 
+    <button
+      data-points="${points}"
       class="banana animation" 
       type="button"
       style="font-size: ${fontSize}px; width: ${fontSize}px; height: ${fontSize}px"
@@ -9,5 +14,3 @@ const banana = (fontSize = 40) => {
     </button>
   `;
 };
-
-export { banana };

@@ -1,9 +1,20 @@
 import { $, $$ } from "./bling";
 import { banana } from "./components";
+import { times } from "lodash";
 
 export const randomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-export const sizes = [30, 40, 50, 60, 70, 75, 80, 85, 90, 95];
+export const sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+
+export const points = times(10).map(index => {
+  const maxPoints = 100;
+  return maxPoints - index * 10;
+});
+
+export const sizesAndPoints = sizes.map((size, index) => ({
+  size,
+  points: points[index]
+}));
 
 export const randomSize = () => sizes[randomNumber(0, 9)];
 

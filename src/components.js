@@ -1,4 +1,5 @@
-import { $, $$ } from "./bling";
+import { randomSize } from "/utils";
+
 const circleSvg = (size = 100, fill = "blue") => {
   const radius = size / 2;
   return `
@@ -14,11 +15,12 @@ const circleSvg = (size = 100, fill = "blue") => {
   `;
 };
 
-const banana = () => {
+const banana = (fontSize = 40) => {
   return `
     <button 
       class="banana animation" 
       type="button"
+      style="font-size: ${fontSize}px"
     >
       🍌
     </button>

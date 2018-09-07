@@ -1,11 +1,11 @@
 import { $, $$ } from "./bling";
 import { banana } from "./components";
-import { randomNumber } from "./utils";
+import { randomNumber, randomSize } from "./utils";
 
 let intervalId;
 let state = {
   isPlaying: false,
-  intervalSpeed: 1500
+  intervalSpeed: 900
 };
 
 const getAnimationPlayState = () =>
@@ -14,8 +14,10 @@ const getAnimationPlayState = () =>
     .trim();
 
 const insertBanana = () => {
-  let id = randomNumber(1, 4);
-  $(`#column-${id}`).insertAdjacentHTML("afterbegin", banana());
+  let id = randomNumber(1, 5);
+  let fontSize = randomSize();
+  console.log({ id, fontSize });
+  $(`#column-${id}`).insertAdjacentHTML("afterbegin", banana(fontSize));
 };
 
 const destroyBananas = () => {

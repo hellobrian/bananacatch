@@ -68,12 +68,20 @@ const observer = new MutationObserver(mutationsList => {
       if (bananaNode && bananaNode.length > 0) {
         const banana = bananaNode[0];
         banana.addEventListener("click", event => {
-          // banana.classList.add("exit-animation");
-          // banana.classList.remove('slideDown-animation');
+          /**
+           * get points from dataset.points
+           * update state
+           * display updated score on #score element
+           */
           const points = parseInt(event.target.dataset.points, 10);
           state = { ...state, score: state.score + points };
           $("#score").innerHTML = state.score;
 
+          /**
+           * Select span inside banana
+           * add exit-animation class to trigger it
+           * add animationend event listener to remove banana from DOM
+           */
           const span = event.target.querySelector("span");
           span.classList.add("exit-animation");
           span.on("animationend", () => {
@@ -82,13 +90,13 @@ const observer = new MutationObserver(mutationsList => {
         });
 
         /**
-         * When a banana is added to the DOM, the "animation" class is quickly removed and added to trigger the animation to start
+         * When a banana is added to the DOM, the slideDown-animation class is quickly removed and added to trigger the animation to start
          */
         banana.classList.remove("slideDown-animation");
         banana.classList.add("slideDown-animation");
 
         /**
-         * If the animation is able to end (when a user doesn't click on a banana) then the banana will remove itself from the DOM on animationend event.
+         * If the animation is not clicked, then the banana will remove itself from the DOM on animationend event based on slideDown-animation ending.
          */
         banana.addEventListener("animationend", event => {
           event.target.parentNode.removeChild(event.target);

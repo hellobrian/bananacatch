@@ -10,7 +10,7 @@ export const banana = (fontSize = 40) => {
       type="button"
       style="font-size: ${fontSize}px; width: ${fontSize}px; height: ${fontSize}px"
     >
-      <span class="swing-animation" style="width: ${fontSize}px; height: ${fontSize}px">🍌</span>
+      <span class="swing-animation" data-points="${points}" style="width: ${fontSize}px; height: ${fontSize}px">🍌</span>
     </button>
-  `;
+  `.trim();
 };

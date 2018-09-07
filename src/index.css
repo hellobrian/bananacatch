@@ -96,6 +96,26 @@ button > * {
   }
 }
 
+@keyframes exitText {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(0deg) scale(1);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  90% {
+    transform: rotate(-800deg);
+  }
+
+  100% {
+    transform: scale(0.1);
+    color: rgba(255, 255, 255, 0);
+  }
+}
+
 .slideDown-animation {
   animation: slideDown 10000ms linear;
   animation-play-state: var(--animation-play-state);
@@ -119,6 +139,13 @@ button > * {
   width: 2rem;
   height: 2rem;
   font-size: 2rem;
+}
+
+.banana > span:after {
+  content: attr(data-points) "pts";
+  font-size: 1.25rem;
+  position: absolute;
+  top: 50%;
 }
 
 .banana:focus {

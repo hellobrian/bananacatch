@@ -75,7 +75,7 @@ const observer = new MutationObserver(mutationsList => {
            */
           const points = parseInt(event.target.dataset.points, 10);
           state = { ...state, score: state.score + points };
-          $("#score").innerHTML = state.score;
+          $("#score").innerHTML = `${state.score}pts`;
 
           /**
            * Select span inside banana

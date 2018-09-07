@@ -145,7 +145,7 @@ var banana = exports.banana = function banana() {
     return object.size === fontSize;
   })[0].points;
 
-  return "\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ";
+  return ("\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" data-points=\"" + points + "\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ").trim();
 };
 },{"./methods":"methods.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
@@ -19441,7 +19441,7 @@ var observer = new MutationObserver(function (mutationsList) {
              */
             var points = parseInt(event.target.dataset.points, 10);
             state = _extends({}, state, { score: state.score + points });
-            (0, _bling.$)("#score").innerHTML = state.score;
+            (0, _bling.$)("#score").innerHTML = state.score + "pts";
 
             /**
              * Select span inside banana

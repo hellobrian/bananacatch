@@ -145,7 +145,7 @@ var banana = exports.banana = function banana() {
     return object.size === fontSize;
   })[0].points;
 
-  return "\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      \uD83C\uDF4C\n    </button>\n  ";
+  return "\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ";
 };
 },{"./methods":"methods.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
@@ -19352,7 +19352,7 @@ var resetPlayState = exports.resetPlayState = function resetPlayState(state, roo
 
 var destroyBananas = exports.destroyBananas = function destroyBananas() {
   (0, _bling.$$)(".column").forEach(function (element) {
-    element.innerHTML = "";
+    element.innerHTML = "".trim();
   });
 };
 },{"./bling":"bling.js","./components":"components.js","lodash":"../node_modules/lodash/lodash.js"}],"index.js":[function(require,module,exports) {
@@ -19382,7 +19382,13 @@ var state = {
 
   if (playState === "running") {
     intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
+    (0, _bling.$$)(".banana").forEach(function (element) {
+      element.disabled = false;
+    });
   } else {
+    (0, _bling.$$)(".banana").forEach(function (element) {
+      element.disabled = true;
+    });
     clearInterval(intervalId);
   }
 });
@@ -19406,10 +19412,12 @@ var observer = new MutationObserver(function (mutationsList) {
       if (mutation.type == "childList") {
         /**
          * bananaNode (Array) is a newly added banana HTML string from components.js
-         * - When a childList mutation is observed, filter all addedNodes for any node with the "🍌" text as innerText.
+         * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
          */
+
+        // console.log([...mutation.addedNodes]);
         var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
-          return node.innerText === "🍌";
+          return node.dataset && node.dataset.points > 0;
         });
 
         /**
@@ -19420,6 +19428,7 @@ var observer = new MutationObserver(function (mutationsList) {
         if (bananaNode && bananaNode.length > 0) {
           var banana = bananaNode[0];
           banana.addEventListener("click", function (event) {
+            console.log(event.currentTarget);
             var points = parseInt(event.target.dataset.points, 10);
             state = _extends({}, state, { score: state.score + points });
             (0, _bling.$)("#score").innerHTML = state.score;
@@ -19429,8 +19438,8 @@ var observer = new MutationObserver(function (mutationsList) {
           /**
            * When a banana is added to the DOM, the "animation" class is quickly removed and added to trigger the animation to start
            */
-          banana.classList.remove("animation");
-          banana.classList.add("animation");
+          banana.classList.remove("slideDown-animation");
+          banana.classList.add("slideDown-animation");
 
           /**
            * If the animation is able to end (when a user doesn't click on a banana) then the banana will remove itself from the DOM on animationend event.
@@ -19498,7 +19507,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60687' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60622' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -8,7 +8,6 @@
   padding: 0;
   font-family: sans-serif;
   color: white;
-  outline: 1px solid red;
 }
 
 main {
@@ -37,7 +36,7 @@ button {
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100px;
+  height: 5vh;
   z-index: 3;
 }
 
@@ -45,7 +44,8 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: paleturquoise;
-  height: 100vh;
+  height: 95vh;
+  overflow: hidden;
 }
 
 .column {
@@ -61,18 +61,28 @@ button {
     transform: translateY(0);
   }
 
-  20% {
-    transform: translateY(0);
-  }
-
   100% {
-    transform: translateY(125vh);
+    transform: translateY(100vh);
   }
 }
 
-.animation {
-  animation: slideDown 5000ms linear;
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+.slideDown-animation {
+  animation: slideDown 10000ms linear;
   animation-play-state: var(--animation-play-state);
+}
+
+.swing-animation {
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center -20px;
 }
 
 .banana {
@@ -84,4 +94,13 @@ button {
   width: 2rem;
   height: 2rem;
   font-size: 2rem;
+}
+
+.banana:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button > * {
+  pointer-events: none;
 }

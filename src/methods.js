@@ -39,6 +39,6 @@ export const resetPlayState = (state, rootElement) => {
 
 export const destroyBananas = () => {
   $$(".column").forEach(element => {
-    element.innerHTML = "";
+    element.innerHTML = "".trim();
   });
 };

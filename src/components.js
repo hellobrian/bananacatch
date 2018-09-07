@@ -6,11 +6,11 @@ export const banana = (fontSize = 40) => {
   return `
     <button
       data-points="${points}"
-      class="banana animation" 
+      class="banana slideDown-animation" 
       type="button"
       style="font-size: ${fontSize}px; width: ${fontSize}px; height: ${fontSize}px"
     >
-      🍌
+      <span class="swing-animation" style="width: ${fontSize}px; height: ${fontSize}px">🍌</span>
     </button>
   `;
 };

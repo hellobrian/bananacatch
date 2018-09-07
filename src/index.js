@@ -23,7 +23,13 @@ $(".togglePlay").on("click", () => {
 
   if (playState === "running") {
     intervalId = setInterval(insertBanana, state.intervalSpeed);
+    $$(".banana").forEach(element => {
+      element.disabled = false;
+    });
   } else {
+    $$(".banana").forEach(element => {
+      element.disabled = true;
+    });
     clearInterval(intervalId);
   }
 });
@@ -40,9 +46,13 @@ const observer = new MutationObserver(mutationsList => {
     if (mutation.type == "childList") {
       /**
        * bananaNode (Array) is a newly added banana HTML string from components.js
-       * - When a childList mutation is observed, filter all addedNodes for any node with the "🍌" text as innerText.
+       * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
        */
-      const bananaNode = [...mutation.addedNodes].filter(node => node.innerText === "🍌");
+
+      // console.log([...mutation.addedNodes]);
+      const bananaNode = [...mutation.addedNodes].filter(
+        node => node.dataset && node.dataset.points > 0
+      );
 
       /**
        * If a bananaNode exists:
@@ -52,6 +62,7 @@ const observer = new MutationObserver(mutationsList => {
       if (bananaNode && bananaNode.length > 0) {
         const banana = bananaNode[0];
         banana.addEventListener("click", event => {
+          console.log(event.currentTarget);
           const points = parseInt(event.target.dataset.points, 10);
           state = { ...state, score: state.score + points };
           $("#score").innerHTML = state.score;
@@ -61,8 +72,8 @@ const observer = new MutationObserver(mutationsList => {
         /**
          * When a banana is added to the DOM, the "animation" class is quickly removed and added to trigger the animation to start
          */
-        banana.classList.remove("animation");
-        banana.classList.add("animation");
+        banana.classList.remove("slideDown-animation");
+        banana.classList.add("slideDown-animation");
 
         /**
          * If the animation is able to end (when a user doesn't click on a banana) then the banana will remove itself from the DOM on animationend event.

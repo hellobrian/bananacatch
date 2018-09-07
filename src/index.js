@@ -1,40 +1,24 @@
-import { $, $$ } from "./bling";
-import { banana } from "./components";
-import { randomNumber, randomSize } from "./utils";
+import { $ } from "./bling";
+import {
+  getAnimationPlayState,
+  insertBanana,
+  togglePlayState,
+  resetPlayState,
+  destroyBananas
+} from "./methods";
 
 let intervalId;
+
 let state = {
   isPlaying: false,
   intervalSpeed: 900
 };
 
-const getAnimationPlayState = () =>
-  getComputedStyle(document.documentElement)
-    .getPropertyValue("--animation-play-state")
-    .trim();
-
-const insertBanana = () => {
-  let id = randomNumber(1, 5);
-  let fontSize = randomSize();
-  console.log({ id, fontSize });
-  $(`#column-${id}`).insertAdjacentHTML("afterbegin", banana(fontSize));
-};
-
-const destroyBananas = () => {
-  $$(".column").forEach(element => {
-    element.innerHTML = "";
-  });
-};
-
 $(".togglePlay").on("click", () => {
-  state = { isPlaying: !state.isPlaying, intervalSpeed: state.intervalSpeed };
+  state = { ...state, isPlaying: !state.isPlaying };
+  togglePlayState(state, document.documentElement);
 
-  document.documentElement.style.setProperty(
-    "--animation-play-state",
-    state.isPlaying ? "running" : "paused"
-  );
-
-  const playState = getAnimationPlayState();
+  const playState = getAnimationPlayState(document.documentElement);
 
   if (playState === "running") {
     intervalId = setInterval(insertBanana, state.intervalSpeed);
@@ -44,15 +28,17 @@ $(".togglePlay").on("click", () => {
 });
 
 $(".reset").on("click", () => {
+  state = { ...state, isPlaying: false };
+  resetPlayState(state, document.documentElement);
   clearInterval(intervalId);
   destroyBananas();
 });
 
-// MUTATION OBSERVER
 const observer = new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type == "childList") {
       const bananaNode = [...mutation.addedNodes].filter(node => node.innerText === "🍌");
+
       if (bananaNode && bananaNode.length > 0) {
         const banana = bananaNode[0];
         banana.classList.remove("animation");
@@ -63,9 +49,9 @@ const observer = new MutationObserver(mutationsList => {
       }
     }
 
-    if (mutation.type == "attributes") {
+    if (mutation.type == "attributes" && mutation.attributeName == "style") {
       // Change togglePlay button to say Paused or Start based on state
-      $(".togglePlay").innerHTML = state.isPlaying ? "Paused" : "Start";
+      $(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
     }
   }
 });

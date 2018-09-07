@@ -128,114 +128,102 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 
 exports.$ = $;
 exports.$$ = $$;
-},{}],"utils.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// // Return random hex string
-// export const getRandomColor = () => {
-//   var letters = "0123456789ABCDEF";
-//   var color = "#";
-//   for (let i = 0; i < 6; i++) {
-//     color += letters[Math.floor(Math.random() * 16)];
-//   }
-//   return color;
-// };
-
-// // Return random number between min and max
-var randomNumber = exports.randomNumber = function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-
-// export const maxSize = 100;
-// export const minSize = 10;
-
-var sizes = exports.sizes = [40, 45, 50, 55, 60, 65, 70, 75, 80, 85];
-var randomSize = exports.randomSize = function randomSize() {
-  return sizes[randomNumber(0, 9)];
-};
 },{}],"components.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.banana = exports.circleSvg = undefined;
-
-var _utils = require("/utils");
-
-var circleSvg = function circleSvg() {
-  var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
-  var fill = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "blue";
-
-  var radius = size / 2;
-  return "\n    <svg \n      class=\"animation\"\n      width=\"" + size + "\"\n      height=\"" + size + "\" \n      viewBox=\"0 0 " + size + " " + size + "\" \n      fill=" + fill + "\n    >\n      <circle cx=" + radius + " cy=" + radius + " r=" + radius + " />\n    </svg>\n  ";
-};
-
 var banana = function banana() {
   var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
 
-  return "\n    <button \n      class=\"banana animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px\"\n    >\n      \uD83C\uDF4C\n    </button>\n  ";
+  return "\n    <button \n      class=\"banana animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      \uD83C\uDF4C\n    </button>\n  ";
 };
 
-exports.circleSvg = circleSvg;
 exports.banana = banana;
-},{"/utils":"utils.js"}],"index.js":[function(require,module,exports) {
+},{}],"methods.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.destroyBananas = exports.resetPlayState = exports.togglePlayState = exports.insertBanana = exports.getAnimationPlayState = exports.randomSize = exports.sizes = exports.randomNumber = undefined;
 
 var _bling = require("./bling");
 
 var _components = require("./components");
 
-var _utils = require("./utils");
+var randomNumber = exports.randomNumber = function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+var sizes = exports.sizes = [30, 40, 50, 60, 70, 75, 80, 85, 90, 95];
+
+var randomSize = exports.randomSize = function randomSize() {
+  return sizes[randomNumber(0, 9)];
+};
+
+var getAnimationPlayState = exports.getAnimationPlayState = function getAnimationPlayState(rootElement) {
+  return getComputedStyle(rootElement).getPropertyValue("--animation-play-state").trim();
+};
+
+var insertBanana = exports.insertBanana = function insertBanana() {
+  var id = randomNumber(1, 5);
+  var fontSize = randomSize();
+  (0, _bling.$)("#column-" + id).insertAdjacentHTML("afterbegin", (0, _components.banana)(fontSize));
+};
+
+var togglePlayState = exports.togglePlayState = function togglePlayState(state, rootElement) {
+  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
+};
+
+var resetPlayState = exports.resetPlayState = function resetPlayState(state, rootElement) {
+  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
+};
+
+var destroyBananas = exports.destroyBananas = function destroyBananas() {
+  (0, _bling.$$)(".column").forEach(function (element) {
+    element.innerHTML = "";
+  });
+};
+},{"./bling":"bling.js","./components":"components.js"}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _bling = require("./bling");
+
+var _methods = require("./methods");
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var intervalId = void 0;
+
 var state = {
   isPlaying: false,
   intervalSpeed: 900
 };
 
-var getAnimationPlayState = function getAnimationPlayState() {
-  return getComputedStyle(document.documentElement).getPropertyValue("--animation-play-state").trim();
-};
-
-var insertBanana = function insertBanana() {
-  var id = (0, _utils.randomNumber)(1, 5);
-  var fontSize = (0, _utils.randomSize)();
-  console.log({ id: id, fontSize: fontSize });
-  (0, _bling.$)("#column-" + id).insertAdjacentHTML("afterbegin", (0, _components.banana)(fontSize));
-};
-
-var destroyBananas = function destroyBananas() {
-  (0, _bling.$$)(".column").forEach(function (element) {
-    element.innerHTML = "";
-  });
-};
-
 (0, _bling.$)(".togglePlay").on("click", function () {
-  state = { isPlaying: !state.isPlaying, intervalSpeed: state.intervalSpeed };
+  state = _extends({}, state, { isPlaying: !state.isPlaying });
+  (0, _methods.togglePlayState)(state, document.documentElement);
 
-  document.documentElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
-
-  var playState = getAnimationPlayState();
+  var playState = (0, _methods.getAnimationPlayState)(document.documentElement);
 
   if (playState === "running") {
-    intervalId = setInterval(insertBanana, state.intervalSpeed);
+    intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
   } else {
     clearInterval(intervalId);
   }
 });
 
 (0, _bling.$)(".reset").on("click", function () {
+  state = _extends({}, state, { isPlaying: false });
+  (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
-  destroyBananas();
+  (0, _methods.destroyBananas)();
 });
 
-// MUTATION OBSERVER
 var observer = new MutationObserver(function (mutationsList) {
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
@@ -249,19 +237,20 @@ var observer = new MutationObserver(function (mutationsList) {
         var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
           return node.innerText === "🍌";
         });
+
         if (bananaNode && bananaNode.length > 0) {
-          var _banana = bananaNode[0];
-          _banana.classList.remove("animation");
-          _banana.classList.add("animation");
-          _banana.addEventListener("animationend", function (event) {
+          var banana = bananaNode[0];
+          banana.classList.remove("animation");
+          banana.classList.add("animation");
+          banana.addEventListener("animationend", function (event) {
             event.target.parentNode.removeChild(event.target);
           });
         }
       }
 
-      if (mutation.type == "attributes") {
+      if (mutation.type == "attributes" && mutation.attributeName == "style") {
         // Change togglePlay button to say Paused or Start based on state
-        (0, _bling.$)(".togglePlay").innerHTML = state.isPlaying ? "Paused" : "Start";
+        (0, _bling.$)(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
       }
     }
   } catch (err) {
@@ -285,7 +274,7 @@ observer.observe((0, _bling.$)("#html"), {
   childList: true,
   subtree: true
 });
-},{"./bling":"bling.js","./components":"components.js","./utils":"utils.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./bling":"bling.js","./methods":"methods.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -314,7 +303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62471' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53111' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -50,9 +50,10 @@ button {
 
 .column {
   display: flex;
+  flex-direction: column;
   position: relative;
   top: -100px;
-  justify-content: center;
+  align-items: center;
 }
 
 @keyframes slideDown {
@@ -72,10 +73,6 @@ button {
 .animation {
   animation: slideDown 5000ms linear;
   animation-play-state: var(--animation-play-state);
-}
-
-svg {
-  margin: 0 auto;
 }
 
 .banana {

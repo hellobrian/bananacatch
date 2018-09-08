@@ -128,26 +128,7 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 
 exports.$ = $;
 exports.$$ = $$;
-},{}],"components.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.banana = undefined;
-
-var _methods = require("./methods");
-
-var banana = exports.banana = function banana() {
-  var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
-
-  var points = _methods.sizesAndPoints.filter(function (object) {
-    return object.size === fontSize;
-  })[0].points;
-
-  return ("\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" data-points=\"" + points + "\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ").trim();
-};
-},{"./methods":"methods.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
+},{}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -19296,66 +19277,93 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"methods.js":[function(require,module,exports) {
+},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"constants.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.destroyBananas = exports.resetPlayState = exports.changeAnimationSpeedPercent = exports.togglePlayState = exports.insertBanana = exports.getAnimationPlayState = exports.randomSize = exports.sizesAndPoints = exports.points = exports.sizes = exports.randomNumber = undefined;
-
-var _bling = require("./bling");
-
-var _components = require("./components");
+exports.sizesAndPoints = exports.points = exports.maxPoints = exports.sizes = undefined;
 
 var _lodash = require("lodash");
 
-var randomNumber = exports.randomNumber = function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-
+/**
+ * Different sizes for bananas
+ */
 var sizes = exports.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
 
-var points = exports.points = (0, _lodash.times)(10).map(function (index) {
-  var maxPoints = 100;
+/**
+ * Maximum points for a single banana
+ */
+var maxPoints = exports.maxPoints = 100;
+
+/**
+ * Array of points per banana from maxPoints (100) to dynamic minimum
+ */
+var points = exports.points = (0, _lodash.times)(10).map(function (_, index) {
   return maxPoints - index * 10;
 });
 
+/**
+ * Array of objects mapping sizes to points for bananas
+ */
 var sizesAndPoints = exports.sizesAndPoints = sizes.map(function (size, index) {
   return {
     size: size,
     points: points[index]
   };
 });
+},{"lodash":"../node_modules/lodash/lodash.js"}],"components.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.banana = undefined;
+
+var _constants = require("./constants");
+
+var banana = exports.banana = function banana() {
+  var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+
+  var points = _constants.sizesAndPoints.filter(function (object) {
+    return object.size === fontSize;
+  })[0].points;
+
+  return ("\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" data-points=\"" + points + "\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ").trim();
+};
+},{"./constants":"constants.js"}],"methods.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.changeAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = exports.resetPlayState = exports.togglePlayState = exports.getAnimationPlayState = exports.setLabelInnerHTML = exports.setScoreInnerHTML = exports.shouldDisableBananas = exports.destroyBananas = exports.insertBanana = exports.randomSize = exports.randomNumber = undefined;
+
+var _bling = require("./bling");
+
+var _components = require("./components");
+
+var _constants = require("./constants");
+
+/**
+ * Random methods
+ */
+var randomNumber = exports.randomNumber = function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
 
 var randomSize = exports.randomSize = function randomSize() {
-  return sizes[randomNumber(0, 9)];
+  return _constants.sizes[randomNumber(0, 9)];
 };
 
-var getAnimationPlayState = exports.getAnimationPlayState = function getAnimationPlayState(rootElement) {
-  return getComputedStyle(rootElement).getPropertyValue("--animation-play-state").trim();
-};
-
+/**
+ * Banana methods
+ */
 var insertBanana = exports.insertBanana = function insertBanana() {
   var id = randomNumber(1, 5);
   var fontSize = randomSize();
   (0, _bling.$)("#column-" + id).insertAdjacentHTML("afterbegin", (0, _components.banana)(fontSize));
-};
-
-var togglePlayState = exports.togglePlayState = function togglePlayState(state, rootElement) {
-  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
-};
-
-var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function changeAnimationSpeedPercent(state, rootElement) {
-  var calcSpeedPercent = state.animationSpeedPercent / 100;
-  var calcSpeed = state.fastestAnimationDuration / calcSpeedPercent;
-  console.log({ calcSpeedPercent: calcSpeedPercent, calcSpeed: calcSpeed });
-  rootElement.style.setProperty("--animation-play-speed", calcSpeed + "ms");
-};
-
-var resetPlayState = exports.resetPlayState = function resetPlayState(state, rootElement) {
-  var defaultStyle = ("\n    --animation-play-state: " + (state.isPlaying ? "running" : "paused") + "; --animation-play-speed: " + state.defaultAnimationDuration + "ms;").trim();
-  rootElement.setAttribute("style", defaultStyle);
 };
 
 var destroyBananas = exports.destroyBananas = function destroyBananas() {
@@ -19363,56 +19371,201 @@ var destroyBananas = exports.destroyBananas = function destroyBananas() {
     element.innerHTML = "".trim();
   });
 };
-},{"./bling":"bling.js","./components":"components.js","lodash":"../node_modules/lodash/lodash.js"}],"index.js":[function(require,module,exports) {
+
+var shouldDisableBananas = exports.shouldDisableBananas = function shouldDisableBananas(playState, bananas) {
+  return bananas.forEach(function (element) {
+    element.disabled = playState === "running" ? false : true;
+  });
+};
+
+/**
+ * InnerHTML methods
+ */
+
+var setScoreInnerHTML = exports.setScoreInnerHTML = function setScoreInnerHTML(_ref) {
+  var score = _ref.score;
+
+  (0, _bling.$)("#score").innerHTML = score + "pts";
+};
+
+var setLabelInnerHTML = exports.setLabelInnerHTML = function setLabelInnerHTML(value) {
+  (0, _bling.$)(".label").innerHTML = "Speed: " + value + "%";
+};
+
+/**
+ * State methods
+ */
+var getAnimationPlayState = exports.getAnimationPlayState = function getAnimationPlayState(rootElement) {
+  return getComputedStyle(rootElement).getPropertyValue("--animation-play-state").trim();
+};
+
+var togglePlayState = exports.togglePlayState = function togglePlayState(state, rootElement) {
+  rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
+  (0, _bling.$)(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
+};
+
+var resetPlayState = exports.resetPlayState = function resetPlayState(state, rootElement) {
+  var defaultStyle = ("\n    --animation-play-state: " + (state.isPlaying ? "running" : "paused") + "; --animation-play-speed: " + state.defaultAnimationDuration + "ms;").trim();
+  rootElement.setAttribute("style", defaultStyle);
+};
+
+var calculateAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = function calculateAnimationSpeedPercent(state) {
+  var calcSpeedPercent = state.animationSpeedPercent / 100;
+  var calcSpeed = state.fastestAnimationDuration / calcSpeedPercent;
+  return calcSpeed + "ms";
+};
+
+var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function changeAnimationSpeedPercent(state, rootElement) {
+  var calcSpeed = calculateAnimationSpeedPercent(state);
+  rootElement.style.setProperty("--animation-play-speed", "" + calcSpeed);
+};
+},{"./bling":"bling.js","./components":"components.js","./constants":"constants.js"}],"mutationObserver.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.observer = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _methods = require("./methods");
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/**
+ * Mutation Observer
+ */
+var observer = exports.observer = function observer(state) {
+  return new MutationObserver(function (mutationsList) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = mutationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var mutation = _step.value;
+
+        if (mutation.type == "childList") {
+          /**
+           * bananaNode (Array) is a newly added banana HTML string from components.js
+           * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
+           */
+
+          var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
+            return node.dataset && node.dataset.points > 0;
+          });
+
+          /**
+           * If a bananaNode exists:
+           * - add a click handler to handle adding points to state.score
+           * - clicking on a banana will also remove it from the DOM
+           */
+          if (bananaNode && bananaNode.length > 0) {
+            var banana = bananaNode[0];
+            banana.addEventListener("click", function (event) {
+              /**
+               * get points from dataset.points
+               * update state
+               * display updated score on #score element
+               */
+              var points = parseInt(event.target.dataset.points, 10);
+              state = _extends({}, state, { score: state.score + points });
+              (0, _methods.setScoreInnerHTML)(state);
+
+              /**
+               * Select span inside banana
+               * add exit-animation class to trigger it
+               * add animationend event listener to remove banana from DOM
+               */
+              var span = event.target.querySelector("span");
+              span.classList.add("exit-animation");
+              span.on("animationend", function () {
+                event.target.parentNode.removeChild(event.target);
+              });
+            });
+
+            /**
+             * When a banana is added to the DOM, the slideDown-animation class is quickly removed and added to trigger the animation to start
+             */
+            banana.classList.remove("slideDown-animation");
+            banana.classList.add("slideDown-animation");
+
+            /**
+             * If the animation is not clicked, then the banana will remove itself from the DOM on animationend event based on slideDown-animation ending.
+             */
+            banana.addEventListener("animationend", function (event) {
+              event.target.parentNode.removeChild(event.target);
+            });
+          }
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  });
+};
+},{"./methods":"methods.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _bling = require("./bling");
 
+var _mutationObserver = require("./mutationObserver");
+
 var _methods = require("./methods");
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
+/**
+ * State
+ */
 var intervalId = void 0;
 
-var initialAnimationState = {
+var initialState = {
   animationSpeedPercent: 50,
-  fastestAnimationDuration: 4000,
-  defaultAnimationDuration: 8000
-};
-
-var state = _extends({}, initialAnimationState, {
+  fastestAnimationDuration: 1500,
   intervalSpeed: 900,
   isPlaying: false,
-  score: 0,
-  defaultAnimationDuration: initialAnimationState.fastestAnimationDuration * 2
+  score: 0
+};
+
+var state = _extends({}, initialState, {
+  defaultAnimationDuration: initialState.fastestAnimationDuration * 2
 });
 
+/**
+ * Event Handlers
+ */
 (0, _bling.$)(".togglePlay").on("click", function () {
   state = _extends({}, state, { isPlaying: !state.isPlaying });
   (0, _methods.togglePlayState)(state, document.documentElement);
-
   var playState = (0, _methods.getAnimationPlayState)(document.documentElement);
+  (0, _methods.shouldDisableBananas)(playState, (0, _bling.$$)(".banana"));
 
   if (playState === "running") {
     intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
-    (0, _bling.$$)(".banana").forEach(function (element) {
-      element.disabled = false;
-    });
   } else {
-    (0, _bling.$$)(".banana").forEach(function (element) {
-      element.disabled = true;
-    });
     clearInterval(intervalId);
   }
 });
 
 (0, _bling.$)(".reset").on("click", function () {
   state = _extends({}, state, { isPlaying: false, score: 0, animationSpeedPercent: 50 });
-  (0, _bling.$)("#score").innerHTML = state.score;
-  (0, _bling.$)(".label").innerHTML = "Speed: " + state.animationSpeedPercent + "%";
+  (0, _methods.setScoreInnerHTML)(state);
+  (0, _methods.setLabelInnerHTML)(state.animationSpeedPercent);
   (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
+
   (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
   (0, _methods.destroyBananas)();
@@ -19421,102 +19574,17 @@ var state = _extends({}, initialAnimationState, {
 (0, _bling.$)("#speedPercent").on("change", function (event) {
   state = _extends({}, state, { animationSpeedPercent: event.target.value });
   (0, _methods.changeAnimationSpeedPercent)(state, document.documentElement);
-  (0, _bling.$)(".label").innerHTML = "Speed: " + event.target.value + "%";
+  (0, _methods.setLabelInnerHTML)(event.target.value);
 });
 
-var observer = new MutationObserver(function (mutationsList) {
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+var mutationObserver = (0, _mutationObserver.observer)(state);
 
-  try {
-    for (var _iterator = mutationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var mutation = _step.value;
-
-      if (mutation.type == "childList") {
-        /**
-         * bananaNode (Array) is a newly added banana HTML string from components.js
-         * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
-         */
-
-        // console.log([...mutation.addedNodes]);
-        var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
-          return node.dataset && node.dataset.points > 0;
-        });
-
-        /**
-         * If a bananaNode exists:
-         * - add a click handler to handle adding points to state.score
-         * - clicking on a banana will also remove it from the DOM
-         */
-        if (bananaNode && bananaNode.length > 0) {
-          var banana = bananaNode[0];
-          banana.addEventListener("click", function (event) {
-            /**
-             * get points from dataset.points
-             * update state
-             * display updated score on #score element
-             */
-            var points = parseInt(event.target.dataset.points, 10);
-            state = _extends({}, state, { score: state.score + points });
-            (0, _bling.$)("#score").innerHTML = state.score + "pts";
-
-            /**
-             * Select span inside banana
-             * add exit-animation class to trigger it
-             * add animationend event listener to remove banana from DOM
-             */
-            var span = event.target.querySelector("span");
-            span.classList.add("exit-animation");
-            span.on("animationend", function () {
-              event.target.parentNode.removeChild(event.target);
-            });
-          });
-
-          /**
-           * When a banana is added to the DOM, the slideDown-animation class is quickly removed and added to trigger the animation to start
-           */
-          banana.classList.remove("slideDown-animation");
-          banana.classList.add("slideDown-animation");
-
-          /**
-           * If the animation is not clicked, then the banana will remove itself from the DOM on animationend event based on slideDown-animation ending.
-           */
-          banana.addEventListener("animationend", function (event) {
-            event.target.parentNode.removeChild(event.target);
-          });
-        }
-      }
-
-      if (mutation.type == "attributes" && mutation.attributeName == "style") {
-        /**
-         * Change togglePlay button to say "Pause" or "Start" based on state.isPlaying
-         */
-        (0, _bling.$)(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-});
-
-observer.observe((0, _bling.$)("#html"), {
-  attributes: true,
+mutationObserver.observe((0, _bling.$)("#grid"), {
+  attributes: false,
   childList: true,
   subtree: true
 });
-},{"./bling":"bling.js","./methods":"methods.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./bling":"bling.js","./mutationObserver":"mutationObserver.js","./methods":"methods.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -19545,7 +19613,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54194' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64234' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

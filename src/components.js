@@ -1,4 +1,4 @@
-import { sizesAndPoints } from "./methods";
+import { sizesAndPoints } from "./constants";
 
 export const banana = (fontSize = 40) => {
   const { points } = sizesAndPoints.filter(object => object.size === fontSize)[0];

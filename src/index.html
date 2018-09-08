@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>banana-stand</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <main id="app"></main>
+  <main id="app">
+    <header class="header">
+      <p id="score">0pts</p>
+      <button class="btn togglePlay" type="button">Start</button>
+      <button class="btn reset" type="button">Reset</button>
+      <input id="speedPercent" min="10" max="100" step="1" type="range" value="50">
+      <label for="speedPercent" class="label">Speed: 50%</label>
+    </header>
+    <section class="grid" id="grid">
+      <div class="column" id="column-1">
+      </div>
+      <div class="column" id="column-2">
+      </div>
+      <div class="column" id="column-3">
+      </div>
+      <div class="column" id="column-4">
+      </div>
+    </section>
+  </main>
   <script src="index.js"></script>
 </body>
 

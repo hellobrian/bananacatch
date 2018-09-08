@@ -4,10 +4,9 @@ const app = express();
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
-// app.use(express.static('/tmp'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function(request, response) {
+app.get("/", function(response) {
   response.sendFile(__dirname + "/public/index.html");
 });
 

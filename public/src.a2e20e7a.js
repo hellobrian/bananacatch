@@ -128,6 +128,76 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 
 exports.$ = $;
 exports.$$ = $$;
+},{}],"mutationObserver.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/**
+ * Mutation Observer
+ */
+var observer = exports.observer = function observer(state) {
+  return new MutationObserver(function (mutationsList) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = mutationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var mutation = _step.value;
+
+        if (mutation.type == "childList") {
+          /**
+           * bananaNode (Array) is a newly added banana HTML string from components.js
+           * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
+           */
+          var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
+            return node.dataset && node.dataset.points > 0;
+          });
+
+          /**
+           * If a bananaNode exists:
+           * - add a click handler to handle adding points to state.score
+           * - clicking on a banana will also remove it from the DOM
+           */
+          if (bananaNode && bananaNode.length > 0) {
+            var banana = bananaNode[0];
+
+            /**
+             * When a banana is added to the DOM, the slideDown-animation class is quickly removed and added to trigger the animation to start
+             */
+            banana.classList.remove("slideDown-animation");
+            banana.classList.add("slideDown-animation");
+
+            /**
+             * If the animation is not clicked, then the banana will remove itself from the DOM on animationend event based on slideDown-animation ending.
+             */
+            banana.addEventListener("animationend", function (event) {
+              event.target.parentNode.removeChild(event.target);
+            });
+          }
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  });
+};
 },{}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
@@ -19419,104 +19489,7 @@ var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function
   var calcSpeed = calculateAnimationSpeedPercent(state);
   rootElement.style.setProperty("--animation-play-speed", "" + calcSpeed);
 };
-},{"./bling":"bling.js","./components":"components.js","./constants":"constants.js"}],"mutationObserver.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.observer = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _methods = require("./methods");
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-/**
- * Mutation Observer
- */
-var observer = exports.observer = function observer(state) {
-  return new MutationObserver(function (mutationsList) {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = mutationsList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var mutation = _step.value;
-
-        if (mutation.type == "childList") {
-          /**
-           * bananaNode (Array) is a newly added banana HTML string from components.js
-           * - When a childList mutation is observed, filter all addedNodes for any node with dataset.points.
-           */
-
-          var bananaNode = [].concat(_toConsumableArray(mutation.addedNodes)).filter(function (node) {
-            return node.dataset && node.dataset.points > 0;
-          });
-
-          /**
-           * If a bananaNode exists:
-           * - add a click handler to handle adding points to state.score
-           * - clicking on a banana will also remove it from the DOM
-           */
-          if (bananaNode && bananaNode.length > 0) {
-            var banana = bananaNode[0];
-            banana.addEventListener("click", function (event) {
-              /**
-               * get points from dataset.points
-               * update state
-               * display updated score on #score element
-               */
-              var points = parseInt(event.target.dataset.points, 10);
-              state = _extends({}, state, { score: state.score + points });
-              (0, _methods.setScoreInnerHTML)(state);
-
-              /**
-               * Select span inside banana
-               * add exit-animation class to trigger it
-               * add animationend event listener to remove banana from DOM
-               */
-              var span = event.target.querySelector("span");
-              span.classList.add("exit-animation");
-              span.on("animationend", function () {
-                event.target.parentNode.removeChild(event.target);
-              });
-            });
-
-            /**
-             * When a banana is added to the DOM, the slideDown-animation class is quickly removed and added to trigger the animation to start
-             */
-            banana.classList.remove("slideDown-animation");
-            banana.classList.add("slideDown-animation");
-
-            /**
-             * If the animation is not clicked, then the banana will remove itself from the DOM on animationend event based on slideDown-animation ending.
-             */
-            banana.addEventListener("animationend", function (event) {
-              event.target.parentNode.removeChild(event.target);
-            });
-          }
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-  });
-};
-},{"./methods":"methods.js"}],"index.js":[function(require,module,exports) {
+},{"./bling":"bling.js","./components":"components.js","./constants":"constants.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19577,6 +19550,29 @@ var state = _extends({}, initialState, {
   (0, _methods.setLabelInnerHTML)(event.target.value);
 });
 
+(0, _bling.$)("#grid").on("click", function (event) {
+  if (event.target && event.target.matches("button.banana")) {
+    /**
+     * get points from dataset.points
+     * update state
+     * display updated score on #score element
+     */
+    var points = parseInt(event.target.dataset.points, 10);
+    state = _extends({}, state, { score: state.score + points });
+    (0, _methods.setScoreInnerHTML)(state);
+    /**
+     * Select span inside banana
+     * add exit-animation class to trigger it
+     * add animationend event listener to remove banana from DOM
+     */
+    var span = event.target.querySelector("span");
+    span.classList.add("exit-animation");
+    span.on("animationend", function () {
+      event.target.parentNode.removeChild(event.target);
+    });
+  }
+});
+
 var mutationObserver = (0, _mutationObserver.observer)(state);
 
 mutationObserver.observe((0, _bling.$)("#grid"), {
@@ -19613,7 +19609,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64234' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61388' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

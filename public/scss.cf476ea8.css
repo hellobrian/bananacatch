@@ -10,6 +10,7 @@
   --green: #badc58;
   --brown: #4d2b14;
   --blue: #0076c5;
+  --blue-dark: #015e9c;
   --gradient-banana: linear-gradient(
     188deg,
     var(--yellow) 5%,
@@ -65,6 +66,19 @@ button > * {
     transform: rotate(-150deg) scale(0.1);
     opacity: 0; } }
 
+@keyframes pressStart {
+  0% {
+    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(0) scale(1);
+    opacity: 1; }
+  50%,
+  95% {
+    background-color: var(--blue-dark);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(5px) scale(0.9); }
+  100% {
+    opacity: 0; } }
+
 .slideDown-animation {
   animation: slideDown var(--animation-play-speed) linear;
   animation-play-state: var(--animation-play-state); }
@@ -76,12 +90,15 @@ button > * {
 .exit-animation {
   animation: exit 750ms var(--cubic-bezier-standard); }
 
+.pressStart-animation {
+  animation: pressStart 700ms var(--cubic-bezier-standard); }
+
 .start-screen {
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background: var(--yellow);
   background: var(--gradient-banana);
   display: flex;
@@ -121,7 +138,12 @@ button > * {
   color: var(--white);
   border-radius: 40px;
   position: absolute;
-  bottom: 12vh; }
+  bottom: 12vh;
+  outline: none;
+  transition: background-color 400ms var(--cubic-bezier-standard); }
+  .start-screen .start:hover {
+    background-color: var(--blue-dark);
+    transition: background-color 400ms var(--cubic-bezier-standard); }
 
 .btn {
   width: 100px;

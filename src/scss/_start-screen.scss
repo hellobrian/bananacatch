@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background: var(--yellow);
   background: var(--gradient-banana);
   display: flex;
@@ -47,4 +47,11 @@
   border-radius: 40px;
   position: absolute;
   bottom: 12vh;
+  outline: none;
+  transition: background-color 400ms var(--cubic-bezier-standard);
+
+  &:hover {
+    background-color: var(--blue-dark);
+    transition: background-color 400ms var(--cubic-bezier-standard);
+  }
 }

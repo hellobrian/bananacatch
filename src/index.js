@@ -33,16 +33,21 @@ let state = {
 /**
  * Event Handlers
  */
-$(".start").on("click", () => {
-  state = { ...state, isPlaying: !state.isPlaying };
-  togglePlayState(state, document.documentElement);
-  $(".start-screen").classList.add("hide");
-  const playState = getAnimationPlayState(document.documentElement);
-  if (playState === "running") {
-    intervalId = setInterval(insertBanana, state.intervalSpeed);
-  } else {
-    clearInterval(intervalId);
-  }
+$(".start").on("click", event => {
+  event.target.classList.add("pressStart-animation");
+
+  event.target.addEventListener("animationend", () => {
+    state = { ...state, isPlaying: !state.isPlaying };
+    togglePlayState(state, document.documentElement);
+    $(".start-screen").classList.add("hide");
+    const playState = getAnimationPlayState(document.documentElement);
+    if (playState === "running") {
+      intervalId = setInterval(insertBanana, state.intervalSpeed);
+    } else {
+      clearInterval(intervalId);
+    }
+    event.target.parentNode.removeChild(event.target);
+  });
 });
 
 $(".togglePlay").on("click", () => {

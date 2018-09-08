@@ -33,6 +33,18 @@ let state = {
 /**
  * Event Handlers
  */
+$(".start").on("click", () => {
+  state = { ...state, isPlaying: !state.isPlaying };
+  togglePlayState(state, document.documentElement);
+  $(".modal-overlay").classList.add("hide");
+  const playState = getAnimationPlayState(document.documentElement);
+  if (playState === "running") {
+    intervalId = setInterval(insertBanana, state.intervalSpeed);
+  } else {
+    clearInterval(intervalId);
+  }
+});
+
 $(".togglePlay").on("click", () => {
   state = { ...state, isPlaying: !state.isPlaying };
   togglePlayState(state, document.documentElement);

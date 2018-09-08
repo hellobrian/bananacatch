@@ -81,7 +81,7 @@ button > * {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: var(--yellow);
   background: var(--gradient-banana);
   display: flex;
@@ -121,7 +121,7 @@ button > * {
   color: var(--white);
   border-radius: 40px;
   position: absolute;
-  bottom: 10vh; }
+  bottom: 12vh; }
 
 .btn {
   width: 100px;

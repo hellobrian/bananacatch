@@ -19531,7 +19531,7 @@ var state = _extends({}, initialState, {
 (0, _bling.$)(".start").on("click", function () {
   state = _extends({}, state, { isPlaying: !state.isPlaying });
   (0, _methods.togglePlayState)(state, document.documentElement);
-  (0, _bling.$)(".modal-overlay").classList.add("hide");
+  (0, _bling.$)(".start-screen").classList.add("hide");
   var playState = (0, _methods.getAnimationPlayState)(document.documentElement);
   if (playState === "running") {
     intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
@@ -19629,7 +19629,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58293' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61364' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

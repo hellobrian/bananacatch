@@ -1,0 +1,19 @@
+.btn {
+  width: 100px;
+  border: 2px solid white;
+  color: white;
+  height: 40px;
+  margin: 0 1rem;
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  background-color: palevioletred;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 5vh;
+  z-index: 3;
+}

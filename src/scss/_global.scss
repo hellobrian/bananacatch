@@ -1,0 +1,41 @@
+:root {
+  --animation-play-speed: 8000ms;
+  --animation-play-state: paused;
+  --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-90: rgba(255, 255, 255, 0.9);
+  --white: #fff;
+  --orange: #ff7922;
+  --yellow: #feca57;
+  --green: #badc58;
+  --brown: #4d2b14;
+  --blue: #0076c5;
+  --gradient-banana: linear-gradient(
+    188deg,
+    var(--yellow) 5%,
+    var(--yellow) 47%,
+    var(--green) 100%
+  );
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  overflow: hidden;
+}
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
+
+button > * {
+  pointer-events: none;
+}

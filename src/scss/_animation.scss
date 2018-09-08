@@ -1,0 +1,62 @@
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes exit {
+  0% {
+    transform: scale(1);
+  }
+
+  4%,
+  10% {
+    transform: scale(0.5);
+  }
+
+  25%,
+  40% {
+    transform: scale(1.25);
+  }
+
+  50%,
+  53% {
+    transform: rotate(50deg);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-150deg) scale(0.1);
+    opacity: 0;
+  }
+}
+
+.slideDown-animation {
+  animation: slideDown var(--animation-play-speed) linear;
+  animation-play-state: var(--animation-play-state);
+}
+
+.swing-animation {
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center -20px;
+}
+
+.exit-animation {
+  animation: exit 750ms var(--cubic-bezier-standard);
+}

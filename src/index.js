@@ -63,6 +63,29 @@ $("#speedPercent").on("change", event => {
   setLabelInnerHTML(event.target.value);
 });
 
+$("#grid").on("click", event => {
+  if (event.target && event.target.matches("button.banana")) {
+    /**
+     * get points from dataset.points
+     * update state
+     * display updated score on #score element
+     */
+    const points = parseInt(event.target.dataset.points, 10);
+    state = { ...state, score: state.score + points };
+    setScoreInnerHTML(state);
+    /**
+     * Select span inside banana
+     * add exit-animation class to trigger it
+     * add animationend event listener to remove banana from DOM
+     */
+    const span = event.target.querySelector("span");
+    span.classList.add("exit-animation");
+    span.on("animationend", () => {
+      event.target.parentNode.removeChild(event.target);
+    });
+  }
+});
+
 const mutationObserver = observer(state);
 
 mutationObserver.observe($("#grid"), {

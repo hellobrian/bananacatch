@@ -29,7 +29,7 @@
     margin-bottom: 10px;
   }
 
-  .label {
+  label {
     width: 100%;
     background: red;
     text-align: center;
@@ -46,21 +46,7 @@
 }
 
 .footer .btn {
-  display: inline-flex;
-  font-family: "Teko", sans-serif;
-  font-size: 1.5rem;
-  padding: 5px 40px;
-  background-color: var(--blue);
-  color: var(--white);
-  border-radius: 40px;
-  outline: none;
-  width: 130px;
-  justify-content: center;
-
-  &:hover {
-    background-color: var(--blue-dark);
-    transition: background-color 400ms var(--cubic-bezier-standard);
-  }
+  @include button;
 
   &:first-child {
     margin-right: 20px;

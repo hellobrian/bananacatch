@@ -1,0 +1,18 @@
+@mixin button {
+  background-color: var(--blue);
+  border-radius: 40px;
+  color: var(--white);
+  display: inline-flex;
+  font-family: "Teko", sans-serif;
+  font-size: 1.5rem;
+  justify-content: center;
+  outline: none;
+  padding: 5px 40px;
+  min-width: 130px;
+  transition: background-color 400ms var(--cubic-bezier-standard);
+
+  &:hover {
+    background-color: var(--blue-dark);
+    transition: background-color 400ms var(--cubic-bezier-standard);
+  }
+}

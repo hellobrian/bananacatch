@@ -132,17 +132,19 @@ button > * {
   font-size: 2rem; }
 
 .start-screen .start {
+  background-color: var(--blue);
+  border-radius: 40px;
+  color: var(--white);
   display: inline-flex;
   font-family: "Teko", sans-serif;
-  font-size: 2rem;
-  padding: 5px 40px;
-  background-color: var(--blue);
-  color: var(--white);
-  border-radius: 40px;
-  position: absolute;
-  bottom: 12vh;
+  font-size: 1.5rem;
+  justify-content: center;
   outline: none;
-  transition: background-color 400ms var(--cubic-bezier-standard); }
+  padding: 5px 40px;
+  min-width: 130px;
+  transition: background-color 400ms var(--cubic-bezier-standard);
+  position: absolute;
+  bottom: 12vh; }
   .start-screen .start:hover {
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard); }
@@ -173,7 +175,7 @@ button > * {
   .footer .input-wrapper input {
     width: 90%;
     margin-bottom: 10px; }
-  .footer .input-wrapper .label {
+  .footer .input-wrapper label {
     width: 100%;
     background: red;
     text-align: center;
@@ -187,16 +189,17 @@ button > * {
   grid-column: 1 / span 3; }
 
 .footer .btn {
+  background-color: var(--blue);
+  border-radius: 40px;
+  color: var(--white);
   display: inline-flex;
   font-family: "Teko", sans-serif;
   font-size: 1.5rem;
-  padding: 5px 40px;
-  background-color: var(--blue);
-  color: var(--white);
-  border-radius: 40px;
+  justify-content: center;
   outline: none;
-  width: 130px;
-  justify-content: center; }
+  padding: 5px 40px;
+  min-width: 130px;
+  transition: background-color 400ms var(--cubic-bezier-standard); }
   .footer .btn:hover {
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard); }

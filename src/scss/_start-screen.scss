@@ -38,20 +38,7 @@
 }
 
 .start-screen .start {
-  display: inline-flex;
-  font-family: "Teko", sans-serif;
-  font-size: 2rem;
-  padding: 5px 40px;
-  background-color: var(--blue);
-  color: var(--white);
-  border-radius: 40px;
+  @include button;
   position: absolute;
   bottom: 12vh;
-  outline: none;
-  transition: background-color 400ms var(--cubic-bezier-standard);
-
-  &:hover {
-    background-color: var(--blue-dark);
-    transition: background-color 400ms var(--cubic-bezier-standard);
-  }
 }

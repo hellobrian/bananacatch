@@ -24,9 +24,10 @@
     </div>
     <!-- Game -->
     <header class="header">
-      <p id="score">0pts</p>
+      <div class="score-sign">
+        <p id="score">0pts</p>
+      </div>
     </header>
-    <div class="background"></div>
     <section class="grid" id="grid">
       <div class="column" id="column-1">
       </div>
@@ -39,8 +40,8 @@
     </section>
     <footer class="footer">
       <div class="input-wrapper">
-        <input id="speedPercent" min="10" max="100" step="1" type="range" value="50">
-        <label for="speedPercent" class="label">Speed: 50%</label>
+        <input id="speedPercent" min="10" max="100" step="1" type="range" value="50" name="speedPercent">
+        <output class="output" for="speedPercent"></output>
       </div>
       <div class="center-buttons">
         <button class="btn togglePlay" type="button">Start</button>

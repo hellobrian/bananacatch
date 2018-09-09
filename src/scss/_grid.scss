@@ -1,24 +1,28 @@
-.background {
-  position: absolute;
-  top: 0;
-  background-image: url("https://cdn.dribbble.com/users/1064465/screenshots/2907979/donutplains_lights.gif");
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: 50%;
-  filter: blur(2px);
-  width: 100vw;
-  height: 100vh;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px;
-  background: paleturquoise;
+  background-image: url("../images/jungle-pattern.jpg");
+  background-color: var(--black-60);
+  background-blend-mode: multiply;
+  background-size: 100%;
   height: calc(100vh - (var(--height-header) + var(--height-footer)));
   overflow: hidden;
   width: 100vw;
-  padding: 0 2.5rem;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+
+  &:after {
+    content: "";
+    background: rgb(196, 67, 161);
+    background: var(--gradient-grid);
+    opacity: 0.25;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+  }
 }
 
 .column {

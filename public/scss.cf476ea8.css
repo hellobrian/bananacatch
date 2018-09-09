@@ -1,24 +1,36 @@
 :root {
+  --blue-dark: #015e9c;
+  --blue: #0076c5;
+  --brown: #4d2b14;
+  --green: #badc58;
+  --orange: #ff7922;
+  --green-marker: #27ae60;
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-90: rgba(255, 255, 255, 0.9);
+  --black-60: rgba(5, 5, 5, 0.6);
+  --white: #fff;
+  --wood-dark: #c98f49;
+  --wood: #f5b362;
+  --yellow: #feca57;
   --animation-play-speed: 20000ms;
   --animation-play-state: paused;
   --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
-  --white-50: rgba(255, 255, 255, 0.5);
-  --white-90: rgba(255, 255, 255, 0.9);
-  --white: #fff;
-  --orange: #ff7922;
-  --yellow: #feca57;
-  --green: #badc58;
-  --brown: #4d2b14;
-  --blue: #0076c5;
-  --blue-dark: #015e9c;
   --gradient-banana: linear-gradient(
     188deg,
     var(--yellow) 5%,
     var(--yellow) 47%,
     var(--green) 100%
   );
+  --gradient-grid: linear-gradient(
+    188deg,
+    rgba(196, 67, 161, 0.6362920168067228) 5%,
+    rgba(87, 99, 254, 1) 54%,
+    rgba(101, 88, 220, 0) 100%
+  );
   --height-header: 75px;
-  --height-footer: 125px; }
+  --height-footer: 125px;
+  --box-shadow--pop-out: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+  --box-shadow--raised: 0 1px 2px 0 rgba(0, 0, 0, 0.1); }
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -70,13 +82,13 @@ button > * {
 
 @keyframes pressStart {
   0% {
-    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow--pop-out);
     transform: translateY(0) scale(1);
     opacity: 1; }
   50%,
   95% {
     background-color: var(--blue-dark);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow--raised);
     transform: translateY(5px) scale(0.9); }
   100% {
     opacity: 0; } }
@@ -151,10 +163,25 @@ button > * {
     transition: background-color 400ms var(--cubic-bezier-standard); }
 
 .header {
+  position: absolute;
+  z-index: 1;
+  top: 0;
   display: flex;
-  height: var(--height-header);
-  position: relative;
-  z-index: 3; }
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  background: transparent; }
+  .header .score-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .header .score-sign.score-sign-animation {
+      animation: swing 400ms alternate; }
+    .header .score-sign p {
+      font-family: "Teko", sans-serif;
+      font-size: 5rem;
+      color: white;
+      pointer-events: none; }
 
 .footer {
   display: grid;
@@ -165,7 +192,9 @@ button > * {
   position: relative;
   height: var(--height-footer);
   z-index: 3;
-  align-items: center; }
+  align-items: center;
+  position: absolute;
+  bottom: 0; }
 
 .footer .input-wrapper {
   display: flex;
@@ -176,11 +205,10 @@ button > * {
   .footer .input-wrapper input {
     width: 90%;
     margin-bottom: 10px; }
-  .footer .input-wrapper label {
-    width: 100%;
-    background: red;
-    text-align: center;
-    font-size: 1rem; }
+  .footer .input-wrapper output {
+    color: white;
+    font-family: "Teko", sans-serif;
+    font-size: 1.75rem; }
 
 .footer .center-buttons {
   display: flex;
@@ -207,26 +235,29 @@ button > * {
   .footer .btn:first-child {
     margin-right: 20px; }
 
-.background {
-  position: absolute;
-  top: 0;
-  background-image: url("https://cdn.dribbble.com/users/1064465/screenshots/2907979/donutplains_lights.gif");
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: 50%;
-  filter: blur(2px);
-  width: 100vw;
-  height: 100vh; }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px;
-  background: paleturquoise;
+  background-image: url("jungle-pattern.5a2c0287.jpg");
+  background-color: var(--black-60);
+  background-blend-mode: multiply;
+  background-size: 100%;
   height: calc(100vh - (var(--height-header) + var(--height-footer)));
   overflow: hidden;
   width: 100vw;
-  padding: 0 2.5rem; }
+  position: absolute;
+  top: 0;
+  height: 100vh; }
+  .grid:after {
+    content: "";
+    background: #c443a1;
+    background: var(--gradient-grid);
+    opacity: 0.25;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0; }
 
 .column {
   display: flex;
@@ -247,7 +278,8 @@ button > * {
   align-items: center;
   width: 2rem;
   height: 2rem;
-  font-size: 2rem; }
+  font-size: 2rem;
+  z-index: 2; }
 
 .banana > span:after {
   content: attr(data-points) "pts";

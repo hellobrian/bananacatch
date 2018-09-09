@@ -9,7 +9,6 @@ import {
   shouldDisableBananas,
   togglePlayState,
   setScoreInnerHTML,
-  setLabelInnerHTML,
   setPlayButtonInnerHTML
 } from "./methods";
 
@@ -19,7 +18,7 @@ import {
 let intervalId;
 
 const initialState = {
-  animationSpeedPercent: 50,
+  animationSpeedPercent: 65,
   fastestAnimationDuration: 3000,
   intervalSpeed: 1500,
   isPlaying: false,
@@ -36,6 +35,9 @@ let state = {
  */
 $(".start").on("click", event => {
   event.target.classList.add("pressStart-animation");
+
+  $("#speedPercent").value = state.animationSpeedPercent;
+  $(".output").value = state.animationSpeedPercent + "%";
 
   event.target.addEventListener("animationend", () => {
     state = { ...state, isPlaying: !state.isPlaying };
@@ -67,7 +69,7 @@ $(".togglePlay").on("click", () => {
 $(".reset").on("click", () => {
   state = { ...state, isPlaying: false, score: 0, animationSpeedPercent: 50 };
   setScoreInnerHTML(state);
-  setLabelInnerHTML(state.animationSpeedPercent);
+  // setLabelInnerHTML(state.animationSpeedPercent);
   setPlayButtonInnerHTML(state);
   $("#speedPercent").value = state.animationSpeedPercent;
 
@@ -79,7 +81,11 @@ $(".reset").on("click", () => {
 $("#speedPercent").on("change", event => {
   state = { ...state, animationSpeedPercent: event.target.value };
   changeAnimationSpeedPercent(state, document.documentElement);
-  setLabelInnerHTML(event.target.value);
+  // setLabelInnerHTML(event.target.value);
+});
+
+$("#speedPercent").on("input", event => {
+  $(".output").value = event.target.value + "%";
 });
 
 $("#grid").on("click", event => {

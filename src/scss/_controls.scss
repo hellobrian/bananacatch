@@ -1,8 +1,29 @@
 .header {
+  position: absolute;
+  z-index: 1;
+  top: 0;
   display: flex;
-  height: var(--height-header);
-  position: relative;
-  z-index: 3;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  background: transparent;
+
+  .score-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.score-sign-animation {
+      animation: swing 400ms alternate;
+    }
+
+    p {
+      font-family: "Teko", sans-serif;
+      font-size: 5rem;
+      color: white;
+      pointer-events: none;
+    }
+  }
 }
 
 .footer {
@@ -15,6 +36,8 @@
   height: var(--height-footer);
   z-index: 3;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer .input-wrapper {
@@ -29,11 +52,10 @@
     margin-bottom: 10px;
   }
 
-  label {
-    width: 100%;
-    background: red;
-    text-align: center;
-    font-size: 1rem;
+  output {
+    color: white;
+    font-family: "Teko", sans-serif;
+    font-size: 1.75rem;
   }
 }
 

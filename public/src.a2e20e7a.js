@@ -19520,7 +19520,7 @@ var _methods = require("./methods");
 var intervalId = void 0;
 
 var initialState = {
-  animationSpeedPercent: 50,
+  animationSpeedPercent: 65,
   fastestAnimationDuration: 3000,
   intervalSpeed: 1500,
   isPlaying: false,
@@ -19536,6 +19536,9 @@ var state = _extends({}, initialState, {
  */
 (0, _bling.$)(".start").on("click", function (event) {
   event.target.classList.add("pressStart-animation");
+
+  (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
+  (0, _bling.$)(".output").value = state.animationSpeedPercent + "%";
 
   event.target.addEventListener("animationend", function () {
     state = _extends({}, state, { isPlaying: !state.isPlaying });
@@ -19567,7 +19570,7 @@ var state = _extends({}, initialState, {
 (0, _bling.$)(".reset").on("click", function () {
   state = _extends({}, state, { isPlaying: false, score: 0, animationSpeedPercent: 50 });
   (0, _methods.setScoreInnerHTML)(state);
-  (0, _methods.setLabelInnerHTML)(state.animationSpeedPercent);
+  // setLabelInnerHTML(state.animationSpeedPercent);
   (0, _methods.setPlayButtonInnerHTML)(state);
   (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
 
@@ -19579,7 +19582,11 @@ var state = _extends({}, initialState, {
 (0, _bling.$)("#speedPercent").on("change", function (event) {
   state = _extends({}, state, { animationSpeedPercent: event.target.value });
   (0, _methods.changeAnimationSpeedPercent)(state, document.documentElement);
-  (0, _methods.setLabelInnerHTML)(event.target.value);
+  // setLabelInnerHTML(event.target.value);
+});
+
+(0, _bling.$)("#speedPercent").on("input", function (event) {
+  (0, _bling.$)(".output").value = event.target.value + "%";
 });
 
 (0, _bling.$)("#grid").on("click", function (event) {
@@ -19641,7 +19648,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58203' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54513' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -1,3 +1,15 @@
+.background {
+  position: absolute;
+  top: 0;
+  background-image: url("https://cdn.dribbble.com/users/1064465/screenshots/2907979/donutplains_lights.gif");
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: 50%;
+  filter: blur(2px);
+  width: 100vw;
+  height: 100vh;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

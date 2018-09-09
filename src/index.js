@@ -9,7 +9,8 @@ import {
   shouldDisableBananas,
   togglePlayState,
   setScoreInnerHTML,
-  setLabelInnerHTML
+  setLabelInnerHTML,
+  setPlayButtonInnerHTML
 } from "./methods";
 
 /**
@@ -67,6 +68,7 @@ $(".reset").on("click", () => {
   state = { ...state, isPlaying: false, score: 0, animationSpeedPercent: 50 };
   setScoreInnerHTML(state);
   setLabelInnerHTML(state.animationSpeedPercent);
+  setPlayButtonInnerHTML(state);
   $("#speedPercent").value = state.animationSpeedPercent;
 
   resetPlayState(state, document.documentElement);

@@ -19416,7 +19416,7 @@ var menuIcon = exports.menuIcon = function menuIcon() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.changeAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = exports.resetPlayState = exports.togglePlayState = exports.getAnimationPlayState = exports.setLabelInnerHTML = exports.setScoreInnerHTML = exports.shouldDisableBananas = exports.destroyBananas = exports.insertBanana = exports.randomSize = exports.randomNumber = undefined;
+exports.changeAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = exports.resetPlayState = exports.togglePlayState = exports.getAnimationPlayState = exports.setPlayButtonInnerHTML = exports.setLabelInnerHTML = exports.setScoreInnerHTML = exports.shouldDisableBananas = exports.destroyBananas = exports.insertBanana = exports.randomSize = exports.randomNumber = undefined;
 
 var _bling = require("./bling");
 
@@ -19470,6 +19470,12 @@ var setLabelInnerHTML = exports.setLabelInnerHTML = function setLabelInnerHTML(v
   (0, _bling.$)(".label").innerHTML = "Speed: " + value + "%";
 };
 
+var setPlayButtonInnerHTML = exports.setPlayButtonInnerHTML = function setPlayButtonInnerHTML(_ref2) {
+  var isPlaying = _ref2.isPlaying;
+
+  (0, _bling.$)(".togglePlay").innerHTML = isPlaying ? "Pause" : "Start";
+};
+
 /**
  * State methods
  */
@@ -19479,7 +19485,7 @@ var getAnimationPlayState = exports.getAnimationPlayState = function getAnimatio
 
 var togglePlayState = exports.togglePlayState = function togglePlayState(state, rootElement) {
   rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
-  (0, _bling.$)(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
+  setPlayButtonInnerHTML(state);
 };
 
 var resetPlayState = exports.resetPlayState = function resetPlayState(state, rootElement) {
@@ -19562,6 +19568,7 @@ var state = _extends({}, initialState, {
   state = _extends({}, state, { isPlaying: false, score: 0, animationSpeedPercent: 50 });
   (0, _methods.setScoreInnerHTML)(state);
   (0, _methods.setLabelInnerHTML)(state.animationSpeedPercent);
+  (0, _methods.setPlayButtonInnerHTML)(state);
   (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
 
   (0, _methods.resetPlayState)(state, document.documentElement);

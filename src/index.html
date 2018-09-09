@@ -13,12 +13,18 @@
 
 <body>
   <main id="app">
+    <!-- START SCREEN -->
+    <div class="start-screen">
+      <h1 class="title">
+        <span>banana</span>
+        <span>stand.</span>
+        <span class="icons">🍌 💵 🔥</span>
+      </h1>
+      <button class="start" type="button">Press Start</button>
+    </div>
+    <!-- Game -->
     <header class="header">
       <p id="score">0pts</p>
-      <button class="btn togglePlay" type="button">Start</button>
-      <button class="btn reset" type="button">Reset</button>
-      <input id="speedPercent" min="10" max="100" step="1" type="range" value="50">
-      <label for="speedPercent" class="label">Speed: 50%</label>
     </header>
     <section class="grid" id="grid">
       <div class="column" id="column-1">
@@ -30,15 +36,18 @@
       <div class="column" id="column-4">
       </div>
     </section>
-    <!-- START SCREEN -->
-    <div class="start-screen">
-      <h1 class="title">
-        <span>banana</span>
-        <span>stand.</span>
-        <span class="icons">🍌 💵 🔥</span>
-      </h1>
-      <button class="start" type="button">Press Start</button>
-    </div>
+    <footer class="footer">
+      <div class="input-wrapper">
+        <input id="speedPercent" min="10" max="100" step="1" type="range" value="50">
+        <label for="speedPercent" class="label">Speed: 50%</label>
+      </div>
+      <div class="center-buttons">
+        <button class="btn togglePlay" type="button">Start</button>
+        <button class="btn reset" type="button">Reset</button>
+      </div>
+
+    </footer>
+
   </main>
   <script src="index.js"></script>
 </body>

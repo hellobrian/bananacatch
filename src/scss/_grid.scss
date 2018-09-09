@@ -1,9 +1,12 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
   background: paleturquoise;
-  height: 95vh;
+  height: calc(100vh - (var(--height-header) + var(--height-footer)));
   overflow: hidden;
+  width: 100vw;
+  padding: 0 2.5rem;
 }
 
 .column {
@@ -12,4 +15,12 @@
   position: relative;
   top: -100px;
   align-items: center;
+
+  &:first-child {
+    align-items: flex-end;
+  }
+
+  &:last-child {
+    align-items: flex-start;
+  }
 }

@@ -1,5 +1,5 @@
 :root {
-  --animation-play-speed: 8000ms;
+  --animation-play-speed: 20000ms;
   --animation-play-state: paused;
   --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
   --white-50: rgba(255, 255, 255, 0.5);
@@ -16,7 +16,9 @@
     var(--yellow) 5%,
     var(--yellow) 47%,
     var(--green) 100%
-  ); }
+  );
+  --height-header: 75px;
+  --height-footer: 125px; }
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -40,7 +42,7 @@ button > * {
   0% {
     transform: translateY(0); }
   100% {
-    transform: translateY(100vh); } }
+    transform: translateY(105vh); } }
 
 @keyframes swing {
   0% {
@@ -145,30 +147,71 @@ button > * {
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard); }
 
-.btn {
-  width: 100px;
-  border: 2px solid white;
-  color: white;
-  height: 40px;
-  margin: 0 1rem;
-  font-size: 1rem; }
-
 .header {
   display: flex;
-  background-color: palevioletred;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  height: var(--height-header);
   position: relative;
-  height: 5vh;
   z-index: 3; }
+
+.footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 20px 1fr;
+  grid-gap: 20px;
+  width: 100%;
+  position: relative;
+  height: var(--height-footer);
+  z-index: 3;
+  align-items: center; }
+
+.footer .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1; }
+  .footer .input-wrapper input {
+    width: 90%;
+    margin-bottom: 10px; }
+  .footer .input-wrapper .label {
+    width: 100%;
+    background: red;
+    text-align: center;
+    font-size: 1rem; }
+
+.footer .center-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  grid-row-start: 2;
+  grid-column: 1 / span 3; }
+
+.footer .btn {
+  display: inline-flex;
+  font-family: "Teko", sans-serif;
+  font-size: 1.5rem;
+  padding: 5px 40px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 40px;
+  outline: none;
+  width: 130px;
+  justify-content: center; }
+  .footer .btn:hover {
+    background-color: var(--blue-dark);
+    transition: background-color 400ms var(--cubic-bezier-standard); }
+  .footer .btn:first-child {
+    margin-right: 20px; }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
   background: paleturquoise;
-  height: 95vh;
-  overflow: hidden; }
+  height: calc(100vh - (var(--height-header) + var(--height-footer)));
+  overflow: hidden;
+  width: 100vw;
+  padding: 0 2.5rem; }
 
 .column {
   display: flex;
@@ -176,6 +219,10 @@ button > * {
   position: relative;
   top: -100px;
   align-items: center; }
+  .column:first-child {
+    align-items: flex-end; }
+  .column:last-child {
+    align-items: flex-start; }
 
 .banana {
   position: absolute;

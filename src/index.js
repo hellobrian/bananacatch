@@ -19,8 +19,8 @@ let intervalId;
 
 const initialState = {
   animationSpeedPercent: 50,
-  fastestAnimationDuration: 1500,
-  intervalSpeed: 900,
+  fastestAnimationDuration: 3000,
+  intervalSpeed: 1500,
   isPlaying: false,
   score: 0
 };

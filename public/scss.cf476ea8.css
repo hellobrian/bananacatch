@@ -144,7 +144,8 @@ button > * {
   min-width: 130px;
   transition: background-color 400ms var(--cubic-bezier-standard);
   position: absolute;
-  bottom: 12vh; }
+  bottom: 12vh;
+  font-size: 2.5rem; }
   .start-screen .start:hover {
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard); }

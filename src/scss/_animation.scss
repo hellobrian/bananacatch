@@ -65,6 +65,12 @@
   }
 }
 
+@keyframes pulse {
+  to {
+    transform: scale(1.05);
+  }
+}
+
 .slideDown-animation {
   animation: slideDown var(--animation-play-speed) linear;
   animation-play-state: var(--animation-play-state);

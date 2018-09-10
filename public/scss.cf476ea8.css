@@ -93,6 +93,10 @@ button > * {
   100% {
     opacity: 0; } }
 
+@keyframes pulse {
+  to {
+    transform: scale(1.05); } }
+
 .slideDown-animation {
   animation: slideDown var(--animation-play-speed) linear;
   animation-play-state: var(--animation-play-state); }
@@ -155,7 +159,7 @@ button > * {
   .start-screen .title .icons:after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 70%;
     width: 0;
     height: 0;
@@ -187,6 +191,8 @@ button > * {
   width: 250px; }
 
 .start-screen .start {
+  animation: pulse 1000ms var(--cubic-bezier-standard) infinite alternate;
+  box-shadow: var(--box-shadow--pop-out);
   display: inline-flex;
   margin-top: 3rem;
   font-size: 2rem;
@@ -200,7 +206,6 @@ button > * {
   align-self: flex-end;
   border-radius: 40px;
   position: relative;
-  box-shadow: var(--box-shadow--pop-out);
   position: absolute;
   bottom: 20vh;
   transition: background-color 400ms var(--cubic-bezier-standard); }
@@ -209,7 +214,7 @@ button > * {
   .start-screen .start:after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 27%;
     width: 0;
     height: 0;

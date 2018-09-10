@@ -25,11 +25,13 @@
     var(--green) 100%
   );
   --gradient-grid: linear-gradient(
-    188deg,
-    rgba(196, 67, 161, 0.6362920168067228) 5%,
-    rgba(87, 99, 254, 1) 54%,
-    rgba(101, 88, 220, 0) 100%
+    180deg,
+    var(--black-60) 1%,
+    rgba(28, 138, 58, 0.6671043417366946) 10%,
+    rgba(42, 86, 87, 0) 50%,
+    var(--white-50) 100%
   );
+
   --height-header: 75px;
   --height-footer: 125px;
   --box-shadow--pop-out: 0 12px 24px 0 rgba(0, 0, 0, 0.1);

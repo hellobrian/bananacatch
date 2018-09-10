@@ -1,0 +1,15 @@
+{
+  "name": "Banana Catch",
+  "short_name": "bananacatch",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#feca57",
+  "description": "A game for catching bananas",
+  "icons": [
+    {
+      "src": "images/banana_160.png",
+      "sizes": "160x160",
+      "type": "image/png"
+    }
+  ]
+}

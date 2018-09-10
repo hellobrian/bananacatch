@@ -4,6 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#feca57",
+  "theme_color": "#feca57",
   "description": "A game for catching bananas",
   "icons": [
     {

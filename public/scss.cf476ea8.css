@@ -188,10 +188,12 @@ button > * {
 
 .start-screen .button-container {
   display: flex;
-  width: 250px; }
+  width: 250px;
+  animation: pulse 1000ms var(--cubic-bezier-standard) infinite alternate;
+  position: absolute;
+  bottom: 20vh; }
 
 .start-screen .start {
-  animation: pulse 1000ms var(--cubic-bezier-standard) infinite alternate;
   box-shadow: var(--box-shadow--pop-out);
   display: inline-flex;
   margin-top: 3rem;
@@ -205,9 +207,6 @@ button > * {
   justify-content: center;
   align-self: flex-end;
   border-radius: 40px;
-  position: relative;
-  position: absolute;
-  bottom: 20vh;
   transition: background-color 400ms var(--cubic-bezier-standard); }
   .start-screen .start:hover {
     background-color: var(--blue-dark); }

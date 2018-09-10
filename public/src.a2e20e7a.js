@@ -19535,6 +19535,7 @@ var state = _extends({}, initialState, {
  * Event Handlers
  */
 (0, _bling.$)(".start").on("click", function (event) {
+  console.log(event.target);
   event.target.classList.add("pressStart-animation");
 
   (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;

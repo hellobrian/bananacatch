@@ -34,6 +34,7 @@ let state = {
  * Event Handlers
  */
 $(".start").on("click", event => {
+  console.log(event.target);
   event.target.classList.add("pressStart-animation");
 
   $("#speedPercent").value = state.animationSpeedPercent;

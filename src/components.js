@@ -14,3 +14,7 @@ export const banana = (fontSize = 40) => {
     </button>
   `.trim();
 };
+
+export const menuIcon = (fill = "#000", width = 20, height = 14) => {
+  return `<svg fill=${fill} width=${width}" height=${height} viewBox="0 0 ${width} ${height}"><path d="M0 0h20v2H0zm0 6h20v2H0zm0 6h20v2H0z"></path></svg>`;
+};

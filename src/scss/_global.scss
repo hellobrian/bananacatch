@@ -1,0 +1,59 @@
+:root {
+  // COLORS
+  --blue-dark: #015e9c;
+  --blue: #0076c5;
+  --brown: #4d2b14;
+  --green: #badc58;
+  --orange: #ff7922;
+  --green-marker: #27ae60;
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-90: rgba(255, 255, 255, 0.9);
+  --black-60: rgba(5, 5, 5, 0.6);
+  --white: #fff;
+  --wood-dark: #c98f49;
+  --wood: #f5b362;
+  --yellow: #feca57;
+
+  // OTHER
+  --animation-play-speed: 20000ms;
+  --animation-play-state: paused;
+  --cubic-bezier-standard: cubic-bezier(0.5, 0, 0.1, 1);
+  --gradient-banana: linear-gradient(
+    188deg,
+    var(--yellow) 5%,
+    var(--yellow) 47%,
+    var(--green) 100%
+  );
+  --gradient-grid: linear-gradient(
+    188deg,
+    rgba(196, 67, 161, 0.6362920168067228) 5%,
+    rgba(87, 99, 254, 1) 54%,
+    rgba(101, 88, 220, 0) 100%
+  );
+  --height-header: 75px;
+  --height-footer: 125px;
+  --box-shadow--pop-out: 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+  --box-shadow--raised: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  overflow: hidden;
+}
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
+
+button > * {
+  pointer-events: none;
+}

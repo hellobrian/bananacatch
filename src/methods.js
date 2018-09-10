@@ -41,6 +41,10 @@ export const setLabelInnerHTML = value => {
   $(".label").innerHTML = `Speed: ${value}%`;
 };
 
+export const setPlayButtonInnerHTML = ({ isPlaying }) => {
+  $(".togglePlay").innerHTML = isPlaying ? "Pause" : "Start";
+};
+
 /**
  * State methods
  */
@@ -51,7 +55,7 @@ export const getAnimationPlayState = rootElement =>
 
 export const togglePlayState = (state, rootElement) => {
   rootElement.style.setProperty("--animation-play-state", state.isPlaying ? "running" : "paused");
-  $(".togglePlay").innerHTML = state.isPlaying ? "Pause" : "Start";
+  setPlayButtonInnerHTML(state);
 };
 
 export const resetPlayState = (state, rootElement) => {

@@ -1,0 +1,42 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  background-image: url("../images/jungle-pattern.jpg");
+  background-color: var(--black-60);
+  background-blend-mode: multiply;
+  background-size: 100%;
+  height: calc(100vh - (var(--height-header) + var(--height-footer)));
+  overflow: hidden;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+
+  &:after {
+    content: "";
+    background: rgb(196, 67, 161);
+    background: var(--gradient-grid);
+    opacity: 0.25;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -100px;
+  align-items: center;
+
+  &:first-child {
+    align-items: flex-end;
+  }
+
+  &:last-child {
+    align-items: flex-start;
+  }
+}

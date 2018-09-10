@@ -9,7 +9,7 @@ import {
   shouldDisableBananas,
   togglePlayState,
   setScoreInnerHTML,
-  setLabelInnerHTML
+  setPlayButtonInnerHTML
 } from "./methods";
 
 /**
@@ -18,9 +18,9 @@ import {
 let intervalId;
 
 const initialState = {
-  animationSpeedPercent: 50,
-  fastestAnimationDuration: 1500,
-  intervalSpeed: 900,
+  animationSpeedPercent: 65,
+  fastestAnimationDuration: 3000,
+  intervalSpeed: 1500,
   isPlaying: false,
   score: 0
 };
@@ -33,6 +33,27 @@ let state = {
 /**
  * Event Handlers
  */
+$(".start").on("click", event => {
+  console.log(event.target);
+  event.target.classList.add("pressStart-animation");
+
+  $("#speedPercent").value = state.animationSpeedPercent;
+  $(".output").value = state.animationSpeedPercent + "%";
+
+  event.target.addEventListener("animationend", () => {
+    state = { ...state, isPlaying: !state.isPlaying };
+    togglePlayState(state, document.documentElement);
+    $(".start-screen").classList.add("hide");
+    const playState = getAnimationPlayState(document.documentElement);
+    if (playState === "running") {
+      intervalId = setInterval(insertBanana, state.intervalSpeed);
+    } else {
+      clearInterval(intervalId);
+    }
+    event.target.parentNode.removeChild(event.target);
+  });
+});
+
 $(".togglePlay").on("click", () => {
   state = { ...state, isPlaying: !state.isPlaying };
   togglePlayState(state, document.documentElement);
@@ -49,7 +70,8 @@ $(".togglePlay").on("click", () => {
 $(".reset").on("click", () => {
   state = { ...state, isPlaying: false, score: 0, animationSpeedPercent: 50 };
   setScoreInnerHTML(state);
-  setLabelInnerHTML(state.animationSpeedPercent);
+  // setLabelInnerHTML(state.animationSpeedPercent);
+  setPlayButtonInnerHTML(state);
   $("#speedPercent").value = state.animationSpeedPercent;
 
   resetPlayState(state, document.documentElement);
@@ -60,7 +82,11 @@ $(".reset").on("click", () => {
 $("#speedPercent").on("change", event => {
   state = { ...state, animationSpeedPercent: event.target.value };
   changeAnimationSpeedPercent(state, document.documentElement);
-  setLabelInnerHTML(event.target.value);
+  // setLabelInnerHTML(event.target.value);
+});
+
+$("#speedPercent").on("input", event => {
+  $(".output").value = event.target.value + "%";
 });
 
 $("#grid").on("click", event => {

@@ -28,18 +28,123 @@
   line-height: 0.85;
   font-size: 4rem;
   text-transform: capitalize;
-  margin-bottom: 4rem;
 }
 
 .start-screen .title .icons {
   display: inline-flex;
-  margin-top: 1rem;
+  margin-top: 3rem;
   font-size: 2rem;
+  background-color: var(--green-marker);
+  padding: 20px;
+  padding-bottom: 15px;
+  align-items: center;
+  line-height: 1.25;
+  width: 175px;
+  justify-content: center;
+  align-self: flex-end;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: var(--box-shadow--pop-out);
+
+  &:after {
+    // triangle for speech bubble
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 70%;
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    border-top-color: #00aabb;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -12.5px;
+    margin-bottom: -25px;
+    border-top-color: var(--green-marker);
+  }
+
+  &:before {
+    // michael bluth head
+    content: "";
+    display: block;
+    background-image: url("../images/michael_bluth.jpg");
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    border-radius: 100%;
+    background-size: 115%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: white;
+    right: 0;
+    bottom: -85px;
+    transform: rotate(15deg);
+  }
 }
 
+.start-screen .button-container {
+  display: flex;
+  width: 250px;
+}
 .start-screen .start {
-  @include button;
+  display: inline-flex;
+  margin-top: 3rem;
+  font-size: 2rem;
+  background-color: var(--blue);
+  padding: 20px;
+  padding-bottom: 15px;
+  align-items: center;
+  line-height: 1.25;
+  width: 175px;
+  justify-content: center;
+  align-self: flex-end;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: var(--box-shadow--pop-out);
   position: absolute;
-  bottom: 12vh;
-  font-size: 2.5rem;
+  bottom: 20vh;
+  transition: background-color 400ms var(--cubic-bezier-standard);
+
+  &:hover {
+    background-color: var(--blue-dark);
+  }
+
+  &:after {
+    // triangle
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 27%;
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    border-top-color: var(--blue);
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -12.5px;
+    margin-bottom: -25px;
+    transition: border-top-color 400ms var(--cubic-bezier-standard);
+  }
+
+  &:hover:after {
+    border-top-color: var(--blue-dark);
+    transition: border-top-color 400ms var(--cubic-bezier-standard);
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    background-image: url("../images/michael_cera.jpg");
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    border-radius: 100%;
+    background-size: 115%;
+    background-position: 75% 50%;
+    background-repeat: no-repeat;
+    background-color: white;
+    left: 0;
+    bottom: -85px;
+    transform: rotate(-15deg);
+  }
 }

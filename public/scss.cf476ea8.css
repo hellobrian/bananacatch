@@ -135,32 +135,109 @@ button > * {
   letter-spacing: -1.25px;
   line-height: 0.85;
   font-size: 4rem;
-  text-transform: capitalize;
-  margin-bottom: 4rem; }
+  text-transform: capitalize; }
 
 .start-screen .title .icons {
   display: inline-flex;
-  margin-top: 1rem;
-  font-size: 2rem; }
+  margin-top: 3rem;
+  font-size: 2rem;
+  background-color: var(--green-marker);
+  padding: 20px;
+  padding-bottom: 15px;
+  align-items: center;
+  line-height: 1.25;
+  width: 175px;
+  justify-content: center;
+  align-self: flex-end;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: var(--box-shadow--pop-out); }
+  .start-screen .title .icons:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 70%;
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    border-top-color: #00aabb;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -12.5px;
+    margin-bottom: -25px;
+    border-top-color: var(--green-marker); }
+  .start-screen .title .icons:before {
+    content: "";
+    display: block;
+    background-image: url("michael_bluth.72510c7e.jpg");
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    border-radius: 100%;
+    background-size: 115%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: white;
+    right: 0;
+    bottom: -85px;
+    transform: rotate(15deg); }
+
+.start-screen .button-container {
+  display: flex;
+  width: 250px; }
 
 .start-screen .start {
-  background-color: var(--blue);
-  border-radius: 40px;
-  color: var(--white);
   display: inline-flex;
-  font-family: "Teko", sans-serif;
-  font-size: 1.5rem;
+  margin-top: 3rem;
+  font-size: 2rem;
+  background-color: var(--blue);
+  padding: 20px;
+  padding-bottom: 15px;
+  align-items: center;
+  line-height: 1.25;
+  width: 175px;
   justify-content: center;
-  outline: none;
-  padding: 5px 40px;
-  min-width: 130px;
-  transition: background-color 400ms var(--cubic-bezier-standard);
+  align-self: flex-end;
+  border-radius: 40px;
+  position: relative;
+  box-shadow: var(--box-shadow--pop-out);
   position: absolute;
-  bottom: 12vh;
-  font-size: 2.5rem; }
+  bottom: 20vh;
+  transition: background-color 400ms var(--cubic-bezier-standard); }
   .start-screen .start:hover {
-    background-color: var(--blue-dark);
-    transition: background-color 400ms var(--cubic-bezier-standard); }
+    background-color: var(--blue-dark); }
+  .start-screen .start:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 27%;
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    border-top-color: var(--blue);
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -12.5px;
+    margin-bottom: -25px;
+    transition: border-top-color 400ms var(--cubic-bezier-standard); }
+  .start-screen .start:hover:after {
+    border-top-color: var(--blue-dark);
+    transition: border-top-color 400ms var(--cubic-bezier-standard); }
+  .start-screen .start:before {
+    content: "";
+    display: block;
+    background-image: url("michael_cera.3ea6af17.jpg");
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    border-radius: 100%;
+    background-size: 115%;
+    background-position: 75% 50%;
+    background-repeat: no-repeat;
+    background-color: white;
+    left: 0;
+    bottom: -85px;
+    transform: rotate(-15deg); }
 
 .header {
   position: absolute;
@@ -228,7 +305,8 @@ button > * {
   outline: none;
   padding: 5px 40px;
   min-width: 130px;
-  transition: background-color 400ms var(--cubic-bezier-standard); }
+  transition: background-color 400ms var(--cubic-bezier-standard);
+  line-height: 1; }
   .footer .btn:hover {
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard); }

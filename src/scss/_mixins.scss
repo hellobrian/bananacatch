@@ -16,4 +16,8 @@
     background-color: var(--blue-dark);
     transition: background-color 400ms var(--cubic-bezier-standard);
   }
+
+  &:focus {
+    text-decoration: underline;
+  }
 }

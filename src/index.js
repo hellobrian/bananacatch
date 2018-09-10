@@ -34,7 +34,6 @@ let state = {
  * Event Handlers
  */
 $(".start").on("click", event => {
-  console.log(event.target);
   event.target.classList.add("pressStart-animation");
 
   $("#speedPercent").value = state.animationSpeedPercent;
@@ -68,9 +67,9 @@ $(".togglePlay").on("click", () => {
 });
 
 $(".reset").on("click", () => {
-  state = { ...state, isPlaying: false, score: 0, animationSpeedPercent: 50 };
+  state = { ...state, ...initialState };
   setScoreInnerHTML(state);
-  // setLabelInnerHTML(state.animationSpeedPercent);
+  $(".output").value = state.animationSpeedPercent + "%";
   setPlayButtonInnerHTML(state);
   $("#speedPercent").value = state.animationSpeedPercent;
 
@@ -82,7 +81,6 @@ $(".reset").on("click", () => {
 $("#speedPercent").on("change", event => {
   state = { ...state, animationSpeedPercent: event.target.value };
   changeAnimationSpeedPercent(state, document.documentElement);
-  // setLabelInnerHTML(event.target.value);
 });
 
 $("#speedPercent").on("input", event => {

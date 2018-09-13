@@ -1,5 +1,5 @@
-import { $, $$ } from "./bling";
-import { observer } from "./mutationObserver";
+import { $, $$ } from './bling';
+import { observer } from './mutationObserver';
 import {
   changeAnimationSpeedPercent,
   destroyBananas,
@@ -9,8 +9,8 @@ import {
   shouldDisableBananas,
   togglePlayState,
   setScoreInnerHTML,
-  setPlayButtonInnerHTML
-} from "./methods";
+  setPlayButtonInnerHTML,
+} from './methods';
 
 /**
  * State
@@ -22,29 +22,29 @@ const initialState = {
   fastestAnimationDuration: 3000,
   intervalSpeed: 1500,
   isPlaying: false,
-  score: 0
+  score: 0,
 };
 
 let state = {
   ...initialState,
-  defaultAnimationDuration: initialState.fastestAnimationDuration * 2
+  defaultAnimationDuration: initialState.fastestAnimationDuration * 2,
 };
 
 /**
  * Event Handlers
  */
-$(".start").on("click", event => {
-  event.target.classList.add("pressStart-animation");
+$('.start').on('click', event => {
+  event.target.classList.add('pressStart-animation');
 
-  $("#speedPercent").value = state.animationSpeedPercent;
-  $(".output").value = state.animationSpeedPercent + "%";
+  $('#speedPercent').value = state.animationSpeedPercent;
+  $('.output').value = state.animationSpeedPercent + '%';
 
-  event.target.addEventListener("animationend", () => {
+  event.target.addEventListener('animationend', () => {
     state = { ...state, isPlaying: !state.isPlaying };
     togglePlayState(state, document.documentElement);
-    $(".start-screen").classList.add("hide");
+    $('.start-screen').classList.add('hide');
     const playState = getAnimationPlayState(document.documentElement);
-    if (playState === "running") {
+    if (playState === 'running') {
       intervalId = setInterval(insertBanana, state.intervalSpeed);
     } else {
       clearInterval(intervalId);
@@ -53,42 +53,42 @@ $(".start").on("click", event => {
   });
 });
 
-$(".togglePlay").on("click", () => {
+$('.togglePlay').on('click', () => {
   state = { ...state, isPlaying: !state.isPlaying };
   togglePlayState(state, document.documentElement);
   const playState = getAnimationPlayState(document.documentElement);
-  shouldDisableBananas(playState, $$(".banana"));
+  shouldDisableBananas(playState, $$('.banana'));
 
-  if (playState === "running") {
+  if (playState === 'running') {
     intervalId = setInterval(insertBanana, state.intervalSpeed);
   } else {
     clearInterval(intervalId);
   }
 });
 
-$(".reset").on("click", () => {
+$('.reset').on('click', () => {
   state = { ...state, ...initialState };
   setScoreInnerHTML(state);
-  $(".output").value = state.animationSpeedPercent + "%";
+  $('.output').value = state.animationSpeedPercent + '%';
   setPlayButtonInnerHTML(state);
-  $("#speedPercent").value = state.animationSpeedPercent;
+  $('#speedPercent').value = state.animationSpeedPercent;
 
   resetPlayState(state, document.documentElement);
   clearInterval(intervalId);
   destroyBananas();
 });
 
-$("#speedPercent").on("change", event => {
+$('#speedPercent').on('change', event => {
   state = { ...state, animationSpeedPercent: event.target.value };
   changeAnimationSpeedPercent(state, document.documentElement);
 });
 
-$("#speedPercent").on("input", event => {
-  $(".output").value = event.target.value + "%";
+$('#speedPercent').on('input', event => {
+  $('.output').value = event.target.value + '%';
 });
 
-$("#grid").on("click", event => {
-  if (event.target && event.target.matches("button.banana")) {
+$('#grid').on('click', event => {
+  if (event.target && event.target.matches('button.banana')) {
     /**
      * get points from dataset.points
      * update state
@@ -102,9 +102,9 @@ $("#grid").on("click", event => {
      * add exit-animation class to trigger it
      * add animationend event listener to remove banana from DOM
      */
-    const span = event.target.querySelector("span");
-    span.classList.add("exit-animation");
-    span.on("animationend", () => {
+    const span = event.target.querySelector('span');
+    span.classList.add('exit-animation');
+    span.on('animationend', () => {
       event.target.parentNode.removeChild(event.target);
     });
   }
@@ -112,8 +112,8 @@ $("#grid").on("click", event => {
 
 const mutationObserver = observer(state);
 
-mutationObserver.observe($("#grid"), {
+mutationObserver.observe($('#grid'), {
   attributes: false,
   childList: true,
-  subtree: true
+  subtree: true,
 });

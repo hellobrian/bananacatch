@@ -103,7 +103,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"bling.js":[function(require,module,exports) {
+})({"js/bling.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -128,7 +128,7 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 
 exports.$ = $;
 exports.$$ = $$;
-},{}],"mutationObserver.js":[function(require,module,exports) {
+},{}],"js/mutationObserver.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19347,7 +19347,33 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"constants.js":[function(require,module,exports) {
+},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"js/Random.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Random = function Random() {
+  var _this = this;
+
+  _classCallCheck(this, Random);
+
+  this.number = function (min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  this.size = function () {
+    var sizeList = Random.sizes;
+    return sizeList[_this.number(0, 9)];
+  };
+};
+
+Random.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+exports.default = Random;
+},{}],"js/constants.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19356,6 +19382,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.sizesAndPoints = exports.points = exports.maxPoints = undefined;
 
 var _lodash = require('lodash');
+
+var _Random = require('./Random');
+
+var _Random2 = _interopRequireDefault(_Random);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Maximum points for a single banana
@@ -19372,13 +19404,13 @@ var points = exports.points = (0, _lodash.times)(10).map(function (_, index) {
 /**
  * Array of objects mapping sizes to points for bananas
  */
-var sizesAndPoints = exports.sizesAndPoints = sizes.map(function (size, index) {
+var sizesAndPoints = exports.sizesAndPoints = _Random2.default.sizes.map(function (size, index) {
   return {
     size: size,
     points: points[index]
   };
 });
-},{"lodash":"../node_modules/lodash/lodash.js"}],"components.js":[function(require,module,exports) {
+},{"lodash":"../node_modules/lodash/lodash.js","./Random":"js/Random.js"}],"js/components.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19405,33 +19437,7 @@ var menuIcon = exports.menuIcon = function menuIcon() {
 
   return "<svg fill=" + fill + " width=" + width + "\" height=" + height + " viewBox=\"0 0 " + width + " " + height + "\"><path d=\"M0 0h20v2H0zm0 6h20v2H0zm0 6h20v2H0z\"></path></svg>";
 };
-},{"./constants":"constants.js"}],"Random.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Random = function Random() {
-  var _this = this;
-
-  _classCallCheck(this, Random);
-
-  this.number = function (min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-  };
-
-  this.size = function () {
-    var sizeList = Random.sizes;
-    return sizeList[_this.number(0, 9)];
-  };
-};
-
-Random.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
-exports.default = Random;
-},{}],"methods.js":[function(require,module,exports) {
+},{"./constants":"js/constants.js"}],"js/methods.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19518,16 +19524,16 @@ var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function
   var calcSpeed = calculateAnimationSpeedPercent(state);
   rootElement.style.setProperty('--animation-play-speed', '' + calcSpeed);
 };
-},{"./bling":"bling.js","./components":"components.js","./Random":"Random.js"}],"index.js":[function(require,module,exports) {
-"use strict";
+},{"./bling":"js/bling.js","./components":"js/components.js","./Random":"js/Random.js"}],"js/index.js":[function(require,module,exports) {
+'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _bling = require("./bling");
+var _bling = require('./bling');
 
-var _mutationObserver = require("./mutationObserver");
+var _mutationObserver = require('./mutationObserver');
 
-var _methods = require("./methods");
+var _methods = require('./methods');
 
 /**
  * State
@@ -19549,18 +19555,18 @@ var state = _extends({}, initialState, {
 /**
  * Event Handlers
  */
-(0, _bling.$)(".start").on("click", function (event) {
-  event.target.classList.add("pressStart-animation");
+(0, _bling.$)('.start').on('click', function (event) {
+  event.target.classList.add('pressStart-animation');
 
-  (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
-  (0, _bling.$)(".output").value = state.animationSpeedPercent + "%";
+  (0, _bling.$)('#speedPercent').value = state.animationSpeedPercent;
+  (0, _bling.$)('.output').value = state.animationSpeedPercent + '%';
 
-  event.target.addEventListener("animationend", function () {
+  event.target.addEventListener('animationend', function () {
     state = _extends({}, state, { isPlaying: !state.isPlaying });
     (0, _methods.togglePlayState)(state, document.documentElement);
-    (0, _bling.$)(".start-screen").classList.add("hide");
+    (0, _bling.$)('.start-screen').classList.add('hide');
     var playState = (0, _methods.getAnimationPlayState)(document.documentElement);
-    if (playState === "running") {
+    if (playState === 'running') {
       intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
     } else {
       clearInterval(intervalId);
@@ -19569,42 +19575,42 @@ var state = _extends({}, initialState, {
   });
 });
 
-(0, _bling.$)(".togglePlay").on("click", function () {
+(0, _bling.$)('.togglePlay').on('click', function () {
   state = _extends({}, state, { isPlaying: !state.isPlaying });
   (0, _methods.togglePlayState)(state, document.documentElement);
   var playState = (0, _methods.getAnimationPlayState)(document.documentElement);
-  (0, _methods.shouldDisableBananas)(playState, (0, _bling.$$)(".banana"));
+  (0, _methods.shouldDisableBananas)(playState, (0, _bling.$$)('.banana'));
 
-  if (playState === "running") {
+  if (playState === 'running') {
     intervalId = setInterval(_methods.insertBanana, state.intervalSpeed);
   } else {
     clearInterval(intervalId);
   }
 });
 
-(0, _bling.$)(".reset").on("click", function () {
+(0, _bling.$)('.reset').on('click', function () {
   state = _extends({}, state, initialState);
   (0, _methods.setScoreInnerHTML)(state);
-  (0, _bling.$)(".output").value = state.animationSpeedPercent + "%";
+  (0, _bling.$)('.output').value = state.animationSpeedPercent + '%';
   (0, _methods.setPlayButtonInnerHTML)(state);
-  (0, _bling.$)("#speedPercent").value = state.animationSpeedPercent;
+  (0, _bling.$)('#speedPercent').value = state.animationSpeedPercent;
 
   (0, _methods.resetPlayState)(state, document.documentElement);
   clearInterval(intervalId);
   (0, _methods.destroyBananas)();
 });
 
-(0, _bling.$)("#speedPercent").on("change", function (event) {
+(0, _bling.$)('#speedPercent').on('change', function (event) {
   state = _extends({}, state, { animationSpeedPercent: event.target.value });
   (0, _methods.changeAnimationSpeedPercent)(state, document.documentElement);
 });
 
-(0, _bling.$)("#speedPercent").on("input", function (event) {
-  (0, _bling.$)(".output").value = event.target.value + "%";
+(0, _bling.$)('#speedPercent').on('input', function (event) {
+  (0, _bling.$)('.output').value = event.target.value + '%';
 });
 
-(0, _bling.$)("#grid").on("click", function (event) {
-  if (event.target && event.target.matches("button.banana")) {
+(0, _bling.$)('#grid').on('click', function (event) {
+  if (event.target && event.target.matches('button.banana')) {
     /**
      * get points from dataset.points
      * update state
@@ -19618,9 +19624,9 @@ var state = _extends({}, initialState, {
      * add exit-animation class to trigger it
      * add animationend event listener to remove banana from DOM
      */
-    var span = event.target.querySelector("span");
-    span.classList.add("exit-animation");
-    span.on("animationend", function () {
+    var span = event.target.querySelector('span');
+    span.classList.add('exit-animation');
+    span.on('animationend', function () {
       event.target.parentNode.removeChild(event.target);
     });
   }
@@ -19628,12 +19634,12 @@ var state = _extends({}, initialState, {
 
 var mutationObserver = (0, _mutationObserver.observer)(state);
 
-mutationObserver.observe((0, _bling.$)("#grid"), {
+mutationObserver.observe((0, _bling.$)('#grid'), {
   attributes: false,
   childList: true,
   subtree: true
 });
-},{"./bling":"bling.js","./mutationObserver":"mutationObserver.js","./methods":"methods.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./bling":"js/bling.js","./mutationObserver":"js/mutationObserver.js","./methods":"js/methods.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -19662,7 +19668,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60350' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55528' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -19803,5 +19809,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/src.bdab4087.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
+//# sourceMappingURL=/js.f701524a.map

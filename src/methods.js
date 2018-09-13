@@ -1,20 +1,6 @@
 import { $, $$ } from './bling';
 import { banana } from './components';
-import { sizes } from './constants';
-
-/**
- * Random
- */
-export class Random {
-  number = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
-  size = () => {
-    const sizeList = Random.sizes;
-    return sizeList[this.number(0, 9)];
-  };
-
-  static sizes = sizes;
-}
+import Random from './Random';
 
 /**
  * Banana methods

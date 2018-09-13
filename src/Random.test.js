@@ -1,24 +1,10 @@
-import { Random } from './methods';
+import Random from './Random';
 
 describe('Random', () => {
   let random;
   beforeEach(() => {
     random = new Random();
   });
-
-  // describe('constructor()', () => {
-  //   it('should be an array with length of 10', () => {
-  //     const result = random.sizes;
-  //     expect(result).toHaveLength(10);
-  //   });
-
-  //   it('should contain numbers', () => {
-  //     random.sizes.forEach(size => {
-  //       const result = typeof size;
-  //       expect(result).toBe('number');
-  //     });
-  //   });
-  // });
 
   describe('number()', () => {
     it('should return a number equal to 1', () => {

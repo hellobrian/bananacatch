@@ -1,9 +1,4 @@
-import { times } from "lodash";
-
-/**
- * Different sizes for bananas
- */
-export const sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+import { times } from 'lodash';
 
 /**
  * Maximum points for a single banana
@@ -20,5 +15,5 @@ export const points = times(10).map((_, index) => maxPoints - index * 10);
  */
 export const sizesAndPoints = sizes.map((size, index) => ({
   size,
-  points: points[index]
+  points: points[index],
 }));

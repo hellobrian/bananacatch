@@ -19348,19 +19348,14 @@ var define;
 }.call(this));
 
 },{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"constants.js":[function(require,module,exports) {
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sizesAndPoints = exports.points = exports.maxPoints = exports.sizes = undefined;
+exports.sizesAndPoints = exports.points = exports.maxPoints = undefined;
 
-var _lodash = require("lodash");
-
-/**
- * Different sizes for bananas
- */
-var sizes = exports.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+var _lodash = require('lodash');
 
 /**
  * Maximum points for a single banana
@@ -19410,26 +19405,16 @@ var menuIcon = exports.menuIcon = function menuIcon() {
 
   return "<svg fill=" + fill + " width=" + width + "\" height=" + height + " viewBox=\"0 0 " + width + " " + height + "\"><path d=\"M0 0h20v2H0zm0 6h20v2H0zm0 6h20v2H0z\"></path></svg>";
 };
-},{"./constants":"constants.js"}],"methods.js":[function(require,module,exports) {
-'use strict';
+},{"./constants":"constants.js"}],"Random.js":[function(require,module,exports) {
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.changeAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = exports.resetPlayState = exports.togglePlayState = exports.getAnimationPlayState = exports.setPlayButtonInnerHTML = exports.setLabelInnerHTML = exports.setScoreInnerHTML = exports.shouldDisableBananas = exports.destroyBananas = exports.insertBanana = exports.Random = undefined;
-
-var _bling = require('./bling');
-
-var _components = require('./components');
-
-var _constants = require('./constants');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Random
- */
-var Random = exports.Random = function Random() {
+var Random = function Random() {
   var _this = this;
 
   _classCallCheck(this, Random);
@@ -19444,14 +19429,31 @@ var Random = exports.Random = function Random() {
   };
 };
 
+Random.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+exports.default = Random;
+},{}],"methods.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.changeAnimationSpeedPercent = exports.calculateAnimationSpeedPercent = exports.resetPlayState = exports.togglePlayState = exports.getAnimationPlayState = exports.setPlayButtonInnerHTML = exports.setLabelInnerHTML = exports.setScoreInnerHTML = exports.shouldDisableBananas = exports.destroyBananas = exports.insertBanana = undefined;
+
+var _bling = require('./bling');
+
+var _components = require('./components');
+
+var _Random = require('./Random');
+
+var _Random2 = _interopRequireDefault(_Random);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * Banana methods
  */
-
-
-Random.sizes = _constants.sizes;
 var insertBanana = exports.insertBanana = function insertBanana() {
-  var random = new Random();
+  var random = new _Random2.default();
   var id = random.number(1, 5);
   var fontSize = random.size();
   (0, _bling.$)('#column-' + id).insertAdjacentHTML('afterbegin', (0, _components.banana)(fontSize));
@@ -19516,7 +19518,7 @@ var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function
   var calcSpeed = calculateAnimationSpeedPercent(state);
   rootElement.style.setProperty('--animation-play-speed', '' + calcSpeed);
 };
-},{"./bling":"bling.js","./components":"components.js","./constants":"constants.js"}],"index.js":[function(require,module,exports) {
+},{"./bling":"bling.js","./components":"components.js","./Random":"Random.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };

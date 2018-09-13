@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "parcel ./src/index.html -d public",
-    "build": "parcel build ./src/index.html -d public"
+    "build": "parcel build ./src/index.html -d public",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "Brian Han",
@@ -15,10 +17,13 @@
     "autoprefixer": "^9.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
     "node-sass": "^4.9.3",
     "parcel-bundler": "^1.4.1"
   },
   "dependencies": {
+    "babel-jest": "^23.6.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10"
   }

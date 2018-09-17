@@ -1,15 +1,17 @@
 import { $, $$ } from './bling';
 import { banana } from './components';
 import Random from './Random';
+import Banana from './Banana';
 
 /**
- * Banana methods
+ * Banana methods (TODO: Move to Banana.js)
  */
 export const insertBanana = () => {
   const random = new Random();
+  const banana = new Banana();
   let id = random.number(1, 5);
   let fontSize = random.size();
-  $(`#column-${id}`).insertAdjacentHTML('afterbegin', banana(fontSize));
+  $(`#column-${id}`).insertAdjacentHTML('afterbegin', banana.html(fontSize));
 };
 
 export const destroyBananas = () => {

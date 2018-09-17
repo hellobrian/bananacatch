@@ -198,6 +198,72 @@ var observer = exports.observer = function observer(state) {
     }
   });
 };
+},{}],"js/constants.js":[function(require,module,exports) {
+// import { times } from 'lodash';
+// import Random from './Random';
+// /**
+//  * Maximum points for a single banana
+//  */
+// export const maxPoints = 100;
+
+// /**
+//  * Array of points per banana from maxPoints (100) to dynamic minimum
+//  */
+// export const points = times(10).map((_, index) => maxPoints - index * 10);
+
+// /**
+//  * Array of objects mapping sizes to points for bananas
+//  */
+// export const sizesAndPoints = Random.sizes.map((size, index) => ({
+//   size,
+//   points: points[index],
+// }));
+// //
+},{}],"js/components.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.banana = undefined;
+
+var _constants = require('./constants');
+
+var banana = exports.banana = function banana() {
+  var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+
+  var points = _constants.sizesAndPoints.filter(function (object) {
+    return object.size === fontSize;
+  })[0].points;
+
+  return ('\n    <button\n      data-points="' + points + '"\n      class="banana slideDown-animation" \n      type="button"\n      style="font-size: ' + fontSize + 'px; width: ' + fontSize + 'px; height: ' + fontSize + 'px"\n    >\n      <span class="swing-animation" data-points="' + points + '" style="width: ' + fontSize + 'px; height: ' + fontSize + 'px">\uD83C\uDF4C</span>\n    </button>\n  ').trim();
+};
+},{"./constants":"js/constants.js"}],"js/Random.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Random = function Random() {
+  var _this = this;
+
+  _classCallCheck(this, Random);
+
+  this.number = function (min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  this.size = function () {
+    var sizeList = Random.sizes;
+    return sizeList[_this.number(0, 9)];
+  };
+};
+
+Random.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
+exports.default = Random;
 },{}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
@@ -19347,39 +19413,14 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"js/Random.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Random = function Random() {
-  var _this = this;
-
-  _classCallCheck(this, Random);
-
-  this.number = function (min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-  };
-
-  this.size = function () {
-    var sizeList = Random.sizes;
-    return sizeList[_this.number(0, 9)];
-  };
-};
-
-Random.sizes = [40, 45, 50, 55, 60, 65, 70, 80, 85, 90];
-exports.default = Random;
-},{}],"js/constants.js":[function(require,module,exports) {
+},{"buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"js/Banana.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sizesAndPoints = exports.points = exports.maxPoints = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _lodash = require('lodash');
 
@@ -19389,55 +19430,64 @@ var _Random2 = _interopRequireDefault(_Random);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Maximum points for a single banana
- */
-var maxPoints = exports.maxPoints = 100;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Array of points per banana from maxPoints (100) to dynamic minimum
- */
-var points = exports.points = (0, _lodash.times)(10).map(function (_, index) {
-  return maxPoints - index * 10;
-});
+var Banana = function () {
+  function Banana() {
+    var _this = this;
 
-/**
- * Array of objects mapping sizes to points for bananas
- */
-var sizesAndPoints = exports.sizesAndPoints = _Random2.default.sizes.map(function (size, index) {
-  return {
-    size: size,
-    points: points[index]
-  };
-});
-},{"lodash":"../node_modules/lodash/lodash.js","./Random":"js/Random.js"}],"js/components.js":[function(require,module,exports) {
-"use strict";
+    _classCallCheck(this, Banana);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.menuIcon = exports.banana = undefined;
+    this.points = function () {
+      var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+      return Banana.sizesAndPoints.list.filter(function (object) {
+        return object.size === fontSize;
+      })[0].points;
+    };
 
-var _constants = require("./constants");
+    this.style = function () {
+      var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+      return 'font-size: ' + fontSize + 'px; width: ' + fontSize + 'px; height: ' + fontSize + 'px';
+    };
 
-var banana = exports.banana = function banana() {
-  var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+    this.html = function () {
+      var fontSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
 
-  var points = _constants.sizesAndPoints.filter(function (object) {
-    return object.size === fontSize;
-  })[0].points;
+      var points = _this.points(fontSize);
 
-  return ("\n    <button\n      data-points=\"" + points + "\"\n      class=\"banana slideDown-animation\" \n      type=\"button\"\n      style=\"font-size: " + fontSize + "px; width: " + fontSize + "px; height: " + fontSize + "px\"\n    >\n      <span class=\"swing-animation\" data-points=\"" + points + "\" style=\"width: " + fontSize + "px; height: " + fontSize + "px\">\uD83C\uDF4C</span>\n    </button>\n  ").trim();
+      return ('\n      <button\n        class="banana slideDown-animation" \n        data-points="' + points + '"\n        style="' + _this.style(fontSize) + '"\n        type="button"\n      >\n        <span \n          class="swing-animation" \n          data-points="' + points + '" \n          style="' + _this.style(fontSize) + '"\n        >\n          \uD83C\uDF4C\n        </span>\n      </button>\n    ').trim();
+    };
+  }
+
+  _createClass(Banana, null, [{
+    key: 'sizesAndPointsMaxPoints',
+    value: function sizesAndPointsMaxPoints() {
+      return 100;
+    }
+  }, {
+    key: 'sizesAndPointsList',
+    value: function sizesAndPointsList() {
+      var maxPoints = Banana.sizesAndPointsMaxPoints();
+      return _Random2.default.sizes.map(function (size, index) {
+        return {
+          size: size,
+          points: (0, _lodash.times)(10).map(function (_, index) {
+            return maxPoints - index * 10;
+          })[index]
+        };
+      });
+    }
+  }]);
+
+  return Banana;
+}();
+
+Banana.sizesAndPoints = {
+  max: Banana.sizesAndPointsMaxPoints(),
+  list: Banana.sizesAndPointsList()
 };
-
-var menuIcon = exports.menuIcon = function menuIcon() {
-  var fill = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "#000";
-  var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
-  var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 14;
-
-  return "<svg fill=" + fill + " width=" + width + "\" height=" + height + " viewBox=\"0 0 " + width + " " + height + "\"><path d=\"M0 0h20v2H0zm0 6h20v2H0zm0 6h20v2H0z\"></path></svg>";
-};
-},{"./constants":"js/constants.js"}],"js/methods.js":[function(require,module,exports) {
+exports.default = Banana;
+},{"lodash":"../node_modules/lodash/lodash.js","./Random":"js/Random.js"}],"js/methods.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19453,16 +19503,21 @@ var _Random = require('./Random');
 
 var _Random2 = _interopRequireDefault(_Random);
 
+var _Banana = require('./Banana');
+
+var _Banana2 = _interopRequireDefault(_Banana);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Banana methods
+ * Banana methods (TODO: Move to Banana.js)
  */
 var insertBanana = exports.insertBanana = function insertBanana() {
   var random = new _Random2.default();
+  var banana = new _Banana2.default();
   var id = random.number(1, 5);
   var fontSize = random.size();
-  (0, _bling.$)('#column-' + id).insertAdjacentHTML('afterbegin', (0, _components.banana)(fontSize));
+  (0, _bling.$)('#column-' + id).insertAdjacentHTML('afterbegin', banana.html(fontSize));
 };
 
 var destroyBananas = exports.destroyBananas = function destroyBananas() {
@@ -19524,7 +19579,7 @@ var changeAnimationSpeedPercent = exports.changeAnimationSpeedPercent = function
   var calcSpeed = calculateAnimationSpeedPercent(state);
   rootElement.style.setProperty('--animation-play-speed', '' + calcSpeed);
 };
-},{"./bling":"js/bling.js","./components":"js/components.js","./Random":"js/Random.js"}],"js/index.js":[function(require,module,exports) {
+},{"./bling":"js/bling.js","./components":"js/components.js","./Random":"js/Random.js","./Banana":"js/Banana.js"}],"js/index.js":[function(require,module,exports) {
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19668,7 +19723,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55528' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '65292' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

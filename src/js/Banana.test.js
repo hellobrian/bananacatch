@@ -20,6 +20,18 @@ describe('Banana', () => {
     });
   });
 
+  describe('style()', () => {
+    it('should return a string', () => {
+      const result = typeof banana.style();
+      expect(result).toBe('string');
+    });
+
+    it('should contain interpolated fontSize', () => {
+      const result = banana.style(80).includes('80px');
+      expect(result).toBe(true);
+    });
+  });
+
   describe('html()', () => {
     let div, button, span;
     beforeEach(() => {
